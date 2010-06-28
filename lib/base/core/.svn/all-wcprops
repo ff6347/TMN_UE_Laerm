@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/5/trunk/tmn_UE_Laerm/lib/base/core
+END
+ant-launcher.jar
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/5/trunk/tmn_UE_Laerm/lib/base/core/ant-launcher.jar
+END
+ant.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/5/trunk/tmn_UE_Laerm/lib/base/core/ant.jar
+END
+libquaqua.jnilib
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3/trunk/tmn_UE_Laerm/lib/base/core/libquaqua.jnilib
+END
+revisions.txt
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/5/trunk/tmn_UE_Laerm/lib/base/core/revisions.txt
+END
+libquaqua64.jnilib
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3/trunk/tmn_UE_Laerm/lib/base/core/libquaqua64.jnilib
+END
+core.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3/trunk/tmn_UE_Laerm/lib/base/core/core.jar
+END

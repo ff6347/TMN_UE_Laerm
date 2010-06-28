@@ -1,0 +1,21 @@
+K 26
+svn:wc:ra_dav:activity-url
+V 14
+/svn/!svn/act/
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/43/trunk/tmn_UE_Laerm
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/3/trunk/tmn_UE_Laerm/.project
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/53/trunk/tmn_UE_Laerm/.classpath
+END
