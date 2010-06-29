@@ -100,7 +100,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 
 		//PDXIII background Stuff
-		//fadingBG = loadImage("fadingBG.png");
+		fadingBG = loadImage("fadingBG.png");
 
 		//PDXIII TUIO Stuff
 		// enable on system installed fonts
@@ -158,6 +158,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 //		PDXBGStuff
 //		drawBG();
+//		theBackground();
 		
 //		just a clearScreen method
 		clearScreen();
@@ -185,12 +186,16 @@ public ArrayList<ObstacleObject> obstclObjList;
 		for(int j = 0; j < obstclObjList.size(); j++){
 			
 			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
-			
-			for(int k = 0; k< obstclObject.ObstclsRepellerList.size();k++){
-				
-				repellers.add(obstclObject.ObstclsRepellerList.get(k));
+			if(obstclObject.ObstclsRepellerList != null){
+				for(int k = 0; k< obstclObject.ObstclsRepellerList.size();k++){
+					
+					repellers.add(obstclObject.ObstclsRepellerList.get(k));
+				}
 			}
 		}
+		
+		drawObstacleObjects();
+
 		// Apply repeller objects to all Particles
 //		ps.myApplyRepellers(repellers);
 		ps.myApplyObstcles(obstclObjList);
@@ -209,11 +214,10 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 		tuioCursorList = new ArrayList<TuioCursor> (tuioClient.getTuioCursors());
 		
-		drawObstacleObjects();
 		
 //		//just for adjustment
 //		debug.drawGrid();
-//		debug.drawCursors(tuioCursorList);
+		debug.drawCursors(tuioCursorList);
 //		debug.drawCursorCount(tuioCursorList);
 //		//end PDXIII TUIO Stuff
 		debug.writeIMGs();
@@ -230,8 +234,8 @@ public ArrayList<ObstacleObject> obstclObjList;
 	void drawBG(){
 		
 		//PDXIII background Stuff
-//		tint(tinter, 255, 255,100);
-//		image(fadingBG,0,0);	
+		tint(tinter, 255, 255,100);
+		image(fadingBG,0,0);	
 		tinter += 0.5f;	
 		if(tinter > 360){ tinter = 0;}
 		//end PDXIII background Stuff
@@ -240,7 +244,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 	
     public void theBackground(){
         
-        tint(300-tinter, 40+tinter, 40+tinter);
+        tint(220, 40+tinter, 40+tinter);
         image(fadingBG,0,0);
         if (tinter >= tintMax){tintBack = true;}
         
@@ -299,6 +303,8 @@ public ArrayList<ObstacleObject> obstclObjList;
 					obstclObject.newCoursor01Pos = nowPos;
 
 					obstclObject.setOffset(nowPos);
+					
+					obstclObject.setTime_01();
 				}
 			}
 		}
@@ -368,6 +374,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 			if(obstclObject.coursor01ID == nowID){
 				
 				obstclObject.coursor01ID = 99;
+				obstclObject.setTime_02();
 			}
 			
 			if(obstclObject.coursor02ID == nowID){

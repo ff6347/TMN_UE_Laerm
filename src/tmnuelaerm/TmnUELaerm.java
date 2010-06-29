@@ -45,17 +45,18 @@ public ArrayList<ObstacleObject> obstclObjList;
 	
 //	Setup the Particles
 	// A path object (series of connected points/particles)
-	Path path;
+//	Path path;
 //	our particle System
 	ParticleSystem ps;
 //	Some Arraylists to store the objects
 	ArrayList <Particle> ptclsList =  new ArrayList<Particle>();
 	ArrayList<Repeller> repellers;
+	ArrayList <Path> pathsList = new ArrayList <Path>();
 	
 //	This is for debugging and make some lose repellers
 	ArrayList<Repeller> someRepellers = new ArrayList<Repeller>();
 //	for the particles
-	int numPtcls = 1000; // number of particles
+	int numPtcls = 1005; // number of particles
 	
 //	every particle can have his own force / radius / speed
 //	they can be chaged later
@@ -87,10 +88,13 @@ public ArrayList<ObstacleObject> obstclObjList;
 	public boolean tintBack = false;
     public float tintMax = 60;
     public float tintMin = 20;
+
+	private int pathNum = 0;
     //end PDXIII background Stuff
     
     
 	public void setup() {
+		
 
 		colorMode(HSB,360,100,100);
 		background(0);
@@ -100,7 +104,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 
 		//PDXIII background Stuff
-		//fadingBG = loadImage("fadingBG.png");
+		fadingBG = loadImage("fadingBG.png");
 
 		//PDXIII TUIO Stuff
 		// enable on system installed fonts
@@ -112,6 +116,11 @@ public ArrayList<ObstacleObject> obstclObjList;
 		tuioClient.addTuioListener(this);
 		tuioClient.connect();
 		
+		int [] pathsSize = {40,60,80,100,120,140,160,180,200};
+		for(int p = 0;p<9;p++){
+			pathsList.add(PSUtil.initCirclePath(this, 13, 50,pathsSize[p]));
+			
+		}
 		obstclObjList = new ArrayList<ObstacleObject>();
 		
 		// making ObstacleObjects
@@ -127,17 +136,20 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 //		particle stuff
 		  // Call a function to generate new Path object with 23 segments
-		path = PSUtil.initCirclePath(this, path, 23);
+		//path = PSUtil.initCirclePath(this, path, 23);
+//		pathsList = PSUtil.initPaths(this, pathsList);
 		
 		  // We are now making random Particles and storing them in an ArrayList ptclsList
 		ptclsList = PSUtil.initParticles(this, numPtcls, ptclRadius, ptclsList);
 		
 //		add the  Path ptclPoints ArrayList of Particles to the ptclsList
-		for(int i = 0; i < path.ptclPoints.size();i++){
-			ptclsList.add(path.ptclPoints.get(i));
+		for(int pl  =0; pl< pathsList.size();pl++){
+		for(int pp = 0; pp < pathsList.get(pl).ptclPoints.size();pp++){
+			ptclsList.add(pathsList.get(pl).ptclPoints.get(pp));
+		}
 		}
 //		we need the particle system to interact with the repellers
-		ps = new ParticleSystem(this,1,new PVector(width/2,height/2),ptclsList,path);
+		ps = new ParticleSystem(this,1,new PVector(width/2,height/2),ptclsList,pathsList.get(pathNum));
 		
 //		PSUtil.makeSomeRepellers(this, someRepellers);
 		
@@ -147,17 +159,26 @@ public ArrayList<ObstacleObject> obstclObjList;
 	}
 
 	public void draw() {
+		
 		debug.watchAParticle(ptclsList, ps);
+		
+//		for(int pl2 = 0; pl2<pathsList.size();pl2++ ){
+//		pathsList.get(pl2).ptclPathDisplay();
+//		}
 //		path.ptclPathDisplay();
-		path.resetPointPtcls();
+		pathsList.get(pathNum).resetPointPtcls();
 		
 //		this is for setting all the time the radius
-		if(runtimeCounter==0)path.radius = 30;
-		
+		for(int pl2 = 0; pl2<pathsList.size();pl2++ ){
+
+		if(runtimeCounter==0)pathsList.get(pl2).radius = 50;
+		}
+
 //		background(125);
 		
 //		PDXBGStuff
 //		drawBG();
+//		theBackground();
 		
 //		just a clearScreen method
 		clearScreen();
@@ -168,7 +189,9 @@ public ArrayList<ObstacleObject> obstclObjList;
 				Particle ptkl =  ptclsList.get(i);
 				if(ptkl.hidden!=true){
 				// Path following and separation are worked on in this function
-				ptkl.applyForces(ptclsList,path);
+//					pathNum = floor(random(0,8));
+//					println(pathNum);
+				ptkl.applyForces(ptclsList,pathsList.get(ptkl.pathNum));
 				// Call the generic run method (update, borders, display, etc.)
 				}
 				ptkl.run();
@@ -185,12 +208,16 @@ public ArrayList<ObstacleObject> obstclObjList;
 		for(int j = 0; j < obstclObjList.size(); j++){
 			
 			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
-			
-			for(int k = 0; k< obstclObject.ObstclsRepellerList.size();k++){
-				
-				repellers.add(obstclObject.ObstclsRepellerList.get(k));
+			if(obstclObject.ObstclsRepellerList != null){
+				for(int k = 0; k< obstclObject.ObstclsRepellerList.size();k++){
+					
+					repellers.add(obstclObject.ObstclsRepellerList.get(k));
+				}
 			}
 		}
+		
+		drawObstacleObjects();
+
 		// Apply repeller objects to all Particles
 //		ps.myApplyRepellers(repellers);
 		ps.myApplyObstcles(obstclObjList);
@@ -209,11 +236,10 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 		tuioCursorList = new ArrayList<TuioCursor> (tuioClient.getTuioCursors());
 		
-		drawObstacleObjects();
 		
 //		//just for adjustment
 //		debug.drawGrid();
-//		debug.drawCursors(tuioCursorList);
+		debug.drawCursors(tuioCursorList);
 //		debug.drawCursorCount(tuioCursorList);
 //		//end PDXIII TUIO Stuff
 		debug.writeIMGs();
@@ -230,8 +256,8 @@ public ArrayList<ObstacleObject> obstclObjList;
 	void drawBG(){
 		
 		//PDXIII background Stuff
-//		tint(tinter, 255, 255,100);
-//		image(fadingBG,0,0);	
+		tint(tinter, 255, 255,100);
+		image(fadingBG,0,0);	
 		tinter += 0.5f;	
 		if(tinter > 360){ tinter = 0;}
 		//end PDXIII background Stuff
@@ -240,7 +266,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 	
     public void theBackground(){
         
-        tint(300-tinter, 40+tinter, 40+tinter);
+        tint(220, 40+tinter, 40+tinter);
         image(fadingBG,0,0);
         if (tinter >= tintMax){tintBack = true;}
         
@@ -299,6 +325,8 @@ public ArrayList<ObstacleObject> obstclObjList;
 					obstclObject.newCoursor01Pos = nowPos;
 
 					obstclObject.setOffset(nowPos);
+					
+					obstclObject.setTime_01();
 				}
 			}
 		}
@@ -368,6 +396,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 			if(obstclObject.coursor01ID == nowID){
 				
 				obstclObject.coursor01ID = 99;
+				obstclObject.setTime_02();
 			}
 			
 			if(obstclObject.coursor02ID == nowID){

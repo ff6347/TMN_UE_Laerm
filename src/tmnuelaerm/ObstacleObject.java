@@ -1,13 +1,6 @@
 package tmnuelaerm;
 
 import java.util.ArrayList;
-
-import TUIO.TuioCursor;
-/*
-import TUIO.TuioClient;
-import TUIO.TuioCursor;
-//import TUIO.TuioProcessing;
-*/
 import particleSystem.Repeller;
 import processing.core.*;
 
@@ -16,7 +9,11 @@ public class ObstacleObject {
 	
 	public String id;
 	
-	public boolean obstclActive = true;
+	public boolean obstclActive = false;
+	
+	public int time_01;
+	public int time_02;
+	public int activationDelay = 1000;
 	
 	public int coursor01ID = 99;
 	public PVector coursor01Pos = new PVector();
@@ -88,7 +85,7 @@ public class ObstacleObject {
 		obstclSize = new PVector(svg.width, svg.height);
 
 		
-		doTheRepellers();
+//		doTheRepellers();
 		
 		
 		boundingBox();
@@ -97,25 +94,24 @@ public class ObstacleObject {
 	
 	public void draw(){
 		
+		compareTime();
 		
-		
-		if(coursor01ID < 99){
+		if(obstclActive){
 			
-			pa.fill(0);
-			
-			if(coursor02ID < 99){
-				
-			}
-		}else{
 			pa.fill(255);
+			doTheRepellers();
+
+			
+		}else{
+			pa.fill(125);
+			ObstclsRepellerList = null;
 		}
 		
+		
 
 		pa.noStroke();
 
-		pa.noStroke();
 		pa.shape(svg, obstclPos.x, obstclPos.y, obstclSize.x, obstclSize.y);
-		doTheRepellers();
 		
 	
 		boundingBox();
@@ -123,12 +119,12 @@ public class ObstacleObject {
 
 		boundingBox.display();
 
-		pa.stroke(255);
-		pa.noFill();
-		for(int j = 0; j < ObstclsRepellerList.size(); j++){
-			
-			ObstclsRepellerList.get(j).display();
-		}
+//		pa.stroke(255);
+//		pa.noFill();
+//		for(int j = 0; j < ObstclsRepellerList.size(); j++){
+//			
+//			ObstclsRepellerList.get(j).display();
+//		}
 
 		scale = 1;
 		coursor01Pos = newCoursor01Pos;
@@ -144,7 +140,11 @@ public class ObstacleObject {
 
 	public void move(PVector nowPos){
 
-		obstclPos = PVector.sub(nowPos, offSet);
+		if(obstclActive){
+			
+			obstclPos = PVector.sub(nowPos, offSet);
+			setTime_01();	
+		}
 	}
 
 	public void doTheRepellers(){
@@ -160,7 +160,7 @@ public class ObstacleObject {
 			
 			float repXpos = obstclPos.x - obstclSize.x/2 + i*howMuchSpace;
 			float repYpos = obstclPos.y; 
-			ObstclsRepellerList.add(new Repeller(pa, repXpos , repYpos, grav, radius));
+			ObstclsRepellerList.add(new Repeller(pa, repXpos , repYpos, grav, radius, id));
 			
 		}
 		
@@ -181,5 +181,33 @@ public class ObstacleObject {
 		boundingBox.addPoint(bounds3);
 		boundingBox.addPoint(bounds4);
 		
+	}
+	
+	public void setTime_01(){
+		
+		time_01 = pa.millis();
+		
+	}
+	
+	public void setTime_02(){
+		
+		time_02 = pa.millis();
+		
+	}
+	
+	public void compareTime(){
+		
+		if(obstclActive){
+			if(time_02 - time_01 > activationDelay){
+				obstclActive = false;
+				time_02 = 0;
+			}
+		}else{
+			
+			if(time_02 - time_01 > activationDelay){
+				obstclActive = true;
+				setTime_01();
+			}
+		}
 	}
 }

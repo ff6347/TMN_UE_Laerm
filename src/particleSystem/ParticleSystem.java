@@ -111,10 +111,11 @@ public class ParticleSystem {
 	        float n = p.norm(distToCenterPS,0,p.width/2f);
 	        ptcl.setMass(n);
 
-	        
+	
 //	        for every Obstacle
 	     for(int j = 0; j < ObstclsList.size();j++ ){
 	        
+	    	 if(ObstclsList.get(j).ObstclsRepellerList != null){
 	    	 ArrayList<Repeller> repellersList = ObstclsList.get(j).ObstclsRepellerList;
 	    	 
 		      // For every Repeller
@@ -152,6 +153,7 @@ public class ParticleSystem {
 	        	
 	        }
 	      }
+	     }
 	     }
 	    }
 	  }

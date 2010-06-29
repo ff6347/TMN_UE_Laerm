@@ -26,6 +26,9 @@ import tmnuelaerm.Point;
 	public int color1;
 	public int color2;
 	public int id;
+	
+	public String obstclID; 
+
 
 	
 	public Repeller(PApplet p_,float x, float y)  {
@@ -70,7 +73,18 @@ import tmnuelaerm.Point;
 		}
 	
 	
-	
+	// Repellers get the ID of the ObstacleObjaect as a String, so we IDs looking like 01, 02, etc.
+	public Repeller(PApplet p_,float x, float y, float G_,float radius_, String _id)  {
+		p = p_;
+	 loc = new PVector(x,y);
+	 drag = new PVector(0,0);
+	 G = G_;
+	 radius = radius_;
+	 obstclID = _id;
+
+	 color1 = p.color(0,0, 100, 100);
+	 color2 = p.color(0,0, 100, 70);
+	}
 	public Repeller(PApplet p_,float x, float y, float G_,float radius_)  {
 		p = p_;
 	 loc = new PVector(x,y);
@@ -81,7 +95,6 @@ import tmnuelaerm.Point;
 	 color1 = p.color(0,0, 100, 100);
 	 color2 = p.color(0,0, 100, 70);
 	}
-	
 	
 	public void display() {
 	 p.stroke(color1);

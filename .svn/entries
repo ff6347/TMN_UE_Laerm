@@ -1,14 +1,14 @@
 10
 
 dir
-60
+66
 https://tmn-ue-learm.googlecode.com/svn/trunk/tmn_UE_Laerm
 https://tmn-ue-learm.googlecode.com/svn
 
 
 
-2010-06-28T17:36:56.753216Z
-60
+2010-06-29T16:24:31.510601Z
+66
 fabiantheblind
 has-props
 
@@ -35,7 +35,7 @@ c7aafc91-a54f-9bc5-4ece-305c0ad91397
 
 .classpath
 file
-59
+
 
 
 
@@ -69,7 +69,7 @@ has-props
 
 .project
 file
-59
+
 
 
 

@@ -143,7 +143,8 @@ public class Path {
 	    }
 
 	    // Draw Regular Line
-	    p.stroke(0);
+	    p.stroke(255);
+	    p.strokeWeight(3);
 	    p.noFill();
 	    p.beginShape();
 	    for (int i = 0; i < points.size(); i++) {
