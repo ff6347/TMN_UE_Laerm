@@ -66,7 +66,7 @@ public class Path {
 		  			ptclPoints.get(i).setMass(100);
 		  			ptclPoints.get(i).setGravity(0f);
 		  			ptclPoints.get(i).setMaxforce(100f);
-		  			ptclPoints.get(i).setMaxspeed(0.0001f);
+		  			ptclPoints.get(i).setMaxspeed(0.11f);
 		  			ptclPoints.get(i).setRadius(0.01f);
 		  			ptclPoints.get(i).hidden = true;
 	  				

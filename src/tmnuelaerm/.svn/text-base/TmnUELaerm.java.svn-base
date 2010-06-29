@@ -211,11 +211,11 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 		drawObstacleObjects();
 		
-		//just for adjustment
-		debug.drawGrid();
-		debug.drawCursors(tuioCursorList);
-		debug.drawCursorCount(tuioCursorList);
-		//end PDXIII TUIO Stuff
+//		//just for adjustment
+//		debug.drawGrid();
+//		debug.drawCursors(tuioCursorList);
+//		debug.drawCursorCount(tuioCursorList);
+//		//end PDXIII TUIO Stuff
 		debug.writeIMGs();
 
 	}
@@ -427,7 +427,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 				
 //				 not important for the main programm
 				if (key == 's' || key == 'S') {
-					saveFrame("./data/MyImg"+time+".jpg");
+					debug.saveFrame(time);
 					
 				}	
 				if (key == 'e' || key == 'E') {

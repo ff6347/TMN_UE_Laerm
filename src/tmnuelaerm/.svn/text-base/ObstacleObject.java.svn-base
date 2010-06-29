@@ -1,6 +1,8 @@
 package tmnuelaerm;
 
 import java.util.ArrayList;
+
+import TUIO.TuioCursor;
 /*
 import TUIO.TuioClient;
 import TUIO.TuioCursor;
@@ -14,6 +16,7 @@ public class ObstacleObject {
 	
 	public String id;
 	
+	public boolean obstclActive = true;
 	
 	public int coursor01ID = 99;
 	public PVector coursor01Pos = new PVector();
@@ -23,6 +26,8 @@ public class ObstacleObject {
 	public PVector coursor02Pos = new PVector();
 	public PVector newCoursor02Pos = new PVector();
 	
+	public float newDist;
+	public float oldDist;
 	public PVector obstclSize;
 	
 	public PVector obstclPos;
@@ -31,7 +36,9 @@ public class ObstacleObject {
 	
 	public PVector obstclTrans;
 	
-	public float obstclRotate = 0;
+	public float oldAngle;
+	public float newAngle;
+	public float angle;
 	
 	public BoundingBox boundingBox;
 	
@@ -49,7 +56,7 @@ public class ObstacleObject {
 	public ArrayList <Repeller> ObstclsRepellerList;
 	
 	public float grav = PApplet.pow(10,3);
-	public float radius = 30; 
+	public float radius; 
 	
 	public float scale = 1;
 	public PShape svg;
@@ -71,15 +78,11 @@ public class ObstacleObject {
 		id = PApplet.nf(_id,2);
 		obstclName = "Object" + id + ".svg";
 		
-		ObstclsRepellerList = new ArrayList<Repeller>();
-		ObstclsRepellerList.add(new Repeller(pa, obstclPos));
-//		repeller01 = new Repeller(pa, obstclTrans);
-		ObstclsRepellerList.get(0).setG(pa.pow(10,3));
-//		repeller01.setG(pa.pow(10,3));
+
 
 		svg = pa.loadShape(obstclName);
 		svg.disableStyle();
-		pa.shapeMode(pa.CORNER);
+		pa.shapeMode(PConstants.CENTER);
 
 		
 		obstclSize = new PVector(svg.width, svg.height);
@@ -87,29 +90,21 @@ public class ObstacleObject {
 		
 		doTheRepellers();
 		
-		for(int i = 0; i < ObstclsRepellerList.size(); i++ ){
-			ObstclsRepellerList.get(i).setG(pa.pow(10,3));		
-		}
-
-		
 		
 		boundingBox();
 		boundingBox.translate(obstclPos);
-		boundingBox.rotate(obstclRotate);
 	}
 	
 	public void draw(){
 		
-		pa.pushMatrix();
 		
 		
 		if(coursor01ID < 99){
 			
-			pa.fill(255);
+			pa.fill(0);
 			
-			if(coursor02ID <99){
+			if(coursor02ID < 99){
 				
-				setScale();
 			}
 		}else{
 			pa.fill(255);
@@ -117,25 +112,14 @@ public class ObstacleObject {
 		
 
 		pa.noStroke();
-		//setRotation();
-
-
-		pa.translate(obstclPos.x, obstclPos.y);
-
-		
-		setSize();
-		//setRotation();
 
 		pa.noStroke();
-		pa.shape(svg, 0,0, obstclSize.x, obstclSize.y);
-		pa.popMatrix();
-		
+		pa.shape(svg, obstclPos.x, obstclPos.y, obstclSize.x, obstclSize.y);
 		doTheRepellers();
 		
 	
 		boundingBox();
 		boundingBox.translate(obstclPos);
-		//boundingBox.rotate(obstclRotate);
 
 		boundingBox.display();
 
@@ -151,65 +135,13 @@ public class ObstacleObject {
 		coursor02Pos = newCoursor02Pos;
 	}
 	
-	public void setRotation(){
-		
-		if (coursor01Pos != null && coursor02Pos != null && newCoursor01Pos != null && newCoursor02Pos != null){
 
-			PVector v01 = PVector.sub(coursor01Pos, coursor02Pos);
-						
-			float theta01 = PVector.angleBetween(v01,obstclPos);
-			
-			PVector v02 = PVector.sub(newCoursor01Pos, newCoursor02Pos);
-			
-			float theta02 = PVector.angleBetween(v02,obstclPos);
-			
-			obstclRotate += (theta01-theta02);
-			
-		}
-		pa.rotate(obstclRotate);
-	}
-	
 	public void setOffset(PVector nowPos){
 		
 		offSet = PVector.sub(nowPos,obstclPos);
 	}
 	
-	public void setScale(){
-		
-		if (coursor01Pos != null && coursor02Pos != null && newCoursor01Pos != null && newCoursor02Pos != null){
-			float s1 = PVector.dist(coursor01Pos, coursor02Pos);
-			float s2 = PVector.dist(newCoursor01Pos, newCoursor02Pos);
-			scale = s2 / s1;
-			
-		}
-		
-		if (scale > 1.5f){
-			scale = 1.5f;
-		}
-		
-		if (scale < 0.5f)
-			scale = 0.5f;
-	}
-	
-	public void setSize(){
-		
-		obstclSize = PVector.mult(obstclSize,scale);
-		
-		if (obstclSize.x > 700){
-			
-			obstclSize.y = 700 / svg.width * svg.height; 
-			obstclSize.x = 700;
-		}
-		if (obstclSize.x < 100){
-			
-			obstclSize.y = 100 / svg.width * svg.height; 
-			obstclSize.x = 100;
-		}
-		
-		//grav *= obstclSize.x/100;
-		radius = obstclSize.x/5;
-	}
-	
+
 	public void move(PVector nowPos){
 
 		obstclPos = PVector.sub(nowPos, offSet);
@@ -217,27 +149,33 @@ public class ObstacleObject {
 
 	public void doTheRepellers(){
 		
+		radius = obstclSize.y/2;
+		
+		int howManyRep = PApplet.ceil((obstclSize.x / radius) +1);
+		float howMuchSpace = obstclSize.x / howManyRep;
+		
 		ObstclsRepellerList = new ArrayList<Repeller>();
 		
-		PVector repellerPos01 = new PVector(obstclPos.x + radius, obstclPos.y + obstclSize.y/2);
-		PVector repellerPos02 = new PVector(obstclPos.x + obstclSize.x/2, obstclPos.y + obstclSize.y/2);
-		PVector repellerPos03 = new PVector(obstclPos.x - radius + obstclSize.x, obstclPos.y + obstclSize.y/2);
-		ObstclsRepellerList.add(new Repeller(pa, repellerPos01.x, repellerPos01.y, grav, radius));
-		ObstclsRepellerList.add(new Repeller(pa, repellerPos02.x, repellerPos02.y, grav, radius));
-		ObstclsRepellerList.add(new Repeller(pa, repellerPos03.x, repellerPos03.y, grav, radius));
-
+		for(int i = 1; i < howManyRep; i++){
+			
+			float repXpos = obstclPos.x - obstclSize.x/2 + i*howMuchSpace;
+			float repYpos = obstclPos.y; 
+			ObstclsRepellerList.add(new Repeller(pa, repXpos , repYpos, grav, radius));
+			
+		}
 		
 	}
 	
 	public void boundingBox(){
 		
-		bounds1 = new Point(0,0);
-		bounds2 = new Point(0, obstclSize.y);
-		bounds3 = new Point(obstclSize.x, 0);
-		bounds4 = new Point(obstclSize.x, obstclSize.y);
+		bounds1 = new Point(-obstclSize.x/2, -obstclSize.y/2);
+		bounds2 = new Point(obstclSize.x/2,-obstclSize.y/2);
+		bounds3 = new Point(obstclSize.x/2, obstclSize.y/2);
+		bounds4 = new Point(-obstclSize.x/2, obstclSize.y/2);
 		
 		boundingBox = new BoundingBox(pa);
 		
+		boundingBox.addCenter(obstclPos);
 		boundingBox.addPoint(bounds1);
 		boundingBox.addPoint(bounds2);
 		boundingBox.addPoint(bounds3);

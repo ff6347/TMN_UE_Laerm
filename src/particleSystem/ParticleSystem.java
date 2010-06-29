@@ -69,28 +69,32 @@ public class ParticleSystem {
 	        float d = ptcl.loc.dist(r.loc);
 
 
-	        if(d < r.getRadius() /*&& ptcl.affection == true*/){
+	        if(d < r.getRadius()+20 /*&& ptcl.affection == true*/){
 	        	
-	       
-	        PVector repel = r.pushParticle(ptcl);
+	        	PVector repel = new PVector(0,0);
+	        	 if(d < r.getRadius() /*&& ptcl.affection == true*/){ 
+	        		 
+	        		  repel = r.pushParticle(ptcl);
+	        		 }
 	        	
 		    ptcl.applyRepellForce(repel);
 	        ptcl.setMaxforce((d/100));
-	        ptcl.setGravity((d/100)*0.0001f);
+	        ptcl.setGravity((d/100)*-0.0001f);
 	        ptcl.setMaxspeed((d/10));
 	        ptcl.setMass(d/100);
+	        ptcl.setColorCol2(200, 50, 50, 100);
 //	        ptcl.setMaxforce(r.getG()*n);
 //	        }else if(d < r.getRadius()+5){	
 //		        PVector repel = r.pushParticle(ptcl);        
 //		        ptcl.applyRepellForce(repel);
 	        }else{
-		        ptcl.setMass((n));
-		        ptcl.resetMass();
-		        ptcl.resetGravity();
-		        
-		        
-		        if(ptcl.maxforce>0.2f)ptcl.maxforce = ptcl.maxforce*0.5f;
-		        if(ptcl.maxspeed>1.5f)ptcl.maxspeed = ptcl.maxspeed*0.5f;
+//		        ptcl.setMass((n));
+//		        ptcl.resetMass();
+//		        ptcl.resetGravity();
+//		        
+//		        
+//		        if(ptcl.maxforce>0.2f)ptcl.maxforce = ptcl.maxforce*0.5f;
+//		        if(ptcl.maxspeed>1.5f)ptcl.maxspeed = ptcl.maxspeed*0.5f;
 	        	
 	        }
 	      }

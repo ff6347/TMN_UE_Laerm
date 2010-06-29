@@ -29,7 +29,7 @@ public class Debug {
 		public void writeIMGs(){
 			if(writeImg){
 				String sa = p.nf(imgNum,6);
-				 p.saveFrame("./data/ParticleSystem-"+sa+".tif");
+				 p.saveFrame("./bilder/ParticleSystem-"+sa+".tif");
 				  imgNum++;
 			}
 		}
@@ -88,6 +88,14 @@ public class Debug {
 			p.fill(255);
 			p.text(tuioCursorList.size(), 50, 50);
 			p.noFill();
+		}
+
+
+
+		public void saveFrame(float time) {
+			// TODO Auto-generated method stub
+			p.saveFrame("./bilder/MyImg"+time+".jpg");
+
 		}
 
 }

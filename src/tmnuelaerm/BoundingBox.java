@@ -12,12 +12,15 @@ public class BoundingBox {
 	 */
 	private static final long serialVersionUID = 1047107748121172490L;
 	
-	public ArrayList points;
+	public ArrayList<Point> points;
+	public Point center;
+	
 	PApplet pa;
 
 	BoundingBox(PApplet _pa) {
 		pa = _pa;
-		points = new ArrayList();
+		points = new ArrayList<Point>();
+
 	}
 
 	public void display() {
@@ -28,8 +31,12 @@ public class BoundingBox {
 		}		
 	}
 
+	public void addCenter(PVector _cntr){
+		center = new Point(_cntr.x, _cntr.y);
+	}
+	
 	void addPoint(Point point) {
-	points.add(point);
+		points.add(point);
 	}
 
 	Point getPoint(int index) {
@@ -49,6 +56,7 @@ public class BoundingBox {
 		for (int i = 0; i < points.size(); i++) {
 			Point point = (Point) points.get(i);
 			point.rotate(angle);
+			//center.rotate(angle);
 		}
 	}
 	

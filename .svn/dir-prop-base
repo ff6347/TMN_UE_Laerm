@@ -1,8 +1,10 @@
 K 10
 svn:ignore
-V 13
+V 19
 data
 
 bilder
+
+.git
 
 END
