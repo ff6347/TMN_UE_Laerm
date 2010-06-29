@@ -21,14 +21,30 @@ public class PSUtil {
 	
 //	This a number of points circling  around the center. for a smother path 
 //	give him more segments
-	public static Path initCirclePath(PApplet p,Path path,int segments){
+	public static Path initCirclePath(PApplet p,int segments,int radius, int size){
 		
-		path = new Path(p,100);
+		Path path = new Path(p,radius);
 		for(int i = 0; i <=360;i+=360/segments){
 //				path.addPoint(width / 2 + sin(radians(i))*100,height / 2 + cos(radians(i))*100);
-			  path.addPointPtcl(p.width / 2 + p.sin(p.radians(i))*150,p.height / 2 + p.cos(p.radians(i))*150);
+			  path.addPointPtcl((p.width / 2) + (p.sin(p.radians(i)))*size,(p.height / 2) + (p.cos(p.radians(i)))*size);
 		}
 		return path;
+	}
+	
+	public static ArrayList <Path> initPaths(PApplet p, ArrayList <Path> pathsList){
+		
+		int [] segments = {13,13,13,13,13,13,13,13,13,13};
+		int [] r = {50,50,50,50,50,50,50,50,50,50};
+		int radiusFormula = (((p.height/2)/9)+50);
+		for(int i = 0; i< 1; i++){
+			Path path = new Path(p,r[i]);	
+			for(int j = 0; i <=360;j+=360/segments[i]){
+//			path.addPoint(width / 2 + sin(radians(j))*100,height / 2 + cos(radians(j))*100);
+			  path.addPointPtcl((p.width / 2 + p.sin(p.radians(j)))*(radiusFormula*i),(p.height / 2 + p.cos(p.radians(j)))*(radiusFormula*i));
+			}
+			pathsList.add(path);
+		}	
+		return pathsList;		
 	}
 	
 //	for easier initalizing of particles
@@ -53,7 +69,9 @@ public class PSUtil {
 //				  float maxspeed =  0.3f;    // Maximum speed
 //				  float myMaxspeed = Particle.maxspeed;
 //				  float myMaxforce = Particle.maxforce;//+random(-1f,1f);
-				Particle ptcl = new Particle(p,new PVector(x,y),new PVector(x,y), ptclRadius,true,false);
+		int pathNum = p.floor(p.random(0,8));
+		
+				Particle ptcl = new Particle(p,new PVector(x,y),new PVector(x,y), ptclRadius,pathNum,true,false);
 //				ptcl.setMaxforce(10f);
 //				ptcl.setMaxforce(5f);
 //				ptcl.setMaxspeed(2f);

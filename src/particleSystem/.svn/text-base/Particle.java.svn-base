@@ -19,6 +19,8 @@ public class Particle {
     public float mass = 0.5f; // The higher the mass the lesser the particles get pushed by repellers
     public boolean affection;
     public boolean hidden;
+	public int pathNum;
+
 
     public final PVector origin;
 
@@ -29,6 +31,27 @@ public class Particle {
 	public int col1;
 	public int col2;
 		
+	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,float ms, float mf,int pathNum_, boolean a_,boolean h_) {
+		// TODO Auto-generated constructor stub
+		p = p_;
+		loc = loc_.get();
+		
+		vel = vel_;
+		radius = r_;
+		maxspeed = ms;
+		maxforce = mf;
+		acc = new PVector(0,0);
+		vel = new PVector(0,0);
+		lifeTime = 100000.0f;
+		col1 = p.color(255,200);
+		col2 = p.color(255,23);
+		affection = a_;
+		hidden  = h_;
+		origin = new PVector(loc.x,loc.y);
+		pathNum = pathNum_;
+		
+	}
+	
 	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,float ms, float mf,boolean a_,boolean h_) {
 		// TODO Auto-generated constructor stub
 		p = p_;
@@ -50,7 +73,9 @@ public class Particle {
 	
 
 	
-	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,boolean a_,boolean h_) {
+
+	
+	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,int pathNum_, boolean a_,boolean h_) {
 		// TODO Auto-generated constructor stub
 		p = p_;
 		loc = loc_.get();
@@ -66,8 +91,7 @@ public class Particle {
 		affection = a_;
 		origin = new PVector(loc.x,loc.y);
 		hidden  = h_;
-
-
+		pathNum = pathNum_;
 	}
 	
 //	this is the particle for the ParticleSystem Emitter
@@ -173,6 +197,12 @@ public class Particle {
 			mass = 0.5f;
 			
 		}
+		
+		public void setPathNum(int pathNumIn){
+			pathNum = pathNumIn;
+			
+		}
+		
 		
 
 //	this is for playing around with forces

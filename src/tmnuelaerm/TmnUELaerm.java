@@ -67,7 +67,9 @@ public ArrayList<ObstacleObject> obstclObjList;
 //	some repellers
 	int numRepellers = 5;
 
-	
+//	ThePath Number
+	private int pathNum = 0;
+
 //	to count the time
 	public static int runtimeCounter;
 //	just for unique filenames when saving a frame as .jpg in the folder data
@@ -89,10 +91,15 @@ public ArrayList<ObstacleObject> obstclObjList;
     public float tintMax = 60;
     public float tintMin = 20;
 
-	private int pathNum = 0;
     //end PDXIII background Stuff
     
+
     
+	private int myPathNum;
+	private int myDirection;
+	private int myRange;
+	private int myCounter;
+	
 	public void setup() {
 		
 
@@ -156,6 +163,11 @@ public ArrayList<ObstacleObject> obstclObjList;
 	time = millis();
 	runtimeCounter = 0;	
 		
+	
+	 myPathNum = 0;
+	 myDirection = 1;
+	 myRange = pathsList.size();
+	 myCounter  = 1;
 	}
 
 	public void draw() {
@@ -184,17 +196,32 @@ public ArrayList<ObstacleObject> obstclObjList;
 		clearScreen();
 		smooth();
 		
-		
+		if(runtimeCounter%100 == 0){
+			println("Range: "+myRange +"   Pathnum: "+myPathNum +"   Dir: "+myDirection);
+
+
+
+			myPathNum += 1*myDirection;
+			if((myPathNum > myRange-2)||(myPathNum == 0)){
+				myDirection = -myDirection;
+	
+			}
+			
+			}
 		for (int i = 0; i < ptclsList.size(); i++) {
-				Particle ptkl =  ptclsList.get(i);
-				if(ptkl.hidden!=true){
+				Particle ptcl =  ptclsList.get(i);
+				if(ptcl.hidden!=true){
+					
+
+
 				// Path following and separation are worked on in this function
 //					pathNum = floor(random(0,8));
 //					println(pathNum);
-				ptkl.applyForces(ptclsList,pathsList.get(ptkl.pathNum));
+					ptcl.pathNum = myPathNum;
+				ptcl.applyForces(ptclsList,pathsList.get(ptcl.pathNum));
 				// Call the generic run method (update, borders, display, etc.)
 				}
-				ptkl.run();
+				ptcl.run();
 				
 			}
 		
