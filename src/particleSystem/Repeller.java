@@ -3,6 +3,7 @@
 import processing.core.PApplet;
 import processing.core.PVector;
 import tmnuelaerm.Point;
+import util.Style;
 	
 	//Particles + Forces
 	//Daniel Shiffman <http://www.shiffman.net>
@@ -20,80 +21,80 @@ import tmnuelaerm.Point;
 	public float radius = 10;
 	
 	// For mouse interaction
-	boolean dragging = false; // Is the object being dragged?
-	boolean rollover = false; // Is the mouse over the ellipse?
+	private boolean dragging = false; // Is the object being dragged?
+	private boolean rollover = false; // Is the mouse over the ellipse?
 	PVector drag;  // holds the offset for when object is clicked on
-	public int color1;
-	public int color2;
+	private int color1;
+	private int color2;
 	public int id;
 	
 	public String obstclID; 
 
 
 	
-	public Repeller(PApplet p_,float x, float y)  {
-		p = p_;
-	 loc = new PVector(x,y);
-	 drag = new PVector(0,0);
-	 G = p.pow(10,3);
+	public Repeller(PApplet p,float x, float y)  {
+		this.p = p;
+		this.loc = new PVector(x,y);
+		this.drag = new PVector(0,0);
+		this.G = PApplet.pow(10,3);
 	 
-	 color1 = p.color(0,0, 100, 100);
-	 color2 = p.color(0,0, 100, 70);
+		this.color1 = p.color(Style.textColor);
+		this.color2 = p.color(Style.col3);
 	}
 	
-	public Repeller(PApplet p_, PVector loc_)  {
-		p = p_;
-		loc = loc_;
-		drag = new PVector(0,0);
-		G = p.pow(10,3);
+	public Repeller(PApplet p, PVector loc_)  {
+		this.p = p;
+		this.loc = loc_;
+		this.drag = new PVector(0,0);
+		this.G = PApplet.pow(10,3);
 		
-		color1 = p.color(0,0, 100, 100);
-		color2 = p.color(0,0, 100, 70);
+		this.color1 = p.color(Style.textColor);
+		this.color2 = p.color(Style.col3);
 		}
-	public Repeller(PApplet p_, PVector loc_,int ObjectID_)  {
-		p = p_;
-		loc = loc_;
-		drag = new PVector(0,0);
-		G = p.pow(10,3);
+	public Repeller(PApplet p, PVector loc_,int ObjectID_)  {
+		this.p = p;
+		this.loc = loc_;
+		this.drag = new PVector(0,0);
+		this.G = PApplet.pow(10,3);
 		
-		color1 = p.color(0,0, 100, 100);
-		color2 = p.color(0,0, 100, 70);
-		id = ObjectID_;
+		this.color1 = p.color(Style.textColor);
+		this.color2 = p.color(Style.col3);
+		this.id = ObjectID_;
 		}
 	
 	
-	public Repeller(PApplet p_, PVector loc_,float radius_)  {
-		p = p_;
-		loc = loc_;
-		drag = new PVector(0,0);
-		G = p.pow(10,3);
-		 radius = radius_;
-		color1 = p.color(0,0, 100, 100);
-		color2 = p.color(0,0, 100, 70);
+	public Repeller(PApplet p, PVector loc_,float radius)  {
+		this.p = p;
+		this.loc = loc_;
+		this.drag = new PVector(0,0);
+		this.G = PApplet.pow(10,3);
+		this.radius = radius;
+		this.color1 = p.color(Style.textColor);
+		this.color2 = p.color(Style.col3);
 		}
 	
 	
 	// Repellers get the ID of the ObstacleObjaect as a String, so we IDs looking like 01, 02, etc.
-	public Repeller(PApplet p_,float x, float y, float G_,float radius_, String _id)  {
-		p = p_;
-	 loc = new PVector(x,y);
-	 drag = new PVector(0,0);
-	 G = G_;
-	 radius = radius_;
-	 obstclID = _id;
+	public Repeller(PApplet p,float x, float y, float G,float radius, String _id)  {
+		p = p;
+		this.loc = new PVector(x,y);
+		this.drag = new PVector(0,0);
+		this.G = G;
+		this.radius = radius;
+		this.obstclID = _id;
 
-	 color1 = p.color(0,0, 100, 100);
-	 color2 = p.color(0,0, 100, 70);
+	 color1 = p.color(Style.textColor);
+	 color2 = p.color(Style.col3);
 	}
-	public Repeller(PApplet p_,float x, float y, float G_,float radius_)  {
-		p = p_;
+	public Repeller(PApplet p,float x, float y, float G,float radius)  {
+		p = p;
 	 loc = new PVector(x,y);
 	 drag = new PVector(0,0);
-	 G = G_;
-	 radius = radius_;
+	 G = G;
+	 radius = radius;
 	 
-	 color1 = p.color(0,0, 100, 100);
-	 color2 = p.color(0,0, 100, 70);
+	 color1 = p.color(Style.textColor);
+	 color2 = p.color(Style.col3);
 	}
 	
 	public void display() {
@@ -109,7 +110,7 @@ import tmnuelaerm.Point;
 	 PVector dir = PVector.sub(loc, ptcl.loc);      // Calculate direction of force
 	 float d = dir.mag();                       // Distance between objects
 	 dir.normalize();                           // Normalize vector (distance doesn't matter here, we just want this vector for direction)
-	 d = p.constrain(d,5,100);                     // Keep distance within a reasonable range
+	 d = PApplet.constrain(d,5,100);                     // Keep distance within a reasonable range
 	 float force = -1 * G / (d * d);            // Repelling force is inversely proportional to distance
 	 dir.mult(force);                           // Get force vector --> magnitude * direction
 	 return dir;
@@ -117,54 +118,54 @@ import tmnuelaerm.Point;
 	
 	public void update(PVector loc_){
 		
-		loc = loc_;
+		this.loc = loc_;
 	}
 	
-	public void translate(PVector _v) {
-		PVector v = _v;
-		
-		Point point = new Point(loc.x, loc.y);
-		point.translate(v.x, v.y);
-	}
+//	public void translate(PVector _v) {
+//		PVector v = _v;
+//		
+//		Point point = new Point(loc.x, loc.y);
+//		point.translate(v.x, v.y);
+//	}
 	
 	
 	public void setG(float G_in){
-		G = G_in;
+		this.G = G_in;
 	}
 	
 	public void setRadius(float radiusIn){
-		radius = radiusIn;
+		this.radius = radiusIn;
 	}
 	
 	public float getG(){	
-		return G;
+		return this.G;
 	}
 	public float getRadius(){	
-		return radius;
+		return this.radius;
 	}
 	
 	public void setColor1(float h, float s, float b, float a){
 		
-		color1 = p.color(h,s,b,a);
+		this.color1 = p.color(h,s,b,a);
 	}
 	
 	public void setColor2(float h, float s, float b, float a){
 		
-		color2 = p.color(h,s,b,a);
+		this.color2 = p.color(h,s,b,a);
 	}
 	
 	// The methods below are for mouse interaction
 	public void clicked(int mx, int my) {
-		float d = p.dist(mx,my,loc.x,loc.y);
+		float d = PApplet.dist(mx,my,loc.x,loc.y);
 		if (d < radius) {
 			dragging = true;
-			drag.x = loc.x-mx;
-			drag.y = loc.y-my;
+			this.drag.x = loc.x-mx;
+			this.drag.y = loc.y-my;
 	 }
 	}
 	
 	void rollover(int mx, int my) {
-		float d = p.dist(mx,my,loc.x,loc.y);
+		float d = PApplet.dist(mx,my,loc.x,loc.y);
 		if (d < radius) {
 			rollover = true;
 		}
@@ -179,8 +180,8 @@ import tmnuelaerm.Point;
 	
 	public void drag() {
 		if (dragging) {
-			loc.x = p.mouseX + drag.x;
-			loc.y = p.mouseY + drag.y;
+			this.loc.x = p.mouseX + drag.x;
+			this.loc.y = p.mouseY + drag.y;
 		}
 	}
 }

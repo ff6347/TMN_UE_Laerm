@@ -12,13 +12,14 @@ public class Debug {
 
 	
 	
-		public boolean writeImg = false;
-		PApplet p;
-		private int imgNum = 0;
+		public static boolean writeImg = false;
+		public static PApplet p;
+		
+		private static int imgNum = 0;
 
 
 
-		public Debug(PApplet p_) {
+		public static void setPAppletDebug(PApplet p_) {
 			p  = p_;
 
 		}
@@ -26,24 +27,30 @@ public class Debug {
 		
 		
 		// just  writing TIff Sequenzes for videos
-		public void writeIMGs(){
+		public static void writeIMGs(){
 			if(writeImg){
-				String sa = p.nf(imgNum,6);
+				String sa = PApplet.nf(imgNum,6);
 				 p.saveFrame("./bilder/ParticleSystem-"+sa+".tif");
 				  imgNum++;
 			}
 		}
 	
 	
-		public void watchAParticle(ArrayList <Particle> ptclsList, ParticleSystem ps){
+		public static void watchAParticle(ArrayList <Particle> ptclsList, ParticleSystem ps){
 	        
 
 			Particle myPtcl = ptclsList.get(0);
-			float distToCenterPS = myPtcl.loc.dist(ps.origin);
+//			float distToCenterPS = myPtcl.loc.dist(ps.origin);
 
-			myPtcl.setColorCol1(200, 50, 50, 100);
-			myPtcl.setColorCol2(200, 50, 50, 20);
-			myPtcl.setRadius(10);
+			myPtcl.setColorCol1(150, 100, 100, 100);
+			myPtcl.setColorCol2(150, 100, 100, 20);
+			p.fill(150,100,100,100);
+			p.ellipseMode(PApplet.CENTER);
+			p.ellipse(myPtcl.loc.x, myPtcl.loc.y, 10, 10);
+			p.noFill();
+			drawMyPtclForce(myPtcl.maxforce);
+//			PApplet.println(myPtcl.maxforce);
+//			myPtcl.setRadius(10);
 			
 //			println("MyPtkls Data -- Gravity: " +nf(myPtcl.gravity,7,7)
 //					+" Mass: "+nf(myPtcl.mass,7,7)
@@ -56,7 +63,7 @@ public class Debug {
 		}
 		
 		//a grid just for adjustment
-		public void drawGrid(){
+		public static void drawGrid(){
 			
 			float gridSize = 100;
 			
@@ -72,7 +79,7 @@ public class Debug {
 		}
 		//grid end
 		
-		public void drawCursors(ArrayList <TuioCursor>tuioCursorList){
+		public static void drawCursors(ArrayList <TuioCursor>tuioCursorList){
 			
 			for (int i=0; i<tuioCursorList.size(); i++) {
 				TuioCursor tcur = (TuioCursor)tuioCursorList.get(i);
@@ -82,17 +89,40 @@ public class Debug {
 			}
 		}
 		
-		public void drawCursorCount(ArrayList <TuioCursor>tuioCursorList){
+		public static void drawCursorCount(ArrayList <TuioCursor>tuioCursorList){
 			
 			p.noStroke();
-			p.fill(255);
+			p.fill(Style.textColor);
 			p.text(tuioCursorList.size(), 50, 50);
+			p.noFill();
+		}
+		
+		public static void drawFrameRate(){
+			
+			p.noStroke();
+			p.fill(Style.textColor);
+			p.text("Framerate: "+ p.frameRate, 50, 50);
+			p.noFill();
+		}
+		public static void drawFrameCount(){
+			
+			p.noStroke();
+			p.fill(Style.textColor);
+			p.text("Framecount: "+ p.frameCount, 50, 70);
+			p.noFill();
+		}
+		
+		 private static void drawMyPtclForce(float in){
+			
+			p.noStroke();
+			p.fill(Style.textColor);
+			p.text("MaxForce: "+ in, 50, 90);
 			p.noFill();
 		}
 
 
 
-		public void saveFrame(float time) {
+		public static void saveFrame(float time) {
 			// TODO Auto-generated method stub
 			p.saveFrame("./bilder/MyImg"+time+".jpg");
 

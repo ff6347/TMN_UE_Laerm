@@ -12,11 +12,14 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
+
 import tmnuelaerm.ObstacleObject;
+
 import util.Debug;
+import util.PSUtil;
+import util.Style;
 
 
-import particleSystem.PSUtil;
 import particleSystem.Particle;
 import particleSystem.ParticleSystem;
 import particleSystem.Path;
@@ -44,10 +47,12 @@ public ArrayList<ObstacleObject> obstclObjList;
 	public PFont font;
 	
 //	Setup the Particles
-	// A path object (series of connected points/particles)
+//	A path object (series of connected points/particles)
 //	Path path;
+	
 //	our particle System
 	ParticleSystem ps;
+	
 //	Some Arraylists to store the objects
 	ArrayList <Particle> ptclsList =  new ArrayList<Particle>();
 	ArrayList<Repeller> repellers;
@@ -55,6 +60,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 	
 //	This is for debugging and make some lose repellers
 	ArrayList<Repeller> someRepellers = new ArrayList<Repeller>();
+	
 //	for the particles
 	int numPtcls = 1005; // number of particles
 	
@@ -69,7 +75,8 @@ public ArrayList<ObstacleObject> obstclObjList;
 
 //	ThePath Number
 	private int pathNum = 0;
-
+//	a boolean for switching the path
+	private boolean switchPath = false;
 //	to count the time
 	public static int runtimeCounter;
 //	just for unique filenames when saving a frame as .jpg in the folder data
@@ -81,8 +88,6 @@ public ArrayList<ObstacleObject> obstclObjList;
 
 //	DEbugging stuff
 	private Debug debug;
-
-
 
 	//PDXIII background Stuff
 	public PImage fadingBG;
@@ -104,10 +109,15 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 
 		colorMode(HSB,360,100,100);
+		//passing the PApplet thru to all static methods
+		Style.setPApplet(this);
+		Style.create();
+		Debug.setPAppletDebug(this);
+		PSUtil.setPApplet(this);
+		
 		background(0);
-		size(500,400,OPENGL);
+		size(1024, 768,OPENGL);
 		frameRate(25);
-		debug = new Debug(this);
 		
 
 		//PDXIII background Stuff
@@ -123,15 +133,16 @@ public ArrayList<ObstacleObject> obstclObjList;
 		tuioClient.addTuioListener(this);
 		tuioClient.connect();
 		
-		int [] pathsSize = {40,60,80,100,120,140,160,180,200};
+		int [] pathsSize = {80,100,120,230,250,270,380,400,420};
+		int [] pathsRadius = {20,60,30,20,60,30,20,60,30};		
 		for(int p = 0;p<9;p++){
-			pathsList.add(PSUtil.initCirclePath(this, 13, 50,pathsSize[p]));
+			pathsList.add(PSUtil.initCirclePath( 13, pathsRadius[p],pathsSize[p]));
 			
 		}
 		obstclObjList = new ArrayList<ObstacleObject>();
 		
 		// making ObstacleObjects
-		for (obstclCounter = 0; obstclCounter < 2; obstclCounter++){
+		for (obstclCounter = 0; obstclCounter < 4; obstclCounter++){
 			int obstclNo = obstclCounter + 1;
 			float firstX = obstclNo*150;
 			float firstY = height/2;
@@ -147,7 +158,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 //		pathsList = PSUtil.initPaths(this, pathsList);
 		
 		  // We are now making random Particles and storing them in an ArrayList ptclsList
-		ptclsList = PSUtil.initParticles(this, numPtcls, ptclRadius, ptclsList);
+		ptclsList = PSUtil.initParticles( numPtcls, ptclRadius, ptclsList);
 		
 //		add the  Path ptclPoints ArrayList of Particles to the ptclsList
 		for(int pl  =0; pl< pathsList.size();pl++){
@@ -156,9 +167,8 @@ public ArrayList<ObstacleObject> obstclObjList;
 		}
 		}
 //		we need the particle system to interact with the repellers
-		ps = new ParticleSystem(this,1,new PVector(width/2,height/2),ptclsList,pathsList.get(pathNum));
+		ps = new ParticleSystem(this,0,new PVector(width/2,height/2),ptclsList,pathsList.get(pathNum));
 		
-//		PSUtil.makeSomeRepellers(this, someRepellers);
 		
 	time = millis();
 	runtimeCounter = 0;	
@@ -168,44 +178,43 @@ public ArrayList<ObstacleObject> obstclObjList;
 	 myDirection = 1;
 	 myRange = pathsList.size();
 	 myCounter  = 1;
+	 
+	 //DEBUGGING
+	 PSUtil.makeSomeRepellers( someRepellers);
+	 
 	}
 
 	public void draw() {
-		
-		debug.watchAParticle(ptclsList, ps);
-		
-//		for(int pl2 = 0; pl2<pathsList.size();pl2++ ){
-//		pathsList.get(pl2).ptclPathDisplay();
-//		}
-//		path.ptclPathDisplay();
-		pathsList.get(pathNum).resetPointPtcls();
-		
-//		this is for setting all the time the radius
-		for(int pl2 = 0; pl2<pathsList.size();pl2++ ){
-
-		if(runtimeCounter==0)pathsList.get(pl2).radius = 50;
-		}
-
-//		background(125);
-		
 //		PDXBGStuff
 //		drawBG();
 //		theBackground();
-		
 //		just a clearScreen method
 		clearScreen();
 		smooth();
+		Debug.watchAParticle(ptclsList, ps);
 		
-		if(runtimeCounter%100 == 0){
-			println("Range: "+myRange +"   Pathnum: "+myPathNum +"   Dir: "+myDirection);
+		for(int pl2 = 0; pl2<pathsList.size();pl2++ ){
+//		pathsList.get(pl2).ptclPathDisplay();
+		pathsList.get(pl2).resetPointPtcls();
+
+		}
+//		path.ptclPathDisplay();
+		
+		
 
 
+		
+		PSUtil.displaySomeRepellers(someRepellers);
 
-			myPathNum += 1*myDirection;
-			if((myPathNum > myRange-2)||(myPathNum == 0)){
-				myDirection = -myDirection;
-	
-			}
+		
+		if(runtimeCounter%300 == 0){
+//			println("Range: "+myRange +"   Pathnum: "+myPathNum +"   Dir: "+myDirection);
+			switchPath = true;
+//			myPathNum += 1*myDirection;
+//			if((myPathNum > myRange-2)||(myPathNum == 0)){
+//				myDirection = -myDirection;
+//			}
+			
 			
 			}
 		for (int i = 0; i < ptclsList.size(); i++) {
@@ -217,9 +226,16 @@ public ArrayList<ObstacleObject> obstclObjList;
 				// Path following and separation are worked on in this function
 //					pathNum = floor(random(0,8));
 //					println(pathNum);
-					ptcl.pathNum = myPathNum;
+//					use the myPathNum variable for constant switching
+//					use the switchPath stuff for random path selection
+					
+					if(switchPath){
+						ptcl.pathNum =floor(random(0,8));//myPathNum;
+					}
 				ptcl.applyForces(ptclsList,pathsList.get(ptcl.pathNum));
 				// Call the generic run method (update, borders, display, etc.)
+				switchPath = false;
+
 				}
 				ptcl.run();
 				
@@ -230,7 +246,15 @@ public ArrayList<ObstacleObject> obstclObjList;
 //		does that matter?
 		
 		repellers = new ArrayList<Repeller>();
+		for(int j = 0; j < someRepellers.size(); j++){
+			
+			Repeller rep  = someRepellers.get(j);
+		
+			repellers.add(rep);
 
+				
+			
+		}
 		
 		for(int j = 0; j < obstclObjList.size(); j++){
 			
@@ -246,7 +270,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 		drawObstacleObjects();
 
 		// Apply repeller objects to all Particles
-//		ps.myApplyRepellers(repellers);
+		ps.myApplyRepellers(someRepellers);
 		ps.myApplyObstcles(obstclObjList);
 		// Run the Particle System
 		ps.run();
@@ -266,10 +290,12 @@ public ArrayList<ObstacleObject> obstclObjList;
 		
 //		//just for adjustment
 //		debug.drawGrid();
-		debug.drawCursors(tuioCursorList);
-//		debug.drawCursorCount(tuioCursorList);
+		Debug.drawCursors(tuioCursorList);
+//		Debug.drawCursorCount(tuioCursorList);
+		Debug.drawFrameRate();
+		Debug.drawFrameCount();
 //		//end PDXIII TUIO Stuff
-		debug.writeIMGs();
+//		Debug.writeIMGs();
 
 	}
 	
@@ -378,10 +404,13 @@ public ArrayList<ObstacleObject> obstclObjList;
 			if(obstclObject.coursor01ID == nowID && obstclObject.coursor02ID == 99){
 				
 				obstclObject.move(nowPos);
+				obstclObject.setTime_01();
+
 				obstclObject.newCoursor01Pos = nowPos;
 				
 			
 			}else if(obstclObject.boundingBox.contains(nowX, nowY)){
+				
 				
 				if(obstclObject.coursor01ID < 99 && obstclObject.coursor01ID != nowID){
 					
@@ -392,6 +421,7 @@ public ArrayList<ObstacleObject> obstclObjList;
 					
 					obstclObject.coursor01ID = nowID;
 					obstclObject.coursor01Pos = nowPos;
+					obstclObject.setTime_01();
 
 					obstclObject.setOffset(nowPos);
 					
@@ -423,12 +453,15 @@ public ArrayList<ObstacleObject> obstclObjList;
 			if(obstclObject.coursor01ID == nowID){
 				
 				obstclObject.coursor01ID = 99;
+				obstclObject.coursor01Pos = null;
 				obstclObject.setTime_02();
 			}
 			
 			if(obstclObject.coursor02ID == nowID){
 				
 				obstclObject.coursor02ID = 99;
+				obstclObject.coursor02Pos = null;
+
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PVector;
+import util.Style;
 
 public class Particle {
 	PApplet p;
@@ -30,86 +31,94 @@ public class Particle {
 	
 	public int col1;
 	public int col2;
+	private int col3;
 		
-	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,float ms, float mf,int pathNum_, boolean a_,boolean h_) {
+	public Particle(PApplet p, PVector loc, PVector vel, float r,float ms, float mf,int pathNum, boolean affection,boolean hidden) {
 		// TODO Auto-generated constructor stub
-		p = p_;
-		loc = loc_.get();
+		this.p = p;
+		this.loc = loc.get();
 		
-		vel = vel_;
-		radius = r_;
-		maxspeed = ms;
-		maxforce = mf;
-		acc = new PVector(0,0);
-		vel = new PVector(0,0);
-		lifeTime = 100000.0f;
-		col1 = p.color(255,200);
-		col2 = p.color(255,23);
-		affection = a_;
-		hidden  = h_;
-		origin = new PVector(loc.x,loc.y);
-		pathNum = pathNum_;
+		this.vel = vel;
+		this.radius = r;
+		this.maxspeed = ms;
+		this.maxforce = mf;
+		this.acc = new PVector(0,0);
+		this.vel = new PVector(0,0);
+		this.lifeTime = 100000.0f;
+		this.col1 = p.color(Style.col1);
+		this.col2 = p.color(Style.col2);
+		this.col3 = p.color(Style.col3);
+
+		this.affection = affection;
+		this.hidden  = hidden;
+		this.origin = new PVector(loc.x,loc.y);
+		this.pathNum = pathNum;
 		
 	}
 	
-	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,float ms, float mf,boolean a_,boolean h_) {
+	public Particle(PApplet p, PVector loc, PVector vel, float r,float ms, float mf,boolean affection,boolean hidden) {
 		// TODO Auto-generated constructor stub
-		p = p_;
-		loc = loc_.get();
+		this.p = p;
+		this.loc = loc.get();
 		
-		vel = vel_;
-		radius = r_;
-		maxspeed = ms;
-		maxforce = mf;
-		acc = new PVector(0,0);
-		vel = new PVector(0,0);
-		lifeTime = 100000.0f;
-		col1 = p.color(255,200);
-		col2 = p.color(255,23);
-		affection = a_;
-		hidden  = h_;
-		origin = new PVector(loc.x,loc.y);
+		this.vel = vel;
+		this.radius = r;
+		this.maxspeed = ms;
+		this.maxforce = mf;
+		this.acc = new PVector(0,0);
+		this.vel = new PVector(0,0);
+		this.lifeTime = 100000.0f;
+		this.col1 = p.color(Style.col1);
+		this.col2 = p.color(Style.col2);
+		this.col3 = p.color(Style.col3);
+
+		this.affection = affection;
+		this.hidden  = hidden;
+		this.origin = new PVector(loc.x,loc.y);
 	}
 	
 
 	
 
 	
-	public Particle(PApplet p_, PVector loc_, PVector vel_, float r_,int pathNum_, boolean a_,boolean h_) {
+	public Particle(PApplet p, PVector loc, PVector vel, float r,int pathNum, boolean affection,boolean hidden) {
 		// TODO Auto-generated constructor stub
-		p = p_;
-		loc = loc_.get();
+		this.p = p;
+		this.loc = loc.get();
 		
-		vel = vel_;
-		radius = r_;
-		acc = new PVector(0,0);
-		vel = new PVector(0,0);
-		lifeTime = 100000.0f;
+		this.vel = vel;
+		this.radius = r;
+		this.acc = new PVector(0,0);
+		this.vel = new PVector(0,0);
+		this.lifeTime = 100000.0f;
+		this.col1 = p.color(Style.col1);
+		this.col2 = p.color(Style.col2);
+		this.col3 = p.color(Style.col3);
 
-		col1 = p.color(255,200);
-		col2 = p.color(255,23);
-		affection = a_;
-		origin = new PVector(loc.x,loc.y);
-		hidden  = h_;
-		pathNum = pathNum_;
+		this.affection = affection;
+		this.origin = new PVector(loc.x,loc.y);
+		this.hidden  = hidden;
+		this.pathNum = pathNum;
 	}
 	
 //	this is the particle for the ParticleSystem Emitter
-	public Particle(PApplet p_, PVector loc_,boolean a_,boolean h_) {
-		p = p_;
+	public Particle(PApplet p, PVector loc,boolean affection,boolean hidden) {
+		this.p = p;
 		
-		acc = new PVector(0,0);
-		vel = new PVector(0,0);
-		loc = loc_.get();
+		this.acc = new PVector(0,0);
+		this.vel = new PVector(0,0);
+		this.loc = loc.get();
 //		r = 10.0;
-		lifeTime = 100000.0f;
+		this.lifeTime = 100000.0f;
 //		maxspeed = 2;
 		
-		col1 = p.color(255,200);
-		col2 = p.color(255,23);
-		affection = a_;
-		origin = new PVector(loc.x,loc.y);
-		hidden  = h_;
+		this.col1 = p.color(Style.col1);
+		this.col2 = p.color(Style.col2);
+		this.col3 = p.color(Style.col3);
+
+		this.affection = affection;
+		this.origin = new PVector(loc.x,loc.y);
+		this.hidden  = hidden;
 
 
 		}
@@ -127,7 +136,7 @@ public class Particle {
 	
 	public void setLifeTime(float lifeTimeIn){
 		
-		lifeTime = lifeTimeIn;
+		this.lifeTime = lifeTimeIn;
 	}
 	
 ////	some graphical stuff in RGB
@@ -149,57 +158,57 @@ public class Particle {
 	
 //	some graphical stuff in HSB
 	public void setColorCol1(int h, float s, float b, int a){
-		col1 = p.color(h,s,b,a);
+		this.col1 = p.color(h,s,b,a);
 	}
 	
 	public void setColorCol1Grey(int greyVal, int a){
-		col1 = p.color(360,0,greyVal,a);
+		this.col1 = p.color(360,0,greyVal,a);
 	}
 	
 	public void setColorCol2(int h, float s, float b, int a){
-		col2 = p.color(h,s,b,a);
+		this.col2 = p.color(h,s,b,a);
 	}
 	
 	public void setColorCol2Grey(int greyVal, int a){
-		col2 = p.color(360,0,greyVal,a);
+		this.col2 = p.color(360,0,greyVal,a);
 	}
 	
 	
 	public void setGravity(float inGravity){
-		gravity = inGravity;
+		this.gravity = inGravity;
 	}
 	public void resetGravity(){
-		gravity = 0.0f;
+		this.gravity = 0.0f;
 	}
 	public void setMaxforce(float inMaxforce){
-		maxforce = inMaxforce;
+		this.maxforce = inMaxforce;
 		}
 	public void resetMaxforce(){
-		maxforce = 0.3f;
+		this.maxforce = 0.3f;
 		}
 	
 		public void setMaxspeed(float inMaxspeed){
-			maxspeed = inMaxspeed;
+			this.maxspeed = inMaxspeed;
 		}
 		public void resetMaxspeed(){
-			maxspeed = 2.0f;
+			this.maxspeed = 2.0f;
 		}
 		
 		public void setRadius(float inRadius) {
-			radius = inRadius;
+			this.radius = inRadius;
 		}
 		
 		public void setMass(float massIn){
-			mass = massIn;
+			this.mass = massIn;
 			
 		}
 		public void resetMass(){
-			mass = 0.5f;
+			this.mass = 0.5f;
 			
 		}
 		
 		public void setPathNum(int pathNumIn){
-			pathNum = pathNumIn;
+			this.pathNum = pathNumIn;
 			
 		}
 		
@@ -253,23 +262,23 @@ public class Particle {
 		
 	}
 	
-	@SuppressWarnings("static-access")
+	
 	public void display(){
 		
 		if(hidden!=true){
-//		p.fill(255);
+
+		p.stroke(col3);
+		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 		p.stroke(col2);
 		p.strokeWeight(2);
-
-		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 
 //		p.fill(col1);
 //		p.ellipse(loc.x, loc.y, radius, radius);
-		p.noStroke();
-		p.fill(col2);
-		p.ellipse(loc.x,loc.y,radius*1.05f,radius*1.05f);
+//		p.noStroke();
+//		p.fill(col2);
+//		p.ellipse(loc.x,loc.y,radius*1.05f,radius*1.05f);
 		
 //		for(int i=0;i<2;i++){
 //			p.strokeWeight(1);
@@ -397,7 +406,7 @@ public class Particle {
 //			}
 
 		// Only if the distance is greater than the path's radius do we bother to steer
-		if (record > pt.radius || vel.mag() < 0.1) {
+		if (record > pt.getRadius() || vel.mag() < 0.1) {
 			target.add(dir);
 			return steer(target,false);		
 		} 

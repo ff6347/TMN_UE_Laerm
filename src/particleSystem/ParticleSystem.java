@@ -82,7 +82,27 @@ public class ParticleSystem {
 	        ptcl.setGravity((d/100)*-0.0001f);
 	        ptcl.setMaxspeed((d/10));
 	        ptcl.setMass(d/100);
-	        ptcl.setColorCol2(200, 50, 50, 100);
+	        if(j == 5){
+	        	
+	        	if(ptcl.pathNum==0 ||ptcl.pathNum==1 ||ptcl.pathNum==8){
+	        ptcl.setColorCol2(200, 100, 100, 100);
+	        ptcl.setMaxforce((20));
+	        ptcl.setMaxspeed((10));
+	        ptcl.setMass(1);
+	        	}else{
+	        		
+	    	        ptcl.setColorCol2(100, 100, 100, 100);
+	    	        ptcl.setMaxforce((0.5f));
+	    	        ptcl.setMaxspeed((0.5f));
+	    	        ptcl.setMass(0.1f);	
+	        	}
+
+	        
+	        }else{
+		        ptcl.setColorCol2(100, 100, 100, 100);
+
+	        	
+	        }
 //	        ptcl.setMaxforce(r.getG()*n);
 //	        }else if(d < r.getRadius()+5){	
 //		        PVector repel = r.pushParticle(ptcl);        

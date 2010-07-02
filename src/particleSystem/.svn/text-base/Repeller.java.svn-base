@@ -35,7 +35,7 @@ import tmnuelaerm.Point;
 		p = p_;
 	 loc = new PVector(x,y);
 	 drag = new PVector(0,0);
-	 G = p.pow(10,3);
+	 G = PApplet.pow(10,3);
 	 
 	 color1 = p.color(0,0, 100, 100);
 	 color2 = p.color(0,0, 100, 70);
@@ -45,7 +45,7 @@ import tmnuelaerm.Point;
 		p = p_;
 		loc = loc_;
 		drag = new PVector(0,0);
-		G = p.pow(10,3);
+		G = PApplet.pow(10,3);
 		
 		color1 = p.color(0,0, 100, 100);
 		color2 = p.color(0,0, 100, 70);
@@ -54,7 +54,7 @@ import tmnuelaerm.Point;
 		p = p_;
 		loc = loc_;
 		drag = new PVector(0,0);
-		G = p.pow(10,3);
+		G = PApplet.pow(10,3);
 		
 		color1 = p.color(0,0, 100, 100);
 		color2 = p.color(0,0, 100, 70);
@@ -66,7 +66,7 @@ import tmnuelaerm.Point;
 		p = p_;
 		loc = loc_;
 		drag = new PVector(0,0);
-		G = p.pow(10,3);
+		G = PApplet.pow(10,3);
 		 radius = radius_;
 		color1 = p.color(0,0, 100, 100);
 		color2 = p.color(0,0, 100, 70);
@@ -109,7 +109,7 @@ import tmnuelaerm.Point;
 	 PVector dir = PVector.sub(loc, ptcl.loc);      // Calculate direction of force
 	 float d = dir.mag();                       // Distance between objects
 	 dir.normalize();                           // Normalize vector (distance doesn't matter here, we just want this vector for direction)
-	 d = p.constrain(d,5,100);                     // Keep distance within a reasonable range
+	 d = PApplet.constrain(d,5,100);                     // Keep distance within a reasonable range
 	 float force = -1 * G / (d * d);            // Repelling force is inversely proportional to distance
 	 dir.mult(force);                           // Get force vector --> magnitude * direction
 	 return dir;
@@ -155,7 +155,7 @@ import tmnuelaerm.Point;
 	
 	// The methods below are for mouse interaction
 	public void clicked(int mx, int my) {
-		float d = p.dist(mx,my,loc.x,loc.y);
+		float d = PApplet.dist(mx,my,loc.x,loc.y);
 		if (d < radius) {
 			dragging = true;
 			drag.x = loc.x-mx;
@@ -164,7 +164,7 @@ import tmnuelaerm.Point;
 	}
 	
 	void rollover(int mx, int my) {
-		float d = p.dist(mx,my,loc.x,loc.y);
+		float d = PApplet.dist(mx,my,loc.x,loc.y);
 		if (d < radius) {
 			rollover = true;
 		}
