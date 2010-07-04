@@ -9,7 +9,10 @@ import processing.core.PApplet;
  */
 public class Style {
 	
-	public static PApplet p;
+	/**
+	 * the PApplet
+	 */
+	private static PApplet p;
 
 	/**
 	 * Color 1
@@ -63,15 +66,6 @@ public static void create(){
 	textColorBlk = p.color(255,0,0,100);
 	
 	clsColor = p.color(255,0,100,100);
-
-	
-
-	
-
-
-
-	
-	
-}
+	}
 
 }

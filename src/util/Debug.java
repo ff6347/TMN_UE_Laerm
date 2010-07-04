@@ -7,6 +7,7 @@ import TUIO.TuioCursor;
 import particleSystem.Particle;
 import particleSystem.ParticleSystem;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 /**
  *  this is for debbuging only and has no effect on the Application
@@ -19,18 +20,35 @@ public class Debug {
 
 	
 	
+		/**
+		 * for writing images if true
+		 * @see #writeIMGs()
+		 * 
+		 */
 		public static boolean writeImg = false;
-		public static PApplet p;
+		/**
+		 * the PApplet
+		 */
+		private static PApplet p;
 		
+		/**
+		 * a unique number for the image
+		 * @see #writeIMGs()
+		 */
 		private static int imgNum = 0;
 
+		/**
+		 * the position of the watchAParticle() Method
+		 * @see #watchAParticle(ArrayList, ParticleSystem)
+		 */
+		private static PVector WAP_position = new PVector (50,100);
 
-
+		
 		/**
 		 * to pass the PApplet to all Methods
 		 * a static Class doesn't need a Constructor
 		 * @param p_ the PApplet
-		 */
+		 */		
 		public static void setPAppletDebug(PApplet p_) {
 			p  = p_;
 
@@ -53,11 +71,13 @@ public class Debug {
 	
 		/**
 		 *  this is for looking at one Particle
+		 *  
 		 * @param ptclsList
 		 * @param ps instance of ParticleSystem
 		 * @see Class Particle
 		 * @see Class ParticleSystem
 		 * @see Class java.util.ArrayList
+		 * @see #drawMyPtclForce(PVector, float, float, float, float, float)
 		 */
 		public static void watchAParticle(ArrayList <Particle> ptclsList, ParticleSystem ps){
 	        
@@ -67,11 +87,15 @@ public class Debug {
 
 			myPtcl.setColorCol1(150, 100, 100, 100);
 			myPtcl.setColorCol2(150, 100, 100, 20);
-			p.fill(150,100,100,100);
+			p.noFill();
+			p.strokeWeight(1);
+			p.stroke(255,0,0,30);
+			p.line(WAP_position.x+200, WAP_position.y-5, myPtcl.loc.x-myPtcl.radius, myPtcl.loc.y-myPtcl.radius);
+			p.stroke(150,100,100,100);
 			p.ellipseMode(PApplet.CENTER);
 			p.ellipse(myPtcl.loc.x, myPtcl.loc.y, 10, 10);
 			p.noFill();
-			drawMyPtclForce(myPtcl.maxforce);
+			drawMyPtclForce(WAP_position, myPtcl);
 //			PApplet.println(myPtcl.maxforce);
 //			myPtcl.setRadius(10);
 			
@@ -159,19 +183,28 @@ public class Debug {
 			p.noFill();
 		}
 		
-		 /**
-		 * 
-		 * this is for drawing a specific float or int value on the screen
+
+		/**
+
+		 * this is for drawing a specific float or integer value on the screen
 		 * used in watchAParticle
-		 * @param in
-		 * @see Debug.watchAParticle()
-		 * @author fabianthelbind
+		 * @param pos PVector the position for the Particles forces
+		 * @param myPtcl Particle to analyze
+		 * @see #watchAParticle(ArrayList, ParticleSystem)
 		 */
-		private static void drawMyPtclForce(float in){
+		private static void drawMyPtclForce(PVector pos,Particle myPtcl){
 			
+			int lineheight = 23;
 			p.noStroke();
 			p.fill(Style.textColorBlk);
-			p.text("MaxForce: "+ in, 50, 90);
+			p.text("The life of one Particle", (lineheight*0) + pos.x, 0 + pos.y);
+			p.text("MaxForce: "+ myPtcl.maxforce, 0+ pos.x, (lineheight*1) + pos.y);
+			p.text("MaxSpeed: "+ myPtcl.maxspeed, 0+ pos.x, (lineheight*2) + pos.y);
+			p.text("Mass: "+ myPtcl.mass, 0+ pos.x, (lineheight*3) + pos.y);
+			p.text("Gravity: "+ myPtcl.gravity, 0+ pos.x, (lineheight*4) + pos.y);	
+			if (myPtcl.lifeTime< 100000.0f){p.text("Lifetime: "+ myPtcl.lifeTime, 0+ pos.x, (lineheight*5) + pos.y);	
+			}
+			
 			p.noFill();
 		}
 

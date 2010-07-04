@@ -5,14 +5,15 @@
 /* Page background color */
 body { 
 
-	background-color: #F5F5F5;
+	background-color: #E5ECF7;
 	font-family:Arial, sans-serif;
  	color:#000000;
 }
 
 /* Headings */
-h1 { 
-   /* 	font-size: 145%; 
+h1{ 
+   
+/* 	font-size: 145%; 
 	font-family:Arial, sans-serif; */
 
 	display:block;
@@ -21,8 +22,7 @@ h1 {
 	margin:0.67em 0;
 	text-shadow: #203E38 2px 2px 4px; 
 	line-height:70px;
-	
-	}
+}
 	
 h2{
 	font-family:Arial, sans-serif;
@@ -46,7 +46,7 @@ a:link {
 	font-weight: normal;
 	font-variant: normal;
 	text-decoration: none;
-	color: #008752;
+	color: #5899DB;
 	
 	
 }
@@ -65,7 +65,7 @@ a:hover {
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
-	color: #06FFD8;
+	color: #65A4D3;
 	text-decoration: none;
 }
 a:active {
@@ -74,7 +74,7 @@ a:active {
 	font-weight: normal;
 	font-variant: normal;
 	text-decoration: none;
-	color: #008048;
+	color: #339BE6;
 	
 	
 	
@@ -84,11 +84,15 @@ tt, code, kbd, samp {
 	font-family:"Courier New",Courier,monospace;
 	font: 1.0em;
 }
+th{
 
+}
 /* Table colors */
-.TableHeadingColor     { background: #C7FFEB; color:#000000 } /* Dark mint */
-.TableSubHeadingColor  { background: #E8FFF5; color:#000000 } /* Light mint */
-.TableRowColor         { background: #ECFFF6; color:#000000 } /* White */
+.TableHeadingColor{
+background: #1E3D7E;
+color:#FFFFFF; } /* Dark Blue white font */
+.TableSubHeadingColor  { background: #1E3D7E; color:#FFFFFF }
+.TableRowColor         { background: #D2EDFF; color:#000000 } /* White */
 
 /* Font used in left-hand frame lists */
 .FrameTitleFont   { font-size: 100%; font-family: Arial, sans-serif; color:#000000 }
@@ -96,8 +100,8 @@ tt, code, kbd, samp {
 .FrameItemFont    { font-size:  90%; font-family: Arial, sans-serif; color:#000000 }
 
 /* Navigation bar fonts and colors */
-.NavBarCell1    { background-color:#C7FFEB; color:#000000} /* Light mint */
-.NavBarCell1Rev { background-color:#00CA6F; color:#FFFFFF} /* Dark mint */
+.NavBarCell1    { background-color:#B4CCF9; color:#000000} /* Light mint */
+.NavBarCell1Rev { background-color:#0084C0; color:#FFFFFF} /* Dark mint */
 .NavBarFont1    { font-family: Arial, sans-serif; color:#000000;color:#000000;}
 .NavBarFont1Rev { font-family: Arial, sans-serif; color:#FFFFFF;color:#FFFFFF;}
 

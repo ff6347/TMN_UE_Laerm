@@ -29,8 +29,16 @@ import particleSystem.Repeller;
 
 
 /**
+ * This is the main Class of the 
+ * Multitouch project by the-moron.net 
+ * represented by fabiantheblind and PDXIII 
+ * students at the University of Applied Sciences Potsdam (FHP) 
+ * during the class of Till Nagel "Urbane Ebenen" (urban layers).
+ * the code is available here: <a href="http://code.google.com/p/tmn-ue-learm/" target="blanc">Google Code</a>
+ * or here: <a href="http://github.com/fabiantheblind/TMN_UE_Laerm.git" target="blanc"> GitHub</a>
  * @author PDXIII 
  * @author fabianthelbind
+ *
  *
  */
 public class TmnUELaerm extends PApplet implements TuioListener{
@@ -49,15 +57,15 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	public ArrayList<TuioCursor> tuioCursorList;
 	
 //	our particle System
-	ParticleSystem ps;
+	public ParticleSystem ps;
 	
 //	Some Arraylists to store the objects
-	ArrayList <Particle> ptclsList =  new ArrayList<Particle>();
-	ArrayList<Repeller> repellers;
-	ArrayList <Path> pathsList = new ArrayList <Path>();
+	public ArrayList <Particle> ptclsList =  new ArrayList<Particle>();
+	public ArrayList<Repeller> repellers;
+	public ArrayList <Path> pathsList = new ArrayList <Path>();
 	
 //	This is for debugging and make some lose repellers
-	ArrayList<Repeller> someRepellers = new ArrayList<Repeller>();
+	public ArrayList<Repeller> someRepellers = new ArrayList<Repeller>();
 	
 //	for the particles
 	int numPtcls = 1005; // number of particles
@@ -94,6 +102,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //	private int myRange;
 //	private int myCounter;
 	
+	/* (non-Javadoc)
+	 * @see processing.core.PApplet#setup()
+	 */
 	public void setup() {
 		
 
@@ -162,7 +173,7 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		}
 		}
 //		we need the particle system to interact with the repellers
-		ps = new ParticleSystem(this,0,new PVector(width/2,height/2),ptclsList,pathsList.get(pathNum));
+		ps = new ParticleSystem(this,0,new PVector(width/2,height/2),ptclsList);
 		
 		
 	time = millis();
@@ -185,6 +196,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 
 	}
 
+	/* (non-Javadoc)
+	 * @see processing.core.PApplet#draw()
+	 */
 	public void draw() {
 //		PDXBGStuff
 //		drawBG();
@@ -308,12 +322,19 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	}
 	
 //	write an rect at everyframe
+	/**
+	 * A Clear Screen Method
+	 * writes a rectangle every Frame
+	 * 
+	 */
 	void clearScreen(){
 		noStroke();
 		fill(Style.clsColor);
 		rect(0,0,width,height);
 	}
 	
+	/**
+	 */
 	void drawBG(){
 		
 		//PDXIII background Stuff
@@ -325,6 +346,8 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		
 	}
 	
+    /**
+     */
     public void theBackground(){
         
         tint(220, 40+tinter, 40+tinter);
@@ -343,6 +366,8 @@ public class TmnUELaerm extends PApplet implements TuioListener{
         
 	
 	//PDXIII TUIO Stuff
+	/**
+	 */
 	public void drawObstacleObjects(){
 		
 		for(int i = 0; i < obstclObjList.size(); i++){
@@ -358,6 +383,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 
 
 	// TUIO methods
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#addTuioCursor(TUIO.TuioCursor)
+	 */
 	@Override
 	public void addTuioCursor(TuioCursor arg0) {
 		
@@ -393,6 +421,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#updateTuioCursor(TUIO.TuioCursor)
+	 */
 	@Override
 	public void updateTuioCursor(TuioCursor arg0) {
 		
@@ -449,6 +480,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#removeTuioCursor(TUIO.TuioCursor)
+	 */
 	@Override
 	public void removeTuioCursor(TuioCursor arg0) {
 		
@@ -474,24 +508,36 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#addTuioObject(TUIO.TuioObject)
+	 */
 	@Override
 	public void addTuioObject(TuioObject arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#refresh(TUIO.TuioTime)
+	 */
 	@Override
 	public void refresh(TuioTime arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#removeTuioObject(TUIO.TuioObject)
+	 */
 	@Override
 	public void removeTuioObject(TuioObject arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see TUIO.TuioListener#updateTuioObject(TUIO.TuioObject)
+	 */
 	@Override
 	public void updateTuioObject(TuioObject arg0) {
 		// TODO Auto-generated method stub
@@ -501,6 +547,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	
 
 	
+		/* (non-Javadoc)
+		 * @see processing.core.PApplet#keyPressed()
+		 */
 		public void keyPressed() {
 			  if (key == 'd') {
 //				do something fancy
@@ -520,6 +569,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 
 			
 		
+			/* (non-Javadoc)
+			 * @see processing.core.PApplet#keyReleased()
+			 */
 			public void keyReleased(){
 				
 //				 not important for the main programm
@@ -539,6 +591,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 				
 				
 			}
+			/* (non-Javadoc)
+			 * @see processing.core.PApplet#mousePressed()
+			 */
 			public void mousePressed() {
 //			  PSUtil.newPtkl(this, mouseX, mouseY, ptclsList, ptclRadius);
 				
@@ -548,6 +603,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 				  }
 			}
 			
+			/* (non-Javadoc)
+			 * @see processing.core.PApplet#mouseReleased()
+			 */
 			public void mouseReleased() {
 				
 				  for (int i = 0; i < someRepellers.size(); i++) {
@@ -556,6 +614,10 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 				  }
 				}
 
+	/**
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		PApplet.main(new String[] { tmnuelaerm.TmnUELaerm.class.getName() });

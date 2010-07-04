@@ -3,6 +3,10 @@ package tmnuelaerm;
 import processing.core.PApplet;
 import processing.core.PVector;
 
+/**
+ * @author PDXIII
+ *
+ */
 public class Point extends PVector {
 	
 	public float tx;

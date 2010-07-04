@@ -16,6 +16,7 @@ import tmnuelaerm.ObstacleObject;
  * @see Particle Class Particle
  * @see Path Class Path
  * @see Repeller Class Repeller
+ * @author fabianthelbind
  *
  */
 public class PSUtil {

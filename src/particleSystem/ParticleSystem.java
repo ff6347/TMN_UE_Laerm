@@ -17,6 +17,10 @@ import tmnuelaerm.ObstacleObject;
  *
  */
 public class ParticleSystem {
+	
+		/**
+		 * the PApplet
+		 */
 		PApplet p;
 
 		/**
@@ -50,7 +54,7 @@ public class ParticleSystem {
 
 	/**
 	 * A function to apply a force to all Particles
-	 * @param fPVector
+	 * @param f PVector
 	 * @see Particle#applyRepellForce(PVector)
 	 */
 	void applyForce(PVector f) {
@@ -115,16 +119,16 @@ public class ParticleSystem {
 	        		 }
 	        	
 		    ptcl.applyRepellForce(repel);
-	        ptcl.setMaxforce((d/100));
-	        ptcl.setGravity((d/100)*-0.0001f);
-	        ptcl.setMaxspeed((d/10));
-	        ptcl.setMass(d/100);
+	        ptcl.setMaxforce((2));
+	        ptcl.setGravity(-0.0001f);
+	        ptcl.setMaxspeed((0.7f));
+	        ptcl.setMass(0.00001f);
 	        if(j == 5){
 	        	
 	        	if(ptcl.pathNum==0 ||ptcl.pathNum==1 ||ptcl.pathNum==8){
 	        ptcl.setColorCol2(200, 100, 100, 100);
 	        ptcl.setMaxforce((20));
-	        ptcl.setMaxspeed((10));
+	        ptcl.setMaxspeed((5));
 	        ptcl.setMass(1);
 	        	}else{
 	        		

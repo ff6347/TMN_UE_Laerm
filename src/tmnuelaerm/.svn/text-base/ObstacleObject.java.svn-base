@@ -5,6 +5,10 @@ import particleSystem.Repeller;
 import processing.core.*;
 
 
+/**
+ * @author PDXIII
+ *
+ */
 public class ObstacleObject {
 	
 	public String id;

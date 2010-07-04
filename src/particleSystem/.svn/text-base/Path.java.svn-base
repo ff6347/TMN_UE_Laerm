@@ -10,7 +10,7 @@ import processing.core.PVector;
 //Daniel Shiffman <http://www.shiffman.net>
 //The Nature of Code, Spring 2009
 /**
- * The Path to follow
+ * The Path to follow a Path is a series of connected particles. They interact eith the Repellers and so...
  * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
  * @author fabianthelbind
  *
@@ -39,7 +39,7 @@ public class Path {
 	  }
 	  
 	  /**
-	   * bulds a Path with an specific Radius around the pathline
+	   * builds a Path with an specific Radius around the pathline
 	 * @param p the PApplet
 	 * @param radius the radius around the path
 	 */

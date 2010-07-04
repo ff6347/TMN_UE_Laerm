@@ -19,15 +19,29 @@ import tmnuelaerm.ObstacleObject;
 public class ParticleSystem {
 		PApplet p;
 
-	ArrayList <Particle> particles;    // An arraylist for all the particles
-	  public PVector origin;        // An origin point for where particles are birthed
-	  Path path;
+		/**
+		 * An arraylist for all the particles
+		 */
+		ArrayList <Particle> particles;
+		
+	/**
+	 * An origin point for where particles are birthed when using the emitter
+	 * @see #addParticleEmitter(boolean)
+	 * @see #setEmitterOrigin(PVector)
+	 */
+	public PVector origin;
 
-	  public ParticleSystem(PApplet p_, int num, PVector v, ArrayList<Particle> particles_,Path path_) {
-	    particles = particles_;              // Initialize the arraylist
-	    p = p_;
-	    path = path_;
-	    origin = v.get();                        // Store the origin point
+	  /**
+	   * this is the masterconstructor
+	 * @param p  the PApplet
+	 * @param num int create at startup a number of particles
+	 * @param v the origin of the emitter
+	 * @param particles an Arraylist of Particles
+	 */
+	public ParticleSystem(PApplet p, int num, PVector v, ArrayList<Particle> particles) {
+	    this.particles = particles;              // Initialize the arraylist
+	    this.p = p;
+	    this.origin = v.get();                        // Store the origin point
 	    for (int i = 0; i < num; i++) {
 	      particles.add(new Particle(p,origin,true,false));    // Add "num" amount of particles to the arraylist
 	    }

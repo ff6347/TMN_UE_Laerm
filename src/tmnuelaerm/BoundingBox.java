@@ -11,10 +11,7 @@ import processing.core.PVector;
  */
 public class BoundingBox {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1047107748121172490L;
+
 	
 	public ArrayList<Point> points;
 	public Point center;

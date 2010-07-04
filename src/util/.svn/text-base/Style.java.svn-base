@@ -3,25 +3,46 @@ package util;
 import processing.core.PApplet;
 
 /**
- * @author fabianmoronzirfas
+ * Here we make all the color and text stuff centralized. Its like a CSS
+ * @author fabiantheblind
  * 
  */
 public class Style {
 	
 	public static PApplet p;
 
+	/**
+	 * Color 1
+	 */
 	public static int col1;
+	/**
+	 * Color 2
+	 */
 	public static int col2; 
+	/**
+	 * Color 3
+	 */
 	public static int col3;
 	
 	
+	/**
+	 * If you wan't the Text white
+	 */
 	public static int textColorWhite;
 
+	/**
+	 * if u want it black
+	 */
 	public static int textColorBlk;
 
+	/**
+	 * the color of the clearscreen
+	 * @see TmnUELaerm#cls()
+	 */
 	public static int clsColor;
 	
 	/**
+	 * to set the PApplet for the whole Class
 	 * @param _p
 	 */
 	public static void setPApplet(PApplet _p){

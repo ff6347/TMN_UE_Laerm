@@ -11,6 +11,7 @@ import processing.core.PApplet;
 /**
  *  this is for debbuging only and has no effect on the Application
  * @author fabianthelbind
+ * @author PDXIII
  *
  *
  */
@@ -25,6 +26,11 @@ public class Debug {
 
 
 
+		/**
+		 * to pass the PApplet to all Methods
+		 * a static Class doesn't need a Constructor
+		 * @param p_ the PApplet
+		 */
 		public static void setPAppletDebug(PApplet p_) {
 			p  = p_;
 
@@ -121,7 +127,6 @@ public class Debug {
 		 * draws the number of active cursors on the screen
 		 * @param tuioCursorList
 		 * @see java.util.ArrayList
-		 * 
 		 */
 		public static void drawCursorCount(ArrayList <TuioCursor>tuioCursorList){
 			
@@ -160,6 +165,7 @@ public class Debug {
 		 * used in watchAParticle
 		 * @param in
 		 * @see Debug.watchAParticle()
+		 * @author fabianthelbind
 		 */
 		private static void drawMyPtclForce(float in){
 			
@@ -174,7 +180,6 @@ public class Debug {
 		/**
 		 * for writing single images on keystroke
 		 * @param time
-		 * 
 		 */
 		public static void saveFrame(float time) {
 			// TODO Auto-generated method stub

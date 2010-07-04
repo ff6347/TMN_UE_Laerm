@@ -26,6 +26,9 @@ svn:special svn:externals svn:needs-lock
 
 c7aafc91-a54f-9bc5-4ece-305c0ad91397
 
+CostumJavaDoc
+dir
+
 MyImg1501.0.jpg
 file
 73
@@ -49,6 +52,40 @@ file
 
 
 deleted
+
+affectionPropertysBasicLayout01.xml
+file
+74
+
+
+
+2010-07-03T05:56:56.000000Z
+a4fdb33e26de999b3f73523f3569ef27
+2010-07-04T10:27:42.021267Z
+74
+fabiantheblind
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3398
 
 grafix
 dir

@@ -13,7 +13,12 @@ import util.Style;
  *
  */
 public class Particle {
-	PApplet p;
+	
+	/**
+	 * the PAplet
+	 * 
+	 */
+	private PApplet p;
 	
 	/**
 	 * the location of the particle
@@ -90,9 +95,21 @@ public class Particle {
     public final PVector origin;
 
 //	some graphical stuff
-	private int col1 = p.color(Style.col1);
-	private int col2 =  p.color(Style.col2);
-	private int col3 = p.color(Style.col3);
+	/**
+	 * the first color of the Particle
+	 * @see Style#col1
+	 */
+	private int col1 = Style.col1;
+	/**
+	 * the second color of the Particle
+	 * @see Style#col2
+	 */
+	private int col2 =  Style.col2;
+	/**
+	 * the third color of the Particle
+	 * @see Style#col3
+	 */	
+	private int col3 = Style.col3;
 
 		
 	/**
@@ -507,6 +524,7 @@ public class Particle {
 	 */
 	public void run() {
 		update();
+//		getALife();
 		display();
 		limit();
 
@@ -611,8 +629,14 @@ public class Particle {
 		}
 	}
 
-	  // A function to get the normal point from a point (p) to a line segment (a-b)
-	  // This function could be optimized to make fewer new Vector objects
+	/**
+	 * A function to get the normal point from a point (p) to a line segment (a-b)
+	 *  This function could be optimized to make fewer new Vector objects
+	 * @param p PVector
+	 * @param a PVector
+	 * @param b PVector
+	 * @return normalPoint
+	 */
 	public PVector getNormalPoint(PVector p, PVector a, PVector b) {
 	    // Vector from a to p
 		PVector ap = PVector.sub(p,a);
@@ -625,8 +649,14 @@ public class Particle {
 		return normalPoint;
 	}
 
-	  // Separation
-	  // Method checks for nearby boids and steers away
+
+	/**
+	 * Separation Method. checks for nearby boids and steers away
+	 * 
+	 * 
+	 * @param ptkls ArrayList of Particles
+	 * @return steer
+	 */
 	public PVector separate (ArrayList<Particle> ptkls) {
 
 		float desiredseparation = radius*2;
@@ -668,20 +698,32 @@ public class Particle {
 	}
 
 
-	  // 
 	/**
 	 * Method to update location. it also reduces the lifetime
 	 */
 	public void update() {
 	    // Update velocity
-		vel.add(acc);
+		this.vel.add(acc);
 	    // Limit speed
-		vel.limit(maxspeed);
-		loc.add(vel);
+		this.vel.limit(maxspeed);
+		this.loc.add(vel);
 		// Reset accelertion to 0 each cycle
-		acc.mult(0);
-		lifeTime -= 0.5;
+		this.acc.mult(0);
+//		this.lifeTime -= 0.5;
 
+	}
+	
+	/**
+	 * use this if you want the particles to die sometime
+	 * is usefull fill the ParticleEmitter
+	 * @see #update()
+	 * @see #run()
+	 * @see ParticleSystem#addParticleEmitter(boolean)
+	 * @see ParticleSystem#setEmitterOrigin(PVector)
+	 * 
+	 */
+	private void getALife(){
+		this.lifeTime -= 0.5;
 	}
 
 	/**

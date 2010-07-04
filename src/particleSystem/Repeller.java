@@ -23,6 +23,10 @@ import util.Style;
 	 * the location of the Repeller
 	 */
 	public PVector loc;
+	
+	/**
+	 * the PApplet
+	 */
 	PApplet p;
 	
 	/**
@@ -42,15 +46,24 @@ import util.Style;
 	 * For mouse interaction. holds the offset for when object is clicked on
 	 */
 	PVector drag;
-	private int color1 = Style.textColorWhite;
+	
+	/**
+	 * The first color of the Repeller
+	 * @see Style#textColorBlk
+	 */
+	private int color1 = Style.textColorBlk;
+	/**
+	 * The first color of the Repeller
+	 * @see Style#col3
+	 */
 	private int color2 = Style.col3;
 	
-
-	
+	/**
+	 * the String that identifies the ObstacleObject
+	 * @see Class ObstacleObject Class
+	 */
 	public String obstclID; 
 
-
-	
 	/**
 	 * @param p the PApplet
 	 * @param x the x-Coordinate

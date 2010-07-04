@@ -47,7 +47,7 @@ import processing.xml.XMLElement;
  * 	 use this to see what happens
  * 	 PApplet.println(XMLImporter.getObsctlObjectPropertys(0, "day", "private"));
  *
- * @author fabianthelbind
+ * @author fabiantheblind
  * 
  * 
  */
@@ -58,6 +58,8 @@ public class XMLImporter {
 	
 	
 	/**
+	 * this is for setting the PApplet for the whole class
+	 * must be called in the setup()
 	 * @param p_
 	 */
 	public static void setPAppelt(PApplet p_){
@@ -66,7 +68,7 @@ public class XMLImporter {
 	}
 	
 	/**
-	 *  the XMLImporter Class in a nutshell
+	 *  the XMLImporter Class in a nutshell all methods of this class in metood with some println() 
 	 */
 	public static void XML_IMPORTER_Class_inANutshell(){
  
@@ -121,7 +123,7 @@ public class XMLImporter {
 //	}
 	
 	/**
-	 * this is for fetching the root
+	 * this is for fetching the root of the .xml file
 	 * @return XMLElement
 	 */
 	public static XMLElement getRoot(){
@@ -131,7 +133,7 @@ public class XMLImporter {
 	
 	
 	/**
-	 * this is for fetching all obstcl objects
+	 * this is for fetching all obstcl objects into an array of XMLElements
 	 * @return XMLElement []
 	 */
 	public static XMLElement [] getObsctlObjects(){
@@ -141,8 +143,8 @@ public class XMLImporter {
 	}
 
 	/**
-	 * this is for fetching a Obstcl object by ID
-	 * @param id int
+	 * this is for fetching a Obstcl object by ID. If you want a specific object
+	 * @param id int the index of the object/element in the .xml file
 	 * @return XMLElement
 	 */
 	public static XMLElement getObsctlObjectByID(int id){
@@ -155,12 +157,13 @@ public class XMLImporter {
 		}
 	}
 	
-//	this is for fetching a specific property
+
 	/**
-	 * @param id  int
-	 * @param time  String name of a XMLElement
-	 * @param space  String name of a XMLElement
-	 * @return flaot
+	 * this is for fetching a specific property
+	 * @param id int the index of the object/element in the .xml file
+	 * @param time  String name of a XMLElement the method accepts " day" or "nite"
+	 * @param space  String name of a XMLElement the method accepts "work" "private" "public"
+	 * @return float
 	 */
 	public static float getObsctlObjectPropertys(int id, String time, String space){
 		root = new XMLElement(p,"./data/affectionPropertys.xml");

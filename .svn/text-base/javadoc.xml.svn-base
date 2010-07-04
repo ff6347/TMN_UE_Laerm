@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="lib/base/opengl/jogl-natives-macosx-universal.jar:lib/base/opengl/jogl-natives-windows-i586.jar:lib/base/core/core.jar:lib/base/opengl/gluegen-rt-natives-linux-i586.jar:lib/base/opengl/gluegen-rt-natives-macosx-universal.jar:lib/base/core/ant.jar:lib/base/opengl/gluegen-rt-natives-macosx-ppc.jar:lib/base/opengl/jogl-natives-macosx-ppc.jar:lib/base/opengl/jogl-natives-linux-i586.jar:lib/base/core/ant-launcher.jar:lib/base/opengl/opengl.jar:lib/base/opengl/gluegen-rt-natives-windows-i586.jar:lib/base/opengl/gluegen-rt-natives-windows-amd64.jar:lib/base/opengl/jogl-natives-windows-amd64.jar:lib/user/TUIO/libTUIO.jar:lib/base/opengl/gluegen-rt-natives-linux-amd64.jar:lib/base/opengl/jogl-natives-linux-amd64.jar:lib/base/opengl/jogl.jar:lib/base/opengl/gluegen-rt.jar:lib/user/TUIO/TUIO.jar" destdir="doc" doctitle="TMN UE Laerm" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="particleSystem,tmnuelaerm,util" source="1.6" sourcepath="src" splitindex="true" stylesheetfile="/Volumes/database worx/_the_moron_net/_own_footage/moron_softwareDevelopment/moron_javaDoc/myJavaDocStylesheet.css" use="true" version="true"/>
+    </target>
+</project>

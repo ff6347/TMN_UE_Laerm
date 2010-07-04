@@ -21,6 +21,10 @@ import tmnuelaerm.ObstacleObject;
  */
 public class PSUtil {
 	
+	/**
+	 * the PApplet
+	 * 
+	 */
 	private static PApplet p;
 
 	/**
