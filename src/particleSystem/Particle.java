@@ -9,8 +9,8 @@ import util.Style;
 /**
  * The Particles
  * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
- * @author fabianthelbind
- *
+ * @author fabiantheblind 
+ * @version 0.74
  */
 public class Particle {
 	
@@ -51,13 +51,16 @@ public class Particle {
 	public float maxspeed =  2.0f;
 	
 	/**
-	 * the radius of the particle. the particle has no ellipse right now but this is still needed for collision
+	 * the radius of the particle.
+	 * the particle has no ellipse right now but this is still needed for collision
 	 * @see #display()
 	 */
 	public float radius;// = 5f;    // radius
 	
 	/**
-	 * the time a particle lifes. We set it realy high so they dont disapper. It it usefull if you wan't to use the emitter in the particlesystem
+	 * the time a particle lifes.
+	 * We set it realy high so they dont disapper.
+	 * It it usefull if you wan't to use the emitter in the particlesystem
 	 * @see Class ParticleSystem Class
 	 * @see ParticleSystem#addParticleEmitter(boolean)
 	 * @see ParticleSystem#setEmitterOrigin(PVector)
@@ -66,8 +69,8 @@ public class Particle {
 	
     /**
      *  The higher the mass of an particle the lesser the particles get pushed by repellers
-     *  @see Class Repeller Class
-     *  @see Repeller#pushParticle(Particle) 
+     *  may never be real 0 i think (or at startup) set it to 0.00000001f
+     *  @see <a href="Repeller.html#pushParticle(particleSystem.Particle)"><code>Repeller.pushParticle(Particle)</code></a>
      */
     public float mass = 0.5f; //
     
@@ -77,8 +80,9 @@ public class Particle {
     public boolean affection;
     
     /**
-     * if this is true the particle will not be drawn to the screen and the other particles dont steer around them
-     * @see TmnUELaerm#draw()
+     * if this is true the particle will not be drawn to the screen
+     * and the other particles dont steer around them
+     * @see <a href="../tmnuelaerm/TmnUELaerm.html#draw()">it happens in <code>TMNUelaerm.draw()</code></a>
      */
     public boolean hidden;
 	/**
@@ -88,9 +92,9 @@ public class Particle {
 
 
     /**
-     * the particle knows where he originated. this is for the paths points They are also particles
-     * @see Class Path Class
-     * @see Path#resetPointPtcls()
+     * the particle knows where he originated.
+     * this is for the paths points They are also particles
+     * @see <a href="Path.html#resetPointPtcls()"><code>Path.resetPointPtcls()</code></a>
      */
     public final PVector origin;
 
@@ -99,12 +103,15 @@ public class Particle {
 	 * the first color of the Particle
 	 * @see Style#col1
 	 */
+	@SuppressWarnings("unused")
 	private int col1 = Style.col1;
 	/**
 	 * the second color of the Particle
 	 * @see Style#col2
 	 */
 	private int col2 =  Style.col2;
+
+
 	/**
 	 * the third color of the Particle
 	 * @see Style#col3
@@ -142,7 +149,8 @@ public class Particle {
 	}
 	
 	/**
-	 * same as the Master constructor but without path to follow (can be set later, or there is just one path)
+	 * same as the Master constructor but without path to follow
+	 * (can be set later, or there is just one path)
 	 * @param p 
 	 * @param loc
 	 * @param vel
@@ -309,7 +317,9 @@ public class Particle {
 	
 	
 	/**
-	 * set the gravity of the particle. if the particle follows a path you wont see much of the gravity. but with the emitter! wow
+	 * set the gravity of the particle.
+	 * if the particle follows a path you wont see much of the gravity.
+	 * but with the emitter! wow!!!!!
 	 * @param inGravity
 	 * @see #gravity
 	 * @see ParticleSystem#addParticleEmitter(boolean)
@@ -532,10 +542,11 @@ public class Particle {
 
 
 	/**
-	 * This function implements Craig Reynolds' path following algorithm
+	 * This function implements Craig Reynolds' path following algorithm<br>
 	 * <a href="http://www.red3d.com/cwr/steer/PathFollow.html" target="blanc">see it at red3d.com</a>
-	 * this is hard stuff. fabiantheblind doesn't really understand ;(
-	 * see the comments within the code to understand more
+	 * this is hard stuff.
+	 * fabiantheblind doesn't really understand ;(<br>
+	 * see the comments within the code to understand more<br>
 	 * there is inside also a debbuging function to see what they ae doing
 	 * where they are steering and all this
 	 * @param pt a path
@@ -630,7 +641,7 @@ public class Particle {
 	}
 
 	/**
-	 * A function to get the normal point from a point (p) to a line segment (a-b)
+	 * A function to get the normal point from a point (p) to a line segment (a-b)<br>
 	 *  This function could be optimized to make fewer new Vector objects
 	 * @param p PVector
 	 * @param a PVector
@@ -652,8 +663,6 @@ public class Particle {
 
 	/**
 	 * Separation Method. checks for nearby boids and steers away
-	 * 
-	 * 
 	 * @param ptkls ArrayList of Particles
 	 * @return steer
 	 */
@@ -699,7 +708,11 @@ public class Particle {
 
 
 	/**
-	 * Method to update location. it also reduces the lifetime
+	 * Method to update location.
+	 * if u like u can add a <code>this.lifeTime -= 0.5;</code><br>
+	 * and set the lifetime lower.. Its useful for the particleEmitter<br>
+	 * @see ParticleSystem#addParticleEmitter(boolean)
+	 * @see ParticleSystem#setEmitterOrigin(PVector)
 	 */
 	public void update() {
 	    // Update velocity
@@ -722,6 +735,7 @@ public class Particle {
 	 * @see ParticleSystem#setEmitterOrigin(PVector)
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	private void getALife(){
 		this.lifeTime -= 0.5;
 	}

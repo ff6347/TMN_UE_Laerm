@@ -40,7 +40,7 @@ public class Style {
 
 	/**
 	 * the color of the clearscreen
-	 * @see TmnUELaerm#cls()
+	 * @see <a href="TmnUELaerm.html#clearScreen()"> TMN_UE_Laerm.clearScreen()</a>
 	 */
 	public static int clsColor;
 	

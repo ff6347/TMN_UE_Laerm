@@ -175,7 +175,7 @@ public class ParticleSystem {
 	      Particle ptcl = (Particle) particles.get(i);
 	      
 	        float distToCenterPS = ptcl.loc.dist(origin);
-	        float n = p.norm(distToCenterPS,0,p.width/2f);
+	        float n = PApplet.norm(distToCenterPS,0,p.width/2f);
 	        ptcl.setMass(n);
 
 	

@@ -59,6 +59,9 @@ public class Debug {
 		// just  writing TIff Sequenzes for videos
 		/**
 		 * write some images
+		 * @see #imgNum
+		 * @see #writeImg
+		 * @see <a href="../tmnuelaerm/TmnUelaerm.html#keyReleased()"><code>keyReleased</code></a>
 		 */
 		public static void writeIMGs(){
 			if(writeImg){
@@ -70,14 +73,12 @@ public class Debug {
 	
 	
 		/**
-		 *  this is for looking at one Particle
-		 *  
+		 *  this is for looking at one Particle  
 		 * @param ptclsList
 		 * @param ps instance of ParticleSystem
-		 * @see Class Particle
-		 * @see Class ParticleSystem
-		 * @see Class java.util.ArrayList
-		 * @see #drawMyPtclForce(PVector, float, float, float, float, float)
+		 * @see <a href="../particleSystem/ParticleSystem.html"><code>ParticleSystem</code></a>
+		 * @see <a href="../particleSystem/Particle.html"><code>Particle</code></a>
+		 * @see #drawMyPtclForce(PVector, Particle)
 		 */
 		public static void watchAParticle(ArrayList <Particle> ptclsList, ParticleSystem ps){
 	        

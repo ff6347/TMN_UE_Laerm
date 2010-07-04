@@ -34,10 +34,11 @@ import particleSystem.Repeller;
  * represented by fabiantheblind and PDXIII 
  * students at the University of Applied Sciences Potsdam (FHP) 
  * during the class of Till Nagel "Urbane Ebenen" (urban layers).
- * the code is available here: <a href="http://code.google.com/p/tmn-ue-learm/" target="blanc">Google Code</a>
+ * the {@code code} is available here: <a href="http://code.google.com/p/tmn-ue-learm/" target="blanc">Google Code</a>
  * or here: <a href="http://github.com/fabiantheblind/TMN_UE_Laerm.git" target="blanc"> GitHub</a>
  * @author PDXIII 
  * @author fabianthelbind
+ * @version 0.74
  *
  *
  */
@@ -404,13 +405,14 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //	write an rect at everyframe
 	/**
 	 * A Clear Screen Method
-	 * writes a rectangle every Frame
+	 * writes a {@code processing.core.PApplet.rect(float, float, float, float)} every Frame
 	 * 
 	 */
 	void clearScreen(){
 		noStroke();
 		fill(Style.clsColor);
 		rect(0,0,width,height);
+
 	}
 	
 	/**

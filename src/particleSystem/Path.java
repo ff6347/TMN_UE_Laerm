@@ -265,7 +265,7 @@ public class Path {
 		      PVector loc =  ptclPoints.get(i).loc;
 		      p.vertex(loc.x,loc.y);
 		    }
-		    p.endShape(p.CLOSE);
+		    p.endShape(PApplet.CLOSE);
 
 		  }
 	  
