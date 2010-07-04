@@ -6,49 +6,117 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import util.Style;
 
+/**
+ * The Particles
+ * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
+ * @author fabianthelbind
+ *
+ */
 public class Particle {
 	PApplet p;
+	
+	/**
+	 * the location of the particle
+	 */
 	public PVector loc;
+	
+	/**
+	 * the velocity of the particle
+	 */
 	public PVector vel;
+	
+	/**
+	 * the acceleration of the particle
+	 */
 	public PVector acc;
 
+	/**
+	 * the gravity of the particle. it mostly affects the emitter particles
+	 * @see ParticleSystem#addParticleEmitter(boolean)
+	 */
 	public float  gravity = 0.0f;
-	public float maxforce = 0.5f;    // Maximum steering force
-	public float maxspeed =  2.0f;    // Maximum speed
+	
+	/**
+	 *  the maximum steering force of the particle
+	 */
+	public float maxforce = 0.5f;
+	/**
+	 *  the maximum speed of the particle
+	 */
+	public float maxspeed =  2.0f;
+	
+	/**
+	 * the radius of the particle. the particle has no ellipse right now but this is still needed for collision
+	 * @see #display()
+	 */
 	public float radius;// = 5f;    // radius
+	
+	/**
+	 * the time a particle lifes. We set it realy high so they dont disapper. It it usefull if you wan't to use the emitter in the particlesystem
+	 * @see Class ParticleSystem Class
+	 * @see ParticleSystem#addParticleEmitter(boolean)
+	 * @see ParticleSystem#setEmitterOrigin(PVector)
+	 */
 	public float lifeTime = 100000.0f;    // the lifetime of an Particle
-    public float mass = 0.5f; // The higher the mass the lesser the particles get pushed by repellers
+	
+    /**
+     *  The higher the mass of an particle the lesser the particles get pushed by repellers
+     *  @see Class Repeller Class
+     *  @see Repeller#pushParticle(Particle) 
+     */
+    public float mass = 0.5f; //
+    
+    /**
+     * this is not used i think : )
+     */
     public boolean affection;
+    
+    /**
+     * if this is true the particle will not be drawn to the screen and the other particles dont steer around them
+     * @see TmnUELaerm#draw()
+     */
     public boolean hidden;
+	/**
+	 * the number of the path to follow. This is specially if you have more than one path. so the particle can switch between paths
+	 */
 	public int pathNum;
 
 
+    /**
+     * the particle knows where he originated. this is for the paths points They are also particles
+     * @see Class Path Class
+     * @see Path#resetPointPtcls()
+     */
     public final PVector origin;
 
-	
-	
 //	some graphical stuff
-	
-	public int col1;
-	public int col2;
-	private int col3;
+	private int col1 = p.color(Style.col1);
+	private int col2 =  p.color(Style.col2);
+	private int col3 = p.color(Style.col3);
+
 		
+	/**
+	 * This is the Master Constructor. you can also set all these parameters at runtime
+	 * 
+	 * @param p the PApplet
+	 * @param loc the location
+	 * @param vel the velocity
+	 * @param r the radius
+	 * @param ms the maxspeed
+	 * @param mf the maxforce
+	 * @param pathNum the path to follow
+	 * @param affection should it get affected or not
+	 * @param hidden is it a hidden particle (see Path)
+	 */
 	public Particle(PApplet p, PVector loc, PVector vel, float r,float ms, float mf,int pathNum, boolean affection,boolean hidden) {
-		// TODO Auto-generated constructor stub
 		this.p = p;
-		this.loc = loc.get();
-		
+		this.loc = loc.get();	
 		this.vel = vel;
 		this.radius = r;
 		this.maxspeed = ms;
 		this.maxforce = mf;
 		this.acc = new PVector(0,0);
 		this.vel = new PVector(0,0);
-		this.lifeTime = 100000.0f;
-		this.col1 = p.color(Style.col1);
-		this.col2 = p.color(Style.col2);
-		this.col3 = p.color(Style.col3);
-
 		this.affection = affection;
 		this.hidden  = hidden;
 		this.origin = new PVector(loc.x,loc.y);
@@ -56,22 +124,26 @@ public class Particle {
 		
 	}
 	
+	/**
+	 * same as the Master constructor but without path to follow (can be set later, or there is just one path)
+	 * @param p 
+	 * @param loc
+	 * @param vel
+	 * @param r
+	 * @param ms
+	 * @param mf
+	 * @param affection
+	 * @param hidden
+	 */
 	public Particle(PApplet p, PVector loc, PVector vel, float r,float ms, float mf,boolean affection,boolean hidden) {
-		// TODO Auto-generated constructor stub
 		this.p = p;
-		this.loc = loc.get();
-		
+		this.loc = loc.get();		
 		this.vel = vel;
 		this.radius = r;
 		this.maxspeed = ms;
 		this.maxforce = mf;
 		this.acc = new PVector(0,0);
 		this.vel = new PVector(0,0);
-		this.lifeTime = 100000.0f;
-		this.col1 = p.color(Style.col1);
-		this.col2 = p.color(Style.col2);
-		this.col3 = p.color(Style.col3);
-
 		this.affection = affection;
 		this.hidden  = hidden;
 		this.origin = new PVector(loc.x,loc.y);
@@ -81,11 +153,19 @@ public class Particle {
 	
 
 	
+	/**
+	 * Same as the Master Constructor but but without maxspeed and maxforce
+	 * @param p
+	 * @param loc
+	 * @param vel
+	 * @param r
+	 * @param pathNum
+	 * @param affection
+	 * @param hidden
+	 */
 	public Particle(PApplet p, PVector loc, PVector vel, float r,int pathNum, boolean affection,boolean hidden) {
-		// TODO Auto-generated constructor stub
 		this.p = p;
 		this.loc = loc.get();
-		
 		this.vel = vel;
 		this.radius = r;
 		this.acc = new PVector(0,0);
@@ -94,24 +174,25 @@ public class Particle {
 		this.col1 = p.color(Style.col1);
 		this.col2 = p.color(Style.col2);
 		this.col3 = p.color(Style.col3);
-
 		this.affection = affection;
 		this.origin = new PVector(loc.x,loc.y);
 		this.hidden  = hidden;
 		this.pathNum = pathNum;
 	}
 	
-//	this is the particle for the ParticleSystem Emitter
+
+	/**
+	 * 	this is the particle for the ParticleSystem Emitter
+	 * @param p
+	 * @param loc
+	 * @param affection
+	 * @param hidden
+	 */
 	public Particle(PApplet p, PVector loc,boolean affection,boolean hidden) {
 		this.p = p;
-		
 		this.acc = new PVector(0,0);
 		this.vel = new PVector(0,0);
-		this.loc = loc.get();
-//		r = 10.0;
-		this.lifeTime = 100000.0f;
-//		maxspeed = 2;
-		
+		this.loc = loc.get();		
 		this.col1 = p.color(Style.col1);
 		this.col2 = p.color(Style.col2);
 		this.col3 = p.color(Style.col3);
@@ -123,7 +204,10 @@ public class Particle {
 
 		}
 	
-	// Is the particle still useful?
+	/**
+	 * Is the particle still useful? (if its lifetime is equal to or less than 0.0)
+	 * @return boolean true or false
+	 */
 	boolean dead() {
 		if (lifeTime <= 0.0) {
 			return true;
@@ -132,8 +216,11 @@ public class Particle {
 		}
 	}
 	
-//	set the lifetime of the particle
-	
+
+	/**
+	 * set the lifetime of the particle
+	 * @param lifeTimeIn give him a float like 100 Frames or so
+	 */
 	public void setLifeTime(float lifeTimeIn){
 		
 		this.lifeTime = lifeTimeIn;
@@ -156,65 +243,139 @@ public class Particle {
 //		col2 = p.color(greyVal,a);
 //	}
 	
-//	some graphical stuff in HSB
+//	
+	/**
+	 * set the field col1
+	 * @param h hue 0 - 360
+	 * @param s saturation 0 - 100
+	 * @param b brightness 0 - 100
+	 * @param a alpha 0 - 100
+	 * @see #col1
+	 */
 	public void setColorCol1(int h, float s, float b, int a){
 		this.col1 = p.color(h,s,b,a);
 	}
 	
+	/**
+	 * set the field col1
+	 * If you want it black and white 
+	 * @param greyVal 0 - 100
+	 * @param a 0 - 100
+	 * @see #col1
+	 */
 	public void setColorCol1Grey(int greyVal, int a){
 		this.col1 = p.color(360,0,greyVal,a);
 	}
 	
+	/**
+	 * set the field col2
+	 * @param h hue 0 - 360
+	 * @param s saturation 0 - 100
+	 * @param b brightness 0 - 100
+	 * @param a alpha 0 - 100
+	 * @see #col2
+	 */
 	public void setColorCol2(int h, float s, float b, int a){
 		this.col2 = p.color(h,s,b,a);
 	}
 	
+	/**
+	 * set the field col2
+	 * If you want it black and white 
+	 * @param greyVal 0 - 100
+	 * @param a 0 - 100
+	 * @see #col2
+	 */
 	public void setColorCol2Grey(int greyVal, int a){
 		this.col2 = p.color(360,0,greyVal,a);
 	}
 	
 	
+	/**
+	 * set the gravity of the particle. if the particle follows a path you wont see much of the gravity. but with the emitter! wow
+	 * @param inGravity
+	 * @see #gravity
+	 * @see ParticleSystem#addParticleEmitter(boolean)
+	 */
 	public void setGravity(float inGravity){
 		this.gravity = inGravity;
 	}
+	
+	/**
+	 * reset the gravity to 0.0
+	 * @see #gravity
+	 */
 	public void resetGravity(){
 		this.gravity = 0.0f;
 	}
+	
+	
+	/**
+	 * set the maximum force. 
+	 * @param inMaxforce float value more than 20 is not useful right now
+	 */
+	
 	public void setMaxforce(float inMaxforce){
 		this.maxforce = inMaxforce;
 		}
+	/**
+	 * resets the maxforce to 0.3 right now
+	 */
 	public void resetMaxforce(){
 		this.maxforce = 0.3f;
 		}
 	
+		/**
+		 * set the maxspeed of the particle use something like 5 for the beginning
+		 * @param inMaxspeed a float value
+		 */
 		public void setMaxspeed(float inMaxspeed){
 			this.maxspeed = inMaxspeed;
 		}
+		/**
+		 * this resets the maxspeed of the particle to 2.0
+		 */
 		public void resetMaxspeed(){
 			this.maxspeed = 2.0f;
 		}
 		
+		/**
+		 * the size of the particle 
+		 * @param inRadius float value
+		 */
 		public void setRadius(float inRadius) {
 			this.radius = inRadius;
 		}
 		
+		/**
+		 * sets the mass of an particle. use something like 0.5 for the begining
+		 * @param massIn a float value use it between 0.0 and 1.0
+		 */
 		public void setMass(float massIn){
 			this.mass = massIn;
 			
 		}
+		/**
+		 * resets the mass of the particle to 0.5
+		 */
 		public void resetMass(){
 			this.mass = 0.5f;
 			
 		}
 		
+		/**
+		 * so you can set the pathnumber to follow
+		 * @param pathNumIn int value
+		 */
 		public void setPathNum(int pathNumIn){
 			this.pathNum = pathNumIn;
 			
 		}
-		
-		
-
-//	this is for playing around with forces
+			
+	/**
+	 * this is for playing around with forces it is not used right now
+	 * @param obstacles
+	 */
 	public void myForce(ArrayList<Particle> obstacles){
 		
 		for(int i = 0;i<obstacles.size();i++){
@@ -245,17 +406,20 @@ public class Particle {
 		}
 	}
 	
-	@SuppressWarnings("static-access")
+	/**
+	 * Limits the particles to the screen
+	 * 
+	 */
 	void limit (){
 		if(loc.y> p.height-radius|| loc.y <radius){
 			
 			vel.y = -vel.y;
-			loc.y= p.constrain(loc.y,-p.height*p.height,p.height-radius);
+			loc.y= PApplet.constrain(loc.y,-p.height*p.height,p.height-radius);
 			
 		}
 		if((loc.x < radius)||(loc.x > p.width-radius)){
 			vel.x = -vel.x;
-			loc.x= p.constrain(loc.x, radius, p.width-radius);
+			loc.x= PApplet.constrain(loc.x, radius, p.width-radius);
 			
 			
 		}
@@ -263,6 +427,10 @@ public class Particle {
 	}
 	
 	
+	/**
+	 * Show the particle
+	 * 
+	 */
 	public void display(){
 		
 		if(hidden!=true){
@@ -270,7 +438,7 @@ public class Particle {
 		p.stroke(col3);
 		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 		p.stroke(col2);
-		p.strokeWeight(2);
+		p.strokeWeight(this.radius);
 		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 		p.point(p.random(loc.x-0.5f,loc.x+0.5f), p.random(loc.y-0.5f,loc.y+0.5f));
 
@@ -292,8 +460,12 @@ public class Particle {
 		}
 		
 	}
-	
-	// A function to deal with path following and separation
+
+	/**
+	 * A function to deal with path following and separation
+	 * @param ptkls a Arraylist of Particles
+	 * @param path a Path
+	 */
 	public void applyForces(ArrayList<Particle> ptkls, Path path) {
 	
 	// Follow path force
@@ -310,6 +482,14 @@ public class Particle {
 		acc.add(s);
 	}
 
+	
+	/**
+	 * applys a force to the particle
+	 * @param force PVector
+	 * @see ParticleSystem#applyRepellers(ArrayList)
+	 * @see ParticleSystem#myApplyRepellers(ArrayList)
+	 * @see ParticleSystem#myApplyObstcles(ArrayList)
+	 */
 	public void applyRepellForce(PVector force){
 		
 		//float mass = 0.1f; // We aren't bothering with mass here
@@ -318,7 +498,13 @@ public class Particle {
 		
 	}
 
-	// Main "run" function
+	// 
+	/**
+	 * Main "run" function calls update, display , limit
+	 * @see #update()
+	 * @see #display()
+	 * @see #limit()
+	 */
 	public void run() {
 		update();
 		display();
@@ -326,9 +512,19 @@ public class Particle {
 
 	}
 
-	// This function implements Craig Reynolds' path following algorithm
-	// http://www.red3d.com/cwr/steer/PathFollow.html
-	private PVector follow(Path pt) {
+
+	/**
+	 * This function implements Craig Reynolds' path following algorithm
+	 * <a href="http://www.red3d.com/cwr/steer/PathFollow.html" target="blanc">see it at red3d.com</a>
+	 * this is hard stuff. fabiantheblind doesn't really understand ;(
+	 * see the comments within the code to understand more
+	 * there is inside also a debbuging function to see what they ae doing
+	 * where they are steering and all this
+	 * @param pt a path
+	 * @return a steer??
+	 * 
+	 */
+	public PVector follow(Path pt) {
 		
 	// Predict location 25 (arbitrary choice) frames ahead
 		PVector predict = vel.get();
@@ -472,7 +668,10 @@ public class Particle {
 	}
 
 
-	  // Method to update location
+	  // 
+	/**
+	 * Method to update location. it also reduces the lifetime
+	 */
 	public void update() {
 	    // Update velocity
 		vel.add(acc);
@@ -485,10 +684,19 @@ public class Particle {
 
 	}
 
+	/**
+	 * this makes a particle allows go to a specific point.
+	 * @param target the PVector to seek
+	 */
 	public void seek(PVector target) {
 		acc.add(steer(target,false));
 	}
 
+	/**
+	 * this also craig Reynolds stuff.
+	 * @param target
+	 * @see #follow(Path)
+	 */
 	public void arrive(PVector target) {
 		acc.add(steer(target,true));
 	}

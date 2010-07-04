@@ -9,41 +9,61 @@ import processing.core.PVector;
 //Path Following
 //Daniel Shiffman <http://www.shiffman.net>
 //The Nature of Code, Spring 2009
+/**
+ * The Path to follow
+ * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
+ * @author fabianthelbind
+ *
+ */
 public class Path {
 
 	  // A Path is an arraylist of points (PVector objects)
-	  public ArrayList<PVector> points;
+//	  public ArrayList<PVector> points;
 	  public ArrayList<Particle> ptclPoints;
 
 	  PApplet p;
 	  // A path has a radius, i.e how far is it ok for the particle to wander off
-	  public float radius;
+	  private float radius;
 
-	  public Path(PApplet p_) {
+	  /**
+	   * builds a basic Path
+	 * @param p the PApplet
+	 */
+	public Path(PApplet p) {
 	    // Arbitrary radius of 20
-		  p = p_;
-//	    radius = 10;
-	    points = new ArrayList<PVector>();
+		  this.p = p;
+
+//	    points = new ArrayList<PVector>();
 	    ptclPoints = new ArrayList<Particle>();
 
 	  }
 	  
-	  public Path(PApplet p_,float r_) {
-		    // Arbitrary radius of 20
-			  p = p_;
-		    r_ = radius;
-		    points = new ArrayList<PVector>();
+	  /**
+	   * bulds a Path with an specific Radius around the pathline
+	 * @param p the PApplet
+	 * @param radius the radius around the path
+	 */
+	public Path(PApplet p,float radius) {
+			  this.p = p;
+		    this.radius = radius;
+//		    points = new ArrayList<PVector>();
 		    ptclPoints = new ArrayList<Particle>();
 
 		  }
 
 	  // Add a point to the path
-	  public void addPoint(float x, float y) {
-	    PVector point = new PVector(x,y);
-	    points.add(point);
-	  }
+//	  public void addPoint(float x, float y) {
+//	    PVector point = new PVector(x,y);
+//	    points.add(point);
+//	  }
 	  
-	  public void addPointPtcl(float x, float y) {
+	  /**
+	   * Adds a point that behaves like a Particle to the path
+	 * @param x
+	 * @param y
+	 * @see Class Particle Class
+	 */
+	public void addPointPtcl(float x, float y) {
 		  PVector pos = new PVector(x,y);
 //		  PVector vel = new PVector(0,0);
 		  Particle ptcl = new Particle(p, pos,false,true);
@@ -58,12 +78,18 @@ public class Path {
 //		    points.add(point);
 		  }
 	  
+	  	/**
+	  	 * makes the points of the path move back to their origin
+	  	 * if this is not called within every loop of the draw()
+	  	 * the points of the path behave like normal Particle
+	  	 * 
+	  	 */
 	  	public void resetPointPtcls(){
 	  	
 	  		for(int i = 0; i < ptclPoints.size();i++){
 	  			if(ptclPoints.get(i).affection==false){
 		  			ptclPoints.get(i).seek(ptclPoints.get(i).origin);
-		  			ptclPoints.get(i).setMass(100);
+		  			ptclPoints.get(i).setMass(0.5f);
 		  			ptclPoints.get(i).setGravity(0f);
 		  			ptclPoints.get(i).setMaxforce(100f);
 		  			ptclPoints.get(i).setMaxspeed(0.11f);
@@ -76,105 +102,133 @@ public class Path {
 	
 	  	}
 	
+	  	/**
+	  	 * @return ArrayList of Particle
+	  	 */
 	  	public ArrayList <Particle> getPtclPointList(){
-	
-	  		return ptclPoints;
+	  		return this.ptclPoints;
 	  	}
 	  
 
-	  public int pathPoinsListSize(){
-		  return points.size();
+//	  public int pathPoinsListSize(){
+//		  return points.size();
+//	  }
+//	  
+//	  public PVector getPathPointVector(int i){
+//		  return this.points.get(i);
+//	  }
+	  	
+	  /**
+	   * this returns the specific location of a Point of the Path
+	 * @param i to choose the point of the path
+	 * @return Particle
+	 */
+	public Particle getPathPtclPointVector(int i){
+		  return this.ptclPoints.get(i);
 	  }
 	  
-	  public PVector getPathPointVector(int i){
-		  return points.get(i);
-	  }
-	  public Particle getPathPtclPointVector(int i){
-		  return ptclPoints.get(i);
-	  }
-	  
-	  public void setRadius(float radius_){
-		  radius = radius_;	  
+	  /**
+	   * set the radius oarund the path
+	 * @param radius
+	 */
+	public void setRadius(float radius){
+		  this.radius = radius;	  
 	  }
 	  
-	  public void updatePath(float radius_){
-		  
-		  radius = radius_;
+	  /**
+	   * get the radius around the path
+	 * @return the radius around the path
+	 */
+	public float getRadius(){
+		  return this.radius;
 	  }
+	  
+//	  public void updatePath(float radius_){
+//		  
+//		  radius = radius_;
+//	  }
 	  
 	  // Draw the path
 	  
-	  public void display() {
-
-	    // Draw the radius as thick lines and circles
-
-	    // Draw end points
-	    for (int i = 0; i < points.size(); i++) {
-	      PVector point = (PVector) points.get(i);
-	      p.fill(175);
-	      p.noStroke();
-	      p.ellipse(point.x,point.y,radius*2,radius*2);
-	    }
-
-	    // Draw Polygon around path
-	    for (int i = 0; i < points.size(); i++) {
-	      PVector start = (PVector) points.get(i);
-	      // We're assuming path is a circle in this example
-	      PVector end = (PVector) points.get((i+1)%points.size());
-	      PVector line = PVector.sub(end,start);
-	      PVector normal = new PVector(line.y,-line.x);
-	      normal.normalize();
-	      normal.mult(radius);
-
-	      // Polygon has four vertices
-	      PVector a = PVector.add(start, normal);
-	      PVector b = PVector.add(end, normal);
-	      PVector c = PVector.sub(end, normal);
-	      PVector d = PVector.sub(start, normal);
-
-	      p.fill(175);
-	      p.noStroke();
-	      p.beginShape();
-	      p.vertex(a.x,a.y);
-	      p.vertex(b.x,b.y);
-	      p.vertex(c.x,c.y);
-	      p.vertex(d.x,d.y);
-	      p.endShape();
-	    }
-
-	    // Draw Regular Line
-	    p.stroke(255);
-	    p.strokeWeight(3);
-	    p.noFill();
-	    p.beginShape();
-	    for (int i = 0; i < points.size(); i++) {
-	      PVector loc = (PVector) points.get(i);
-	      p.vertex(loc.x,loc.y);
-	    }
-	    p.endShape(p.CLOSE);
-
-	  }
-	  public void ptclPathDisplay() {
+//	  /**
+//	   * this is the old way to build a path
+//	 * 
+//	 */
+//	public void display() {
+//
+//	    // Draw the radius as thick lines and circles
+//
+//	    // Draw end points
+//	    for (int i = 0; i < points.size(); i++) {
+//	      PVector point = (PVector) points.get(i);
+//	      p.fill(175);
+//	      p.noStroke();
+//	      p.ellipse(point.x,point.y,radius*2,radius*2);
+//	    }
+//
+//	    // Draw Polygon around path
+//	    for (int i = 0; i < points.size(); i++) {
+//	      PVector start = (PVector) points.get(i);
+//	      // We're assuming path is a circle in this example
+//	      PVector end = (PVector) points.get((i+1)%points.size());
+//	      PVector line = PVector.sub(end,start);
+//	      PVector normal = new PVector(line.y,-line.x);
+//	      normal.normalize();
+//	      normal.mult(radius);
+//
+//	      // Polygon has four vertices
+//	      PVector a = PVector.add(start, normal);
+//	      PVector b = PVector.add(end, normal);
+//	      PVector c = PVector.sub(end, normal);
+//	      PVector d = PVector.sub(start, normal);
+//
+//	      p.fill(175);
+//	      p.noStroke();
+//	      p.beginShape();
+//	      p.vertex(a.x,a.y);
+//	      p.vertex(b.x,b.y);
+//	      p.vertex(c.x,c.y);
+//	      p.vertex(d.x,d.y);
+//	      p.endShape();
+//	    }
+//
+//	    // Draw Regular Line
+//	    p.stroke(255);
+//	    p.strokeWeight(3);
+//	    p.noFill();
+//	    p.beginShape();
+//	    for (int i = 0; i < points.size(); i++) {
+//	      PVector loc = (PVector) points.get(i);
+//	      p.vertex(loc.x,loc.y);
+//	    }
+//	    p.endShape(p.CLOSE);
+//
+//	  }
+	  /**
+	   * This is for showing the Path DEBUGGING
+	 * 
+	 */
+	public void ptclPathDisplay() {
 
 		    // Draw the radius as thick lines and circles
 
 		    // Draw end points
 		    for (int i = 0; i < ptclPoints.size(); i++) {
-		      PVector point = (PVector) ptclPoints.get(i).loc;
-		      p.fill(175);
+		      PVector point =  ptclPoints.get(i).loc;
+		      p.fill(0,0,100,20);
 		      p.noStroke();
-		      p.ellipse(point.x,point.y,radius*2,radius*2);
+		      p.ellipse(point.x,point.y,this.radius*2,this.radius*2);
 		    }
 
 		    // Draw Polygon around path
-		    for (int i = 0; i < points.size(); i++) {
-		      PVector start = (PVector) points.get(i);
+		    for (int i = 0; i < ptclPoints.size(); i++) {
+		      PVector start = ptclPoints.get(i).loc;
 		      // We're assuming path is a circle in this example
-		      PVector end = (PVector) points.get((i+1)%points.size());
+		      PVector end =  ptclPoints.get((i+1)%ptclPoints.size()).loc;
 		      PVector line = PVector.sub(end,start);
 		      PVector normal = new PVector(line.y,-line.x);
 		      normal.normalize();
-		      normal.mult(radius);
+		      normal.mult(this.radius);
 
 		      // Polygon has four vertices
 		      PVector a = PVector.add(start, normal);
@@ -182,7 +236,7 @@ public class Path {
 		      PVector c = PVector.sub(end, normal);
 		      PVector d = PVector.sub(start, normal);
 
-		      p.fill(175);
+		      p.fill(0,0,100,20);
 		      p.noStroke();
 		      p.beginShape();
 		      p.vertex(a.x,a.y);
@@ -193,36 +247,19 @@ public class Path {
 		    }
 
 		    // Draw Regular Line
-		    p.stroke(0);
+		    p.stroke(150,100,100,50);
+		    p.strokeWeight(2);
 		    p.noFill();
 		    p.beginShape();
-		    for (int i = 0; i < points.size(); i++) {
-		      PVector loc = (PVector) points.get(i);
+		    for (int i = 0; i < ptclPoints.size(); i++) {
+		      PVector loc =  ptclPoints.get(i).loc;
 		      p.vertex(loc.x,loc.y);
 		    }
 		    p.endShape(p.CLOSE);
 
 		  }
 	  
-//		public void newPath(Path path) {
-//			  // A path is a series of connected points
-//			  // A more sophisticated path might be a curve
-//			  path = new Path(p);
-//			  float offset = 60;
-//			  path.addPoint(offset,offset);
-//			  path.addPoint(p.width-offset,offset);
-//			  path.addPoint(p.width-offset,p.height-offset);
-//			  path.addPoint(p.width/2,p.height-offset*3);
-//			  path.addPoint(offset,p.height-offset);
-//			}
-//			
-//		public static void circlePath(PApplet p,int segments,Path path){
-//				
-//				path = new Path(p);
-//				for(int i = 0; i <=360;i+=360/segments){
-//					  path.addPoint(p.width / 2 + p.sin(p.radians(i))*100,p.height / 2 + p.cos(p.radians(i))*100);
-//				}
-//			}
+
 			
 
 }

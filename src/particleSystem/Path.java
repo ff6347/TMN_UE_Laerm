@@ -9,6 +9,12 @@ import processing.core.PVector;
 //Path Following
 //Daniel Shiffman <http://www.shiffman.net>
 //The Nature of Code, Spring 2009
+/**
+ * The Path to follow a Path is a series of connected particles. They interact eith the Repellers and so...
+ * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
+ * @author fabianthelbind
+ *
+ */
 public class Path {
 
 	  // A Path is an arraylist of points (PVector objects)
@@ -19,7 +25,11 @@ public class Path {
 	  // A path has a radius, i.e how far is it ok for the particle to wander off
 	  private float radius;
 
-	  public Path(PApplet p) {
+	  /**
+	   * builds a basic Path
+	 * @param p the PApplet
+	 */
+	public Path(PApplet p) {
 	    // Arbitrary radius of 20
 		  this.p = p;
 
@@ -28,7 +38,12 @@ public class Path {
 
 	  }
 	  
-	  public Path(PApplet p,float radius) {
+	  /**
+	   * builds a Path with an specific Radius around the pathline
+	 * @param p the PApplet
+	 * @param radius the radius around the path
+	 */
+	public Path(PApplet p,float radius) {
 			  this.p = p;
 		    this.radius = radius;
 //		    points = new ArrayList<PVector>();
@@ -42,7 +57,13 @@ public class Path {
 //	    points.add(point);
 //	  }
 	  
-	  public void addPointPtcl(float x, float y) {
+	  /**
+	   * Adds a point that behaves like a Particle to the path
+	 * @param x
+	 * @param y
+	 * @see Class Particle Class
+	 */
+	public void addPointPtcl(float x, float y) {
 		  PVector pos = new PVector(x,y);
 //		  PVector vel = new PVector(0,0);
 		  Particle ptcl = new Particle(p, pos,false,true);
@@ -57,6 +78,12 @@ public class Path {
 //		    points.add(point);
 		  }
 	  
+	  	/**
+	  	 * makes the points of the path move back to their origin
+	  	 * if this is not called within every loop of the draw()
+	  	 * the points of the path behave like normal Particle
+	  	 * 
+	  	 */
 	  	public void resetPointPtcls(){
 	  	
 	  		for(int i = 0; i < ptclPoints.size();i++){
@@ -75,8 +102,10 @@ public class Path {
 	
 	  	}
 	
+	  	/**
+	  	 * @return ArrayList of Particle
+	  	 */
 	  	public ArrayList <Particle> getPtclPointList(){
-	
 	  		return this.ptclPoints;
 	  	}
 	  
@@ -88,15 +117,29 @@ public class Path {
 //	  public PVector getPathPointVector(int i){
 //		  return this.points.get(i);
 //	  }
-	  public Particle getPathPtclPointVector(int i){
+	  	
+	  /**
+	   * this returns the specific location of a Point of the Path
+	 * @param i to choose the point of the path
+	 * @return Particle
+	 */
+	public Particle getPathPtclPointVector(int i){
 		  return this.ptclPoints.get(i);
 	  }
 	  
-	  public void setRadius(float radius){
+	  /**
+	   * set the radius oarund the path
+	 * @param radius
+	 */
+	public void setRadius(float radius){
 		  this.radius = radius;	  
 	  }
 	  
-	  public float getRadius(){
+	  /**
+	   * get the radius around the path
+	 * @return the radius around the path
+	 */
+	public float getRadius(){
 		  return this.radius;
 	  }
 	  
@@ -107,7 +150,11 @@ public class Path {
 	  
 	  // Draw the path
 	  
-//	  public void display() {
+//	  /**
+//	   * this is the old way to build a path
+//	 * 
+//	 */
+//	public void display() {
 //
 //	    // Draw the radius as thick lines and circles
 //
@@ -157,7 +204,11 @@ public class Path {
 //	    p.endShape(p.CLOSE);
 //
 //	  }
-	  public void ptclPathDisplay() {
+	  /**
+	   * This is for showing the Path DEBUGGING
+	 * 
+	 */
+	public void ptclPathDisplay() {
 
 		    // Draw the radius as thick lines and circles
 
@@ -208,25 +259,7 @@ public class Path {
 
 		  }
 	  
-//		public void newPath(Path path) {
-//			  // A path is a series of connected points
-//			  // A more sophisticated path might be a curve
-//			  path = new Path(p);
-//			  float offset = 60;
-//			  path.addPoint(offset,offset);
-//			  path.addPoint(p.width-offset,offset);
-//			  path.addPoint(p.width-offset,p.height-offset);
-//			  path.addPoint(p.width/2,p.height-offset*3);
-//			  path.addPoint(offset,p.height-offset);
-//			}
-//			
-//		public static void circlePath(PApplet p,int segments,Path path){
-//				
-//				path = new Path(p);
-//				for(int i = 0; i <=360;i+=360/segments){
-//					  path.addPoint(p.width / 2 + p.sin(p.radians(i))*100,p.height / 2 + p.cos(p.radians(i))*100);
-//				}
-//			}
+
 			
 
 }

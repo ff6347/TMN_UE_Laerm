@@ -8,6 +8,13 @@ import particleSystem.Particle;
 import particleSystem.ParticleSystem;
 import processing.core.PApplet;
 
+/**
+ *  this is for debbuging only and has no effect on the Application
+ * @author fabianthelbind
+ * @author PDXIII
+ *
+ *
+ */
 public class Debug {
 
 	
@@ -19,6 +26,11 @@ public class Debug {
 
 
 
+		/**
+		 * to pass the PApplet to all Methods
+		 * a static Class doesn't need a Constructor
+		 * @param p_ the PApplet
+		 */
 		public static void setPAppletDebug(PApplet p_) {
 			p  = p_;
 
@@ -27,6 +39,9 @@ public class Debug {
 		
 		
 		// just  writing TIff Sequenzes for videos
+		/**
+		 * write some images
+		 */
 		public static void writeIMGs(){
 			if(writeImg){
 				String sa = PApplet.nf(imgNum,6);
@@ -36,6 +51,14 @@ public class Debug {
 		}
 	
 	
+		/**
+		 *  this is for looking at one Particle
+		 * @param ptclsList
+		 * @param ps instance of ParticleSystem
+		 * @see Class Particle
+		 * @see Class ParticleSystem
+		 * @see Class java.util.ArrayList
+		 */
 		public static void watchAParticle(ArrayList <Particle> ptclsList, ParticleSystem ps){
 	        
 
@@ -63,6 +86,9 @@ public class Debug {
 		}
 		
 		//a grid just for adjustment
+		/**
+		 * Draw a Grid for adjustment
+		 */
 		public static void drawGrid(){
 			
 			float gridSize = 100;
@@ -79,6 +105,12 @@ public class Debug {
 		}
 		//grid end
 		
+		/**
+		 * draw the tuio Cursors
+		 * @param tuioCursorList
+		 * @see java.util.ArrayList
+		 * 
+		 */
 		public static void drawCursors(ArrayList <TuioCursor>tuioCursorList){
 			
 			for (int i=0; i<tuioCursorList.size(); i++) {
@@ -89,39 +121,66 @@ public class Debug {
 			}
 		}
 		
+		/**
+		 * 
+		 * this is an overlay for not using the console
+		 * draws the number of active cursors on the screen
+		 * @param tuioCursorList
+		 * @see java.util.ArrayList
+		 */
 		public static void drawCursorCount(ArrayList <TuioCursor>tuioCursorList){
 			
 			p.noStroke();
-			p.fill(Style.textColor);
+			p.fill(Style.textColorWhite);
 			p.text(tuioCursorList.size(), 50, 50);
 			p.noFill();
 		}
 		
+		/**
+		 * this is an overlay for not using the console
+		 * draws the processing.frameRate on the screen
+		 */
 		public static void drawFrameRate(){
 			
 			p.noStroke();
-			p.fill(Style.textColor);
+			p.fill(Style.textColorBlk);
 			p.text("Framerate: "+ p.frameRate, 50, 50);
 			p.noFill();
 		}
+		/**
+		 * this is an overlay for not using the console
+		 * draws the processing.frameCount on the screen
+		 */
 		public static void drawFrameCount(){
 			
 			p.noStroke();
-			p.fill(Style.textColor);
+			p.fill(Style.textColorBlk);
 			p.text("Framecount: "+ p.frameCount, 50, 70);
 			p.noFill();
 		}
 		
-		 private static void drawMyPtclForce(float in){
+		 /**
+		 * 
+		 * this is for drawing a specific float or int value on the screen
+		 * used in watchAParticle
+		 * @param in
+		 * @see Debug.watchAParticle()
+		 * @author fabianthelbind
+		 */
+		private static void drawMyPtclForce(float in){
 			
 			p.noStroke();
-			p.fill(Style.textColor);
+			p.fill(Style.textColorBlk);
 			p.text("MaxForce: "+ in, 50, 90);
 			p.noFill();
 		}
 
 
 
+		/**
+		 * for writing single images on keystroke
+		 * @param time
+		 */
 		public static void saveFrame(float time) {
 			// TODO Auto-generated method stub
 			p.saveFrame("./bilder/MyImg"+time+".jpg");

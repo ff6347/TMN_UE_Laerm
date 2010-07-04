@@ -9,10 +9,25 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import tmnuelaerm.ObstacleObject;
 
+/**
+ * This Class is for helping with the ParticleSystem
+ * they don't affect the Core Application but are very usefull
+ * @author fabianthelbind
+ * @see Particle Class Particle
+ * @see Path Class Path
+ * @see Repeller Class Repeller
+ * @author fabianthelbind
+ *
+ */
 public class PSUtil {
 	
 	private static PApplet p;
 
+	/**
+	 * 
+	 * this sets the PApplet for all the functions it has to be called first
+	 * @param p_
+	 */
 	public static void setPApplet(PApplet p_){
 	
 		p = p_;
@@ -20,15 +35,19 @@ public class PSUtil {
 	}
 
 
-
-
-
-	
-	
 //		Particle stuff
 	
-//	This a number of points circling  around the center. for a smother path 
-//	give him more segments
+	/**
+	 * This a number of points circling  around the center.
+	 * for a smother path give him more segments
+	 * 
+	 * @param segments the number of segments in a path
+	 * @param radius the radius around the path
+	 * @param size the diameter of the circle
+	 * @return Path 
+	 * @see Path Class Path
+	 * @see Path#addPointPtcl(float, float)
+	 */
 	public static Path initCirclePath(int segments,int radius, int size){
 		
 		Path path = new Path(p,radius);
@@ -56,6 +75,14 @@ public class PSUtil {
 //	}
 	
 //	for easier initalizing of particles
+	/**
+	 * @param numPtkls the number of particles
+	 * @param ptclRadius the radius of the particle for collision with others
+	 * @param ptclsList the List of all Particles
+	 * @return ptclsList 
+	 * @see #newPtkl(float, float, ArrayList, float)
+	 * @see Particle Class Particle
+	 */
 	public static ArrayList<Particle> initParticles(int numPtkls,float ptclRadius,ArrayList <Particle> ptclsList){
 		
 		  ptclsList =  new ArrayList<Particle>();
@@ -71,6 +98,15 @@ public class PSUtil {
 	}
 		  
 //	Create new Particles	
+	/**
+	 * builds a new PArticle and adds him to the list of Perticles
+	 * @param x
+	 * @param y
+	 * @param ptclsList
+	 * @param ptclRadius
+	 * @see Particle Class Particle
+	 * 
+	 */
 	public static void newPtkl( float x, float y,ArrayList<Particle> ptclsList, float ptclRadius) {
 				
 //				  float maxforce = 0.3f;    // Maximum steering force
@@ -91,6 +127,12 @@ public class PSUtil {
 			}
 			
 	
+	/**
+	 * not used right now
+	 * @param obstclObjList
+	 * @param ptclsList
+	 * 
+	 */
 	public static void ptclsReactOnObject( ArrayList <ObstacleObject> obstclObjList, ArrayList <Particle>ptclsList){
 		//println(obstclObjList.get(0).ObstclsRepellerList.get(0).radius);
 		float mySize = obstclObjList.get(0).ObstclsRepellerList.get(0).radius;
@@ -107,6 +149,11 @@ public class PSUtil {
 
 
 
+	/**
+	 * this is just for debugging
+	 * @param someRepellers a list of some repellers
+	 * @see Repeller Class Repeller
+	 */
 	public static void makeSomeRepellers(ArrayList <Repeller>someRepellers){
 		
 		
@@ -122,6 +169,13 @@ public class PSUtil {
 				
 	}
 	
+	/**
+	 *  this is for displaying the repellers for debugging
+	 * @param someRepellers
+	 * @see Repeller Class Repeller
+	 * @see #makeSomeRepellers(ArrayList)
+	 *
+	 */
 	public  static void displaySomeRepellers(ArrayList<Repeller>someRepellers){
 		
 		// Display all repellers

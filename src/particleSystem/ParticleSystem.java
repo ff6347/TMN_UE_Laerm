@@ -5,36 +5,68 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PVector;
 import tmnuelaerm.ObstacleObject;
-import tmnuelaerm.TmnUELaerm;
 
+/**
+ * the whole ParticleSystem
+ * here the collision and stuff get worked out
+ * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
+ * @author fabianthelbind
+ * @see Particle Class Particle
+ * @see Path Class Path
+ * @see Repeller Class Repeller
+ *
+ */
 public class ParticleSystem {
 		PApplet p;
-	  ArrayList <Particle> particles;    // An arraylist for all the particles
-	  public PVector origin;        // An origin point for where particles are birthed
-	  Path path;
 
-	  public ParticleSystem(PApplet p_, int num, PVector v, ArrayList<Particle> particles_,Path path_) {
-	    particles = particles_;              // Initialize the arraylist
-	    p = p_;
-	    path = path_;
-	    origin = v.get();                        // Store the origin point
+		/**
+		 * An arraylist for all the particles
+		 */
+		ArrayList <Particle> particles;
+		
+	/**
+	 * An origin point for where particles are birthed when using the emitter
+	 * @see #addParticleEmitter(boolean)
+	 * @see #setEmitterOrigin(PVector)
+	 */
+	public PVector origin;
+
+	  /**
+	   * this is the masterconstructor
+	 * @param p  the PApplet
+	 * @param num int create at startup a number of particles
+	 * @param v the origin of the emitter
+	 * @param particles an Arraylist of Particles
+	 */
+	public ParticleSystem(PApplet p, int num, PVector v, ArrayList<Particle> particles) {
+	    this.particles = particles;              // Initialize the arraylist
+	    this.p = p;
+	    this.origin = v.get();                        // Store the origin point
 	    for (int i = 0; i < num; i++) {
 	      particles.add(new Particle(p,origin,true,false));    // Add "num" amount of particles to the arraylist
 	    }
 	  }
 
-	  
 
-	  // A function to apply a force to all Particles
-	  void applyForce(PVector f) {
+	/**
+	 * A function to apply a force to all Particles
+	 * @param fPVector
+	 * @see Particle#applyRepellForce(PVector)
+	 */
+	void applyForce(PVector f) {
 	    for (int i = 0; i < particles.size(); i++) {
 	      Particle ptcl = (Particle) particles.get(i);
 	      ptcl.applyRepellForce(f);
 	    }
 	  }
 
-	  // A function for particles to interact with all Repellers
-	  public void applyRepellers(ArrayList<Repeller> repellers) {
+	/**
+	 * A function for particles to interact with all Repellers
+	 * this function is not used in the main programm but still is usefull to have
+	 * @param repellers ArrayList
+	 * 
+	 */
+	public void applyRepellers(ArrayList<Repeller> repellers) {
 	    // For every Particle
 	    for (int i = 0; i < particles.size(); i++) {
 	      Particle ptcl = (Particle) particles.get(i);
@@ -50,14 +82,19 @@ public class ParticleSystem {
 	  }
 
 	  
-	  // A function for particles to interact with all Repellers that are near to the repeller
-	  public void myApplyRepellers(ArrayList<Repeller> repellers) {
+	  // 
+	/**
+	 * A function for particles to interact with all Repellers that are near to the repeller
+	 * @param repellers ArrayList
+	 * @see Particle Class Particle
+	 */
+	public void myApplyRepellers(ArrayList<Repeller> repellers) {
 	    // For every Particle
 	    for (int i = 0; i < particles.size(); i++) {
 	      Particle ptcl = (Particle) particles.get(i);
 	      
 	        float distToCenterPS = ptcl.loc.dist(origin);
-	        float n = p.norm(distToCenterPS,0,p.width/2f);
+	        float n = PApplet.norm(distToCenterPS,0,p.width/2f);
 	        ptcl.setMass(n);
 	      // For every Repeller
 	     
@@ -121,8 +158,14 @@ public class ParticleSystem {
 	    }
 	  }
 	  
-	  // A function for particles to interact with all Repellers that are near to the repeller
-	  public void myApplyObstcles(ArrayList<ObstacleObject> ObstclsList) {
+	   
+	/**
+	 * A function for particles to interact with all Repellers that are near to the repeller
+	 * @param ObstclsList ArrayList
+	 * @see #myApplyRepellers(ArrayList)
+	 * @see tmnuelaerm.ObstacleObject#ObstclsRepellerList
+	 */
+	public void myApplyObstcles(ArrayList<ObstacleObject> ObstclsList) {
 	    // For every Particle
 	    for (int i = 0; i < particles.size(); i++) {
 	      Particle ptcl = (Particle) particles.get(i);
@@ -179,7 +222,11 @@ public class ParticleSystem {
 	  }
 	  
 	  
-	  public void run() {
+	  /**
+	   * this runs the ParticleSystem
+	 * 
+	 */
+	public void run() {
 	    // Cycle through the ArrayList backwards b/c we are deleting
 	    for (int i = particles.size()-1; i >= 0; i--) {
 	      Particle ptcl = (Particle) particles.get(i);
@@ -190,7 +237,14 @@ public class ParticleSystem {
 	    }
 	  }
 
-	  public void addParticleEmitter(boolean pointOrigin) {
+	  /**
+	   * this is an basic Particle Emitter it is not worked out
+	   * if u set the pointOrigin to true it will emit Particles from  the center the window
+	   * 
+	 * @param pointOrigin boolean
+	 * @see Particle#Particle(PApplet, PVector, boolean, boolean)
+	 */
+	public void addParticleEmitter(boolean pointOrigin) {
 		  
 		  Particle ptcl;
 		  
@@ -213,18 +267,32 @@ public class ParticleSystem {
 	  }
 	  
 	  
-  public PVector setEmitterOrigin(PVector newOrigin){
+  /**
+   * sets a new origin for the Emitter
+ * @param newOrigin
+ * @return PVector
+ */
+public PVector setEmitterOrigin(PVector newOrigin){
 		  
 	  origin = newOrigin;
 	  return origin;
 	  }
 
-	  void addParticle(Particle ptcl) {
+
+	  /**
+	   * adds a particle to the ArrayList particles
+	 * @param ptcl
+	 * @see #particles
+	 */
+	void addParticle(Particle ptcl) {
 	    particles.add(ptcl);
 	  }
 
-	  // A method to test if the particle system still has particles
-	  boolean dead() {
+	  /**
+	   * A method to test if the particle system still has particles
+	 * @return boolean
+	 */
+	boolean dead() {
 	    if (particles.isEmpty()) {
 	      return true;
 	    } 

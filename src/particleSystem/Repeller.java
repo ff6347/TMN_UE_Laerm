@@ -2,110 +2,146 @@
 	
 import processing.core.PApplet;
 import processing.core.PVector;
-import tmnuelaerm.Point;
 import util.Style;
-	
-	//Particles + Forces
-	//Daniel Shiffman <http://www.shiffman.net>
-	
-	//A very basic Repeller class
+
+	/**
+	 * A very basic Repeller class
+	 * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
+	 * @author fabianthelbind
+	 * @see Class ParticleSystem Class
+	 * @see Class Particle Class
+	 *
+	 */
 	public class Repeller {
-	
-	// Gravitational Constant
+
+	/**
+	 * the Gravitational Constant
+	 */
 	public float G;
 	
-	// Location
+	/**
+	 * the location of the Repeller
+	 */
 	public PVector loc;
 	PApplet p;
 	
+	/**
+	 * the size of a repeller
+	 */
 	public float radius = 10;
+
+	/**
+	 *  For mouse interaction. Is the object being dragged?
+	 */
+	private boolean dragging = false; //
+	/**
+	 * For mouse interaction. Is the mouse over the ellipse?
+	 */
+	private boolean rollover = false; // 
+	/**
+	 * For mouse interaction. holds the offset for when object is clicked on
+	 */
+	PVector drag;
+	private int color1 = Style.textColorWhite;
+	private int color2 = Style.col3;
 	
-	// For mouse interaction
-	private boolean dragging = false; // Is the object being dragged?
-	private boolean rollover = false; // Is the mouse over the ellipse?
-	PVector drag;  // holds the offset for when object is clicked on
-	private int color1;
-	private int color2;
-	public int id;
+
 	
 	public String obstclID; 
 
 
 	
+	/**
+	 * @param p the PApplet
+	 * @param x the x-Coordinate
+	 * @param y the y-Coordinate
+	 */
 	public Repeller(PApplet p,float x, float y)  {
 		this.p = p;
 		this.loc = new PVector(x,y);
 		this.drag = new PVector(0,0);
 		this.G = PApplet.pow(10,3);
-	 
-		this.color1 = p.color(Style.textColor);
-		this.color2 = p.color(Style.col3);
 	}
 	
-	public Repeller(PApplet p, PVector loc_)  {
+	/**
+	 * @param p the PApplet
+	 * @param loc the Position as a PVector
+	 */
+	public Repeller(PApplet p, PVector loc)  {
 		this.p = p;
-		this.loc = loc_;
+		this.loc = loc;
 		this.drag = new PVector(0,0);
 		this.G = PApplet.pow(10,3);
-		
-		this.color1 = p.color(Style.textColor);
-		this.color2 = p.color(Style.col3);
-		}
-	public Repeller(PApplet p, PVector loc_,int ObjectID_)  {
-		this.p = p;
-		this.loc = loc_;
-		this.drag = new PVector(0,0);
-		this.G = PApplet.pow(10,3);
-		
-		this.color1 = p.color(Style.textColor);
-		this.color2 = p.color(Style.col3);
-		this.id = ObjectID_;
+
 		}
 	
-	
-	public Repeller(PApplet p, PVector loc_,float radius)  {
+	/**
+	 * @param p the PApplet
+	 * @param loc the Position as a PVector
+	 * @param radius the size of the Repeller
+	 */
+	public Repeller(PApplet p, PVector loc,float radius)  {
 		this.p = p;
-		this.loc = loc_;
+		this.loc = loc;
 		this.drag = new PVector(0,0);
 		this.G = PApplet.pow(10,3);
 		this.radius = radius;
-		this.color1 = p.color(Style.textColor);
-		this.color2 = p.color(Style.col3);
+
 		}
 	
-	
-	// Repellers get the ID of the ObstacleObjaect as a String, so we IDs looking like 01, 02, etc.
-	public Repeller(PApplet p,float x, float y, float G,float radius, String _id)  {
-		p = p;
+	/**
+	 * Repellers get the ID of the ObstacleObjaect as a String, sowe have IDs looking like 01, 02, etc.
+	 * this is used in the Obstacl Objects
+	 * @param p PApplet
+	 * @param x float x the x-Coordinate
+	 * @param y float y the y-Coordinate
+	 * @param G float G the Gravitational Constante :(
+	 * @param radius float radius the size
+	 * @param id  string id like 01, 02
+	 */
+	public Repeller(PApplet p,float x, float y, float G,float radius, String id)  {
+		this.p = p;
 		this.loc = new PVector(x,y);
 		this.drag = new PVector(0,0);
 		this.G = G;
 		this.radius = radius;
-		this.obstclID = _id;
+		this.obstclID = id;
 
-	 color1 = p.color(Style.textColor);
-	 color2 = p.color(Style.col3);
 	}
+	/**
+	 * @param p PApplet
+	 * @param x float x the x-Coordinate
+	 * @param y float y the y-Coordinate
+	 * @param G float G the Gravitational Constante :(
+	 * @param radius float radius the size
+	 */
 	public Repeller(PApplet p,float x, float y, float G,float radius)  {
-		p = p;
-	 loc = new PVector(x,y);
-	 drag = new PVector(0,0);
-	 G = G;
-	 radius = radius;
-	 
-	 color1 = p.color(Style.textColor);
-	 color2 = p.color(Style.col3);
+	this.p = p;
+	 this.loc = new PVector(x,y);
+	 this.drag = new PVector(0,0);
+	 this.G = G;
+	 this.radius = radius;
+
 	}
 	
+	/**
+	 * Display the Repeller
+	 * 
+	 */
 	public void display() {
 	 p.stroke(color1);
-	 if (dragging) p.fill (color1);
+	 if (dragging) p.fill (Style.textColorBlk);
 	 else if (rollover) p.fill(color2);
 	 else p.noFill();
 	 p.ellipse(loc.x,loc.y,radius*2,radius*2);
 	}
 	
-	// Calculate a force to push particle away from repeller
+	// 
+	/**
+	 * Calculate a force to push particle away from repeller
+	 * @param ptcl the Particle to push
+	 * @return PVector direction
+	 */
 	public PVector pushParticle(Particle ptcl) {
 	 PVector dir = PVector.sub(loc, ptcl.loc);      // Calculate direction of force
 	 float d = dir.mag();                       // Distance between objects
@@ -116,45 +152,81 @@ import util.Style;
 	 return dir;
 	}  
 	
-	public void update(PVector loc_){
+	/**
+	 * Updates the location of the Repeller
+	 * @param loc
+	 */
+	public void update(PVector loc){
 		
-		this.loc = loc_;
+		this.loc = loc;
 	}
 	
-//	public void translate(PVector _v) {
-//		PVector v = _v;
-//		
-//		Point point = new Point(loc.x, loc.y);
-//		point.translate(v.x, v.y);
-//	}
-	
-	
+
+	/**
+	 * set the G field of the Repeller
+	 * @param G_in float right now it is like 10*10*10
+	 * @see #G
+	 */
 	public void setG(float G_in){
 		this.G = G_in;
 	}
-	
-	public void setRadius(float radiusIn){
-		this.radius = radiusIn;
-	}
-	
+	/**
+	 * get the G field of the Repeller
+	 * @return G
+	 * @see #G
+	 */
 	public float getG(){	
 		return this.G;
 	}
+	
+	
+	/**
+	 * Set radius field of the Repeller
+	 * @param radiusIn
+	 * @see #radius
+	 */
+	public void setRadius(float radiusIn){
+		this.radius = radiusIn;
+	}
+	/**
+	 * get the radius field of the Repeller
+	 * @return the radius 
+	 * @see #radius
+	 */
 	public float getRadius(){	
 		return this.radius;
 	}
-	
+
+	/**
+	 * Set the first color of the Repeller
+	 * @param h hue 0-360
+	 * @param s saturation 0-100
+	 * @param b brightness 0 -100 
+	 * @param a alpha 0-100
+	 */
 	public void setColor1(float h, float s, float b, float a){
 		
 		this.color1 = p.color(h,s,b,a);
 	}
 	
+	/**
+	 * Set the second color of the Repeller
+	 * @param h hue 0-360
+	 * @param s saturation 0-100
+	 * @param b brightness 0 -100 
+	 * @param a alpha 0-100
+	 */
 	public void setColor2(float h, float s, float b, float a){
 		
 		this.color2 = p.color(h,s,b,a);
 	}
 	
 	// The methods below are for mouse interaction
+	/**
+	 * for mouse interaction
+	 * @param mx
+	 * @param my
+	 */
 	public void clicked(int mx, int my) {
 		float d = PApplet.dist(mx,my,loc.x,loc.y);
 		if (d < radius) {
@@ -164,6 +236,11 @@ import util.Style;
 	 }
 	}
 	
+	/**
+	 * Roll over the Repeller
+	 * @param mx
+	 * @param my
+	 */
 	void rollover(int mx, int my) {
 		float d = PApplet.dist(mx,my,loc.x,loc.y);
 		if (d < radius) {
@@ -174,10 +251,17 @@ import util.Style;
 		}
 	}
 	
+	/**
+	 * easy to understand stop dragging he?
+	 * 
+	 */
 	public void stopDragging() {
 	 dragging = false;
 	}
 	
+	/**
+	 * Drag the Repeller
+	 */
 	public void drag() {
 		if (dragging) {
 			this.loc.x = p.mouseX + drag.x;
