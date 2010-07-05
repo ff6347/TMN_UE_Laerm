@@ -17,16 +17,26 @@ import processing.core.PVector;
  */
 public class Path {
 
-	  // A Path is an arraylist of points (PVector objects)
-//	  public ArrayList<PVector> points;
-	  public ArrayList<Particle> ptclPoints;
-
-	  PApplet p;
-	  // A path has a radius, i.e how far is it ok for the particle to wander off
-	  private float radius;
+	
+	
+	/**
+	 * A Path is an ArrayList of Particles (PVector objects)
+	 * 
+	 */
+	public ArrayList<Particle> ptclPoints;
 
 	  /**
-	   * builds a basic Path
+	 * the PApplet
+	 */
+	PApplet p;
+	 
+	/**
+	 *  A path has a radius, i.e how far is it ok for the particle to wander off
+	 */
+	private float radius;
+
+	/**
+	 * builds a basic Path
 	 * @param p the PApplet
 	 */
 	public Path(PApplet p) {
@@ -38,8 +48,8 @@ public class Path {
 
 	  }
 	  
-	  /**
-	   * builds a Path with an specific Radius around the pathline
+	/**
+	 * builds a Path with an specific Radius around the pathline
 	 * @param p the PApplet
 	 * @param radius the radius around the path
 	 */
@@ -255,7 +265,7 @@ public class Path {
 		      PVector loc =  ptclPoints.get(i).loc;
 		      p.vertex(loc.x,loc.y);
 		    }
-		    p.endShape(p.CLOSE);
+		    p.endShape(PApplet.CLOSE);
 
 		  }
 	  

@@ -7,23 +7,29 @@ XMLImporter.html
 K 25
 svn:wc:ra_dav:version-url
 V 71
-/svn/!svn/ver/74/trunk/tmn_UE_Laerm/doc/util/class-use/XMLImporter.html
+/svn/!svn/ver/76/trunk/tmn_UE_Laerm/doc/util/class-use/XMLImporter.html
 END
 PSUtil.html
 K 25
 svn:wc:ra_dav:version-url
 V 66
-/svn/!svn/ver/74/trunk/tmn_UE_Laerm/doc/util/class-use/PSUtil.html
+/svn/!svn/ver/76/trunk/tmn_UE_Laerm/doc/util/class-use/PSUtil.html
 END
 Debug.html
 K 25
 svn:wc:ra_dav:version-url
 V 65
-/svn/!svn/ver/74/trunk/tmn_UE_Laerm/doc/util/class-use/Debug.html
+/svn/!svn/ver/76/trunk/tmn_UE_Laerm/doc/util/class-use/Debug.html
 END
 Style.html
 K 25
 svn:wc:ra_dav:version-url
 V 65
-/svn/!svn/ver/74/trunk/tmn_UE_Laerm/doc/util/class-use/Style.html
+/svn/!svn/ver/76/trunk/tmn_UE_Laerm/doc/util/class-use/Style.html
+END
+HowToMakeJavaDoc.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/76/trunk/tmn_UE_Laerm/doc/util/class-use/HowToMakeJavaDoc.html
 END

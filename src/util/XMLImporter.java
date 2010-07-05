@@ -140,7 +140,7 @@ public class XMLImporter {
 //		 the xml File
 //		 if the id is bigger than the objects in the xml File all values are 0.0f
 		 PApplet.println("this is the command:\nfloat [][] testing = ObjectPropertys(0); \nPApplet.println(testing[0][0]);");
-		 float [][] testing = ObjectPropertys(0); 
+		 float [][] testing = ObjectPropertys(0,XMLImporter.getRoot()); 
 		 PApplet.println(testing[0][0]);
 		
 	}
@@ -249,9 +249,9 @@ public class XMLImporter {
 	 * @param id the index of the elements within the root of the .xml file
 	 * @return float [] []
 	 */
-	public static float [][] ObjectPropertys(int id){
+	public static float [][] ObjectPropertys(int id, XMLElement root){
 		
-		root = new XMLElement(p,"./data/affectionPropertys.xml");
+//		root = new XMLElement(p,"./data/affectionPropertys.xml");
 		XMLElement obstcls [] = root.getChildren("obstclObject");
 		if(id < obstcls.length){
 		float [][] propertys = new float[2][3];

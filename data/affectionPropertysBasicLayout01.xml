@@ -5,7 +5,7 @@
 <obstclObject id="0" name='"Lightning"'>
 	<day>
 		<private value="2" />
-		<public value="1" />
+		<public value="4" />
 		<work value="1" />
 	</day>
 	<nite>

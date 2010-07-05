@@ -15,7 +15,7 @@ import util.Style;
 public class Particle {
 	
 	/**
-	 * the PAplet
+	 * the PApplet
 	 * 
 	 */
 	private PApplet p;
@@ -64,6 +64,9 @@ public class Particle {
 	 * @see Class ParticleSystem Class
 	 * @see ParticleSystem#addParticleEmitter(boolean)
 	 * @see ParticleSystem#setEmitterOrigin(PVector)
+	 * @see #run()
+	 * @see #update()
+	 * @see #getALife()
 	 */
 	public float lifeTime = 100000.0f;    // the lifetime of an Particle
 	
@@ -243,8 +246,15 @@ public class Particle {
 	
 
 	/**
-	 * set the lifetime of the particle
+	 * set the lifetime of the particle<br>
+	 * if u want to use this you need to add {@code this.lifeTime -= 0.5; } to {@link #update()}<br>
+	 * or add {@code getALife();} to {@link #run()}<br>
 	 * @param lifeTimeIn give him a float like 100 Frames or so
+	 * @see #lifeTime
+	 * @see #update()
+	 * @see #getALife()
+	 * @see ParticleSystem#addParticleEmitter(boolean)
+	 * @see ParticleSystem#setEmitterOrigin(PVector)
 	 */
 	public void setLifeTime(float lifeTimeIn){
 		
@@ -276,6 +286,7 @@ public class Particle {
 	 * @param b brightness 0 - 100
 	 * @param a alpha 0 - 100
 	 * @see #col1
+	 * @see Style#col1
 	 */
 	public void setColorCol1(int h, float s, float b, int a){
 		this.col1 = p.color(h,s,b,a);
@@ -287,6 +298,7 @@ public class Particle {
 	 * @param greyVal 0 - 100
 	 * @param a 0 - 100
 	 * @see #col1
+	 * @see Style#col1
 	 */
 	public void setColorCol1Grey(int greyVal, int a){
 		this.col1 = p.color(360,0,greyVal,a);
@@ -299,6 +311,7 @@ public class Particle {
 	 * @param b brightness 0 - 100
 	 * @param a alpha 0 - 100
 	 * @see #col2
+	 * @see Style#col2
 	 */
 	public void setColorCol2(int h, float s, float b, int a){
 		this.col2 = p.color(h,s,b,a);
@@ -310,6 +323,7 @@ public class Particle {
 	 * @param greyVal 0 - 100
 	 * @param a 0 - 100
 	 * @see #col2
+	 * @see Style#col2
 	 */
 	public void setColorCol2Grey(int greyVal, int a){
 		this.col2 = p.color(360,0,greyVal,a);
@@ -331,6 +345,7 @@ public class Particle {
 	/**
 	 * reset the gravity to 0.0
 	 * @see #gravity
+	 * @see ParticleSystem#addParticleEmitter(boolean)
 	 */
 	public void resetGravity(){
 		this.gravity = 0.0f;
@@ -340,6 +355,8 @@ public class Particle {
 	/**
 	 * set the maximum force. 
 	 * @param inMaxforce float value more than 20 is not useful right now
+	 * @see #maxforce
+	 * @see #resetMaxforce()
 	 */
 	
 	public void setMaxforce(float inMaxforce){
@@ -347,6 +364,8 @@ public class Particle {
 		}
 	/**
 	 * resets the maxforce to 0.3 right now
+	 * @see #maxforce
+	 * @see #setMaxforce(float)
 	 */
 	public void resetMaxforce(){
 		this.maxforce = 0.3f;
@@ -355,12 +374,16 @@ public class Particle {
 		/**
 		 * set the maxspeed of the particle use something like 5 for the beginning
 		 * @param inMaxspeed a float value
+		 * @see #maxspeed
+		 * @see #resetMaxspeed()
 		 */
 		public void setMaxspeed(float inMaxspeed){
 			this.maxspeed = inMaxspeed;
 		}
 		/**
 		 * this resets the maxspeed of the particle to 2.0
+		 * @see #maxspeed
+		 * @see #setMaxspeed(float)
 		 */
 		public void resetMaxspeed(){
 			this.maxspeed = 2.0f;
@@ -369,6 +392,7 @@ public class Particle {
 		/**
 		 * the size of the particle 
 		 * @param inRadius float value
+		 * @see #radius
 		 */
 		public void setRadius(float inRadius) {
 			this.radius = inRadius;
@@ -377,6 +401,8 @@ public class Particle {
 		/**
 		 * sets the mass of an particle. use something like 0.5 for the begining
 		 * @param massIn a float value use it between 0.0 and 1.0
+		 * @see #mass
+		 * @see #resetMass()
 		 */
 		public void setMass(float massIn){
 			this.mass = massIn;
@@ -384,6 +410,8 @@ public class Particle {
 		}
 		/**
 		 * resets the mass of the particle to 0.5
+		 * @see #mass
+		 * @see #setMass(float)
 		 */
 		public void resetMass(){
 			this.mass = 0.5f;
@@ -393,6 +421,7 @@ public class Particle {
 		/**
 		 * so you can set the pathnumber to follow
 		 * @param pathNumIn int value
+		 * @see <a href="./Path.html"><code>Class Path</code></a>
 		 */
 		public void setPathNum(int pathNumIn){
 			this.pathNum = pathNumIn;

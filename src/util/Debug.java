@@ -6,6 +6,7 @@ import TUIO.TuioCursor;
 
 import particleSystem.Particle;
 import particleSystem.ParticleSystem;
+import particleSystem.Repeller;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -109,7 +110,62 @@ public class Debug {
 			
 			
 		}
+		/**
+
+		 * this is for drawing a specific float or integer value on the screen
+		 * used in watchAParticle
+		 * @param pos PVector the position for the Particles forces
+		 * @param myPtcl Particle to analyze
+		 * @see #watchAParticle(ArrayList, ParticleSystem)
+		 */
+		private static void drawMyPtclForce(PVector pos,Particle myPtcl){
+			
+			int lineheight = 23;
+			p.noStroke();
+			p.fill(Style.textColorBlk);
+			p.text("The life of one Particle", (lineheight*0) + pos.x, 0 + pos.y);
+			p.text("MaxForce: "+ myPtcl.maxforce, 0+ pos.x, (lineheight*1) + pos.y);
+			p.text("MaxSpeed: "+ myPtcl.maxspeed, 0+ pos.x, (lineheight*2) + pos.y);
+			p.text("Mass: "+ myPtcl.mass, 0+ pos.x, (lineheight*3) + pos.y);
+			p.text("Gravity: "+ myPtcl.gravity, 0+ pos.x, (lineheight*4) + pos.y);	
+			if (myPtcl.lifeTime< 100000.0f){p.text("Lifetime: "+ myPtcl.lifeTime, 0+ pos.x, (lineheight*5) + pos.y);	
+			}
+			
+			p.noFill();
+		}
 		
+		
+		public static void watchARepellers(ArrayList<Repeller> someRepellers){
+			
+			Repeller myRepeller = someRepellers.get(1);
+			myRepeller.setColor1(150, 100, 100, 100);
+			myRepeller.setColor2(150, 100, 100, 50);
+			drawRepellerData(myRepeller);
+			
+			
+			
+		}
+		
+		
+		private static void drawRepellerData(Repeller myRep) {
+			// TODO Auto-generated method stub
+			int lineheight = 23;
+			p.noStroke();
+			p.fill(Style.textColorBlk);
+			p.text("Data of this Repeller", (lineheight*0) + myRep.loc.x +13, 0 + myRep.loc.y+13);
+			p.text("Name: " + myRep.property.index, (lineheight*1) + myRep.loc.x +13, 0 + myRep.loc.y+13);
+			p.text("Name: " + myRep.property.name, (lineheight*2) + myRep.loc.x +13, 0 + myRep.loc.y+13);
+			p.text("Day Time / Privat Space Property : " + myRep.property.valueByIndex(0,0), (lineheight*2) + myRep.loc.x +13, 0 + myRep.loc.y+13);
+
+
+			
+			p.noFill();
+			
+			
+		}
+
+
+
 		//a grid just for adjustment
 		/**
 		 * Draw a Grid for adjustment
@@ -185,29 +241,7 @@ public class Debug {
 		}
 		
 
-		/**
 
-		 * this is for drawing a specific float or integer value on the screen
-		 * used in watchAParticle
-		 * @param pos PVector the position for the Particles forces
-		 * @param myPtcl Particle to analyze
-		 * @see #watchAParticle(ArrayList, ParticleSystem)
-		 */
-		private static void drawMyPtclForce(PVector pos,Particle myPtcl){
-			
-			int lineheight = 23;
-			p.noStroke();
-			p.fill(Style.textColorBlk);
-			p.text("The life of one Particle", (lineheight*0) + pos.x, 0 + pos.y);
-			p.text("MaxForce: "+ myPtcl.maxforce, 0+ pos.x, (lineheight*1) + pos.y);
-			p.text("MaxSpeed: "+ myPtcl.maxspeed, 0+ pos.x, (lineheight*2) + pos.y);
-			p.text("Mass: "+ myPtcl.mass, 0+ pos.x, (lineheight*3) + pos.y);
-			p.text("Gravity: "+ myPtcl.gravity, 0+ pos.x, (lineheight*4) + pos.y);	
-			if (myPtcl.lifeTime< 100000.0f){p.text("Lifetime: "+ myPtcl.lifeTime, 0+ pos.x, (lineheight*5) + pos.y);	
-			}
-			
-			p.noFill();
-		}
 
 
 

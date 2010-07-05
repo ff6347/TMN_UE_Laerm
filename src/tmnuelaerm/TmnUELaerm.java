@@ -24,6 +24,7 @@ import util.XMLImporter;
 import particleSystem.Particle;
 import particleSystem.ParticleSystem;
 import particleSystem.Path;
+import particleSystem.Property;
 import particleSystem.Repeller;
 
 
@@ -106,8 +107,7 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 * @see Class Path Class
 	 */
 	public ArrayList <Path> pathsList = new ArrayList <Path>();
-	
-//	
+		
 	/**
 	 * This is for debugging and make some lose repellers
 	 * @see Class Repeller CLass
@@ -120,6 +120,11 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 *  number of particles
 	 */
 	int numPtcls = 1005;
+	
+	/**
+	 * An ArrayList of {@link PSUtil#initPropertysList()} for all the Objects
+	 */
+	public ArrayList<Property>propertysList;
 	
 //	every particle can have his own force / radius / speed
 //	they can be changed later
@@ -198,8 +203,11 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		Debug.setPAppletDebug(this);
 //		these are some methods that help with the ParticleSystem
 		PSUtil.setPApplet(this);
-//		this is for importing the Propertys of the objects from an .xml file
+//		this is for importing the Property of the objects from an .xml file
 		XMLImporter.setPAppelt(this);
+		propertysList = PSUtil.initPropertysList();
+//		println(propertysList.get(1).name +" "+propertysList.get(1).getDayValues()[1]);
+//		exit();
 		
 		background(0);
 		size(1024, 768,OPENGL);
@@ -268,12 +276,12 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //	 myCounter  = 1;
 	 
 	 //DEBUGGING
-	 PSUtil.makeSomeRepellers( someRepellers);
-	 
+//	 PSUtil.makeSomeRepellers( someRepellers);
+	 PSUtil.makeSomeRepellersWithPropertys(someRepellers, propertysList);
 //	 the XMLImporter Class in a nutshell
 //	 for more explanation see the function
 //	 XML_IMPORTER_Class_inANutshell()
-	 XMLImporter.XML_IMPORTER_Class_inANutshell();
+//	 XMLImporter.XML_IMPORTER_Class_inANutshell();
 	 
 	}
 
@@ -283,9 +291,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	public void draw() {
 //		PDXBGStuff
 //		drawBG();
-//		theBackground();
+		theBackground();
 //		just a clearScreen method
-		clearScreen();
+//		clearScreen();
 		smooth();
 //			
 //		this is for the particles that make the paths
@@ -384,7 +392,9 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //		//end PDXIII TUIO Stuff
 
 //		DEBUGGING START press "d"
-		if(showDebug){Debug.watchAParticle(ptclsList, ps);
+		if(showDebug){
+		Debug.watchAParticle(ptclsList, ps);
+		Debug.watchARepellers(someRepellers);
 		PSUtil.displaySomeRepellers(someRepellers);
 		Debug.drawFrameRate();
 		Debug.drawFrameCount();

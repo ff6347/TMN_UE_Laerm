@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import particleSystem.Particle;
 import particleSystem.Path;
+import particleSystem.Property;
 import particleSystem.Repeller;
 import processing.core.PApplet;
 import processing.core.PVector;
+import processing.xml.XMLElement;
 import tmnuelaerm.ObstacleObject;
 
 /**
@@ -173,6 +175,21 @@ public class PSUtil {
 				
 	}
 	
+	public static void makeSomeRepellersWithPropertys(ArrayList <Repeller>someRepellers,ArrayList <Property>propertysList){
+		
+		int numRepellers  = propertysList.size()-1;
+//		int index = 0;
+		//make some repellers
+		for(int i = 0; i <=360;i+=360/numRepellers){
+			PVector loc = new PVector(p.width / 2 + PApplet.sin(PApplet.radians(i))*180,p.height / 2 + PApplet.cos(PApplet.radians(i))*180);
+			Repeller rep = new Repeller(p, loc, ((10*10)*10), 10, propertysList.get(numRepellers));//Repeller(p,p.width / 2 + PApplet.sin(PApplet.radians(i))*180,p.height / 2 + PApplet.cos(PApplet.radians(i))*180);
+			rep.setG(PApplet.pow(10,3));
+			someRepellers.add(rep);
+//			index++;
+		}
+				
+	}
+	
 	/**
 	 *  this is for displaying the repellers for debugging
 	 * @param someRepellers
@@ -180,15 +197,25 @@ public class PSUtil {
 	 * @see #makeSomeRepellers(ArrayList)
 	 *
 	 */
-	public  static void displaySomeRepellers(ArrayList<Repeller>someRepellers){
+	public static void displaySomeRepellers(ArrayList<Repeller>someRepellers){
 		
 		// Display all repellers
 		for (int i = 0; i < someRepellers.size(); i++) {
 			Repeller r = someRepellers.get(i); 
 			r.display();
-			r.drag();
-			
+			r.drag();		
 		}
+	}	
+	public static ArrayList <Property> initPropertysList(){
+		ArrayList<Property>propertysList = new ArrayList<Property>();
+		XMLElement [] myObstaclObjcts = XMLImporter.getObsctlObjects();
+		for(int i = 0; i<myObstaclObjcts.length;i++){			
+		String theName = myObstaclObjcts[i].getStringAttribute("name");
+		float[][] theValues = XMLImporter.ObjectPropertys(i, myObstaclObjcts[i].getParent());
+		propertysList.add(new Property(i, theName, theValues));
+		}
+		return propertysList;
 		
 	}
+	
 }

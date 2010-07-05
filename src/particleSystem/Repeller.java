@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 import util.Style;
 
+
 	/**
 	 * A very basic Repeller class
 	 * based on: <a href="http://www.shiffman.net/teaching/nature/" target="blanc">Daniel Shiffman's Nature of Code</a>
@@ -62,13 +63,27 @@ import util.Style;
 	 * the String that identifies the ObstacleObject
 	 * @see Class ObstacleObject Class
 	 */
-	public String obstclID; 
+	public String obstclID;
+	
+	/**
+	 * the index to load the {@link ../util/XMLImporter.html#ObjectPropertys(id)} from the .xml
+	 * 
+	 * @see
+	 * 
+	 */
+	public int obstclIndex;	
 
 	/**
 	 * @param p the PApplet
 	 * @param x the x-Coordinate
 	 * @param y the y-Coordinate
 	 */
+	
+//	private float [][] affectionProps;// = new float [2][3];
+
+	public Property property;
+	
+	
 	public Repeller(PApplet p,float x, float y)  {
 		this.p = p;
 		this.loc = new PVector(x,y);
@@ -121,6 +136,26 @@ import util.Style;
 		this.obstclID = id;
 
 	}
+	
+//	public Repeller(PApplet p,float x, float y, float G,float radius, float [][] affectionProps)  {
+//		this.p = p;
+//		this.loc = new PVector(x,y);
+//		this.drag = new PVector(0,0);
+//		this.G = G;
+//		this.radius = radius;
+//		this.affectionProps = affectionProps;
+//	}
+	
+	
+	public Repeller(PApplet p,PVector loc, float G,float radius, Property property)  {
+	this.p = p;
+	this.loc = loc;
+	this.drag = new PVector(0,0);
+	this.G = G;
+	this.radius = radius;
+	this.property = property;
+}
+	
 	/**
 	 * @param p PApplet
 	 * @param x float x the x-Coordinate
