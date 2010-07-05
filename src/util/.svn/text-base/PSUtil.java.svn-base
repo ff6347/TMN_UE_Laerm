@@ -2,6 +2,8 @@ package util;
 
 import java.util.ArrayList;
 
+import old.ObstacleObject;
+
 import particleSystem.Particle;
 import particleSystem.Path;
 import particleSystem.Property;
@@ -9,7 +11,6 @@ import particleSystem.Repeller;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.xml.XMLElement;
-import tmnuelaerm.ObstacleObject;
 
 /**
  * This Class is for helping with the ParticleSystem
@@ -21,6 +22,7 @@ import tmnuelaerm.ObstacleObject;
  * @author fabianthelbind
  *
  */
+@SuppressWarnings("deprecation")
 public class PSUtil {
 	
 	/**
@@ -137,7 +139,7 @@ public class PSUtil {
 	 * not used right now
 	 * @param obstclObjList
 	 * @param ptclsList
-	 * 
+	 * @deprecated also old stuff
 	 */
 	public static void ptclsReactOnObject( ArrayList <ObstacleObject> obstclObjList, ArrayList <Particle>ptclsList){
 		//println(obstclObjList.get(0).ObstclsRepellerList.get(0).radius);
@@ -177,15 +179,15 @@ public class PSUtil {
 	
 	public static void makeSomeRepellersWithPropertys(ArrayList <Repeller>someRepellers,ArrayList <Property>propertysList){
 		
-		int numRepellers  = propertysList.size()-1;
-//		int index = 0;
+		int numRepellers  = 7;
+		int index = 0;
 		//make some repellers
 		for(int i = 0; i <=360;i+=360/numRepellers){
 			PVector loc = new PVector(p.width / 2 + PApplet.sin(PApplet.radians(i))*180,p.height / 2 + PApplet.cos(PApplet.radians(i))*180);
-			Repeller rep = new Repeller(p, loc, ((10*10)*10), 10, propertysList.get(numRepellers));//Repeller(p,p.width / 2 + PApplet.sin(PApplet.radians(i))*180,p.height / 2 + PApplet.cos(PApplet.radians(i))*180);
+			Repeller rep = new Repeller(p, loc, ((10*10)*10), 10, propertysList.get(index));//Repeller(p,p.width / 2 + PApplet.sin(PApplet.radians(i))*180,p.height / 2 + PApplet.cos(PApplet.radians(i))*180);
 			rep.setG(PApplet.pow(10,3));
 			someRepellers.add(rep);
-//			index++;
+			index++;
 		}
 				
 	}
@@ -211,7 +213,7 @@ public class PSUtil {
 		XMLElement [] myObstaclObjcts = XMLImporter.getObsctlObjects();
 		for(int i = 0; i<myObstaclObjcts.length;i++){			
 		String theName = myObstaclObjcts[i].getStringAttribute("name");
-		float[][] theValues = XMLImporter.ObjectPropertys(i, myObstaclObjcts[i].getParent());
+		int[][] theValues = XMLImporter.ObjectPropertys(i, myObstaclObjcts[i].getParent());
 		propertysList.add(new Property(i, theName, theValues));
 		}
 		return propertysList;

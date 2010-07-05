@@ -1,15 +1,15 @@
 10
 
 dir
-70
+79
 https://tmn-ue-learm.googlecode.com/svn/trunk/tmn_UE_Laerm/src
 https://tmn-ue-learm.googlecode.com/svn
 
 
 
-2010-06-30T10:45:59.596580Z
-70
-sekan.pete
+2010-07-05T13:38:55.292923Z
+79
+fabiantheblind
 
 
 svn:special svn:externals svn:needs-lock
@@ -27,6 +27,12 @@ svn:special svn:externals svn:needs-lock
 c7aafc91-a54f-9bc5-4ece-305c0ad91397
 
 data
+dir
+
+interaction
+dir
+
+old
 dir
 
 particleSystem

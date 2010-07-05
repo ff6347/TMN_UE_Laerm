@@ -1,15 +1,15 @@
 10
 
 dir
-70
+79
 https://tmn-ue-learm.googlecode.com/svn/trunk/tmn_UE_Laerm/data
 https://tmn-ue-learm.googlecode.com/svn
 
 
 
-2010-06-21T21:22:53.074894Z
-42
-sekan.pete
+2010-07-04T10:31:06.442559Z
+75
+fabiantheblind
 
 
 svn:special svn:externals svn:needs-lock
@@ -29,9 +29,12 @@ c7aafc91-a54f-9bc5-4ece-305c0ad91397
 CostumJavaDoc
 dir
 
-MyImg1501.0.jpg
+FontMiso
+dir
+
+affectionPropertys.xml
 file
-73
+85
 
 
 
@@ -55,14 +58,14 @@ deleted
 
 affectionPropertysBasicLayout01.xml
 file
-74
+80
 
 
 
-2010-07-03T05:56:56.000000Z
-a4fdb33e26de999b3f73523f3569ef27
-2010-07-04T10:27:42.021267Z
-74
+2010-07-05T10:29:10.000000Z
+02b1370b168ab2a0306f0d37dc4f6abe
+2010-07-05T13:41:26.880728Z
+80
 fabiantheblind
 has-props
 

@@ -6,6 +6,8 @@ import TUIO.TuioCursor;
 
 import particleSystem.Particle;
 import particleSystem.ParticleSystem;
+import particleSystem.Path;
+import particleSystem.Property;
 import particleSystem.Repeller;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -38,11 +40,7 @@ public class Debug {
 		 */
 		private static int imgNum = 0;
 
-		/**
-		 * the position of the watchAParticle() Method
-		 * @see #watchAParticle(ArrayList, ParticleSystem)
-		 */
-		private static PVector WAP_position = new PVector (50,100);
+
 
 		
 		/**
@@ -54,12 +52,9 @@ public class Debug {
 			p  = p_;
 
 		}
-	
-		
-		
-		// just  writing TIff Sequenzes for videos
+
 		/**
-		 * write some images
+		 * write some images (TIff Sequenzes for videos)
 		 * @see #imgNum
 		 * @see #writeImg
 		 * @see <a href="../tmnuelaerm/TmnUelaerm.html#keyReleased()"><code>keyReleased</code></a>
@@ -73,6 +68,12 @@ public class Debug {
 		}
 	
 	
+		/**
+		 * the position of the watchAParticle() Method
+		 * @see #watchAParticle(ArrayList, ParticleSystem)
+		 */
+		private static PVector WAP_position = new PVector (800,50);
+		
 		/**
 		 *  this is for looking at one Particle  
 		 * @param ptclsList
@@ -91,8 +92,8 @@ public class Debug {
 			myPtcl.setColorCol2(150, 100, 100, 20);
 			p.noFill();
 			p.strokeWeight(1);
-			p.stroke(255,0,0,30);
-			p.line(WAP_position.x+200, WAP_position.y-5, myPtcl.loc.x-myPtcl.radius, myPtcl.loc.y-myPtcl.radius);
+			p.stroke(Style.textColorWhite);
+			p.line(WAP_position.x-7, WAP_position.y-3, myPtcl.loc.x-myPtcl.radius, myPtcl.loc.y-myPtcl.radius);
 			p.stroke(150,100,100,100);
 			p.ellipseMode(PApplet.CENTER);
 			p.ellipse(myPtcl.loc.x, myPtcl.loc.y, 10, 10);
@@ -120,53 +121,103 @@ public class Debug {
 		 */
 		private static void drawMyPtclForce(PVector pos,Particle myPtcl){
 			
-			int lineheight = 23;
+			p.textFont(Style.MisoReg13);
+			int lineheight = 14;
+		
+			makePtclTextWithShadow(pos, Style.textColorBlk, lineheight, myPtcl);
+			makePtclTextWithShadow(new PVector(pos.x -1,pos.y -1), Style.textColorWhite, lineheight, myPtcl);
+
+			
 			p.noStroke();
-			p.fill(Style.textColorBlk);
+		}
+		
+		private static void makePtclTextWithShadow(PVector pos,int color,int lineheight,Particle myPtcl){
+
+			p.fill(color);
 			p.text("The life of one Particle", (lineheight*0) + pos.x, 0 + pos.y);
 			p.text("MaxForce: "+ myPtcl.maxforce, 0+ pos.x, (lineheight*1) + pos.y);
 			p.text("MaxSpeed: "+ myPtcl.maxspeed, 0+ pos.x, (lineheight*2) + pos.y);
 			p.text("Mass: "+ myPtcl.mass, 0+ pos.x, (lineheight*3) + pos.y);
-			p.text("Gravity: "+ myPtcl.gravity, 0+ pos.x, (lineheight*4) + pos.y);	
-			if (myPtcl.lifeTime< 100000.0f){p.text("Lifetime: "+ myPtcl.lifeTime, 0+ pos.x, (lineheight*5) + pos.y);	
+			p.text("Gravity: "+ myPtcl.gravity, 0+ pos.x, (lineheight*4) + pos.y);		
+			if (myPtcl.lifeTime< 100000.0f){
+			p.text("Lifetime: "+ myPtcl.lifeTime, 0+ pos.x, (lineheight*5) + pos.y);	
 			}
-			
 			p.noFill();
+			
+			
 		}
 		
 		
+		/**
+		 * this is for drawing all the {@link Repeller#property} to the screen
+		 * @param someRepellers ArrayList of {@link Repeller}
+		 * @see #drawRepellerData(Repeller)
+		 */
 		public static void watchARepellers(ArrayList<Repeller> someRepellers){
 			
-			Repeller myRepeller = someRepellers.get(1);
-			myRepeller.setColor1(150, 100, 100, 100);
-			myRepeller.setColor2(150, 100, 100, 50);
-			drawRepellerData(myRepeller);
+			
+			for (int j = 0; j < someRepellers.size(); j++) {
+				Repeller myRepeller = someRepellers.get(j);
+				myRepeller.setColor1(150, 100, 100, 100);
+				myRepeller.setColor2(150, 100, 100, 50);
+				drawRepellerData(myRepeller);
+				
+			}
 			
 			
 			
 		}
 		
 		
+		/**
+		 * this is for drawing all data near the {@code Repeller}
+		 * @param myRep A {@link Repeller}
+		 */
 		private static void drawRepellerData(Repeller myRep) {
 			// TODO Auto-generated method stub
-			int lineheight = 23;
+			p.textFont(Style.MisoReg13);
+			int lineheight = 16;
 			p.noStroke();
-			p.fill(Style.textColorBlk);
-			p.text("Data of this Repeller", (lineheight*0) + myRep.loc.x +13, 0 + myRep.loc.y+13);
-			p.text("Name: " + myRep.property.index, (lineheight*1) + myRep.loc.x +13, 0 + myRep.loc.y+13);
-			p.text("Name: " + myRep.property.name, (lineheight*2) + myRep.loc.x +13, 0 + myRep.loc.y+13);
-			p.text("Day Time / Privat Space Property : " + myRep.property.valueByIndex(0,0), (lineheight*2) + myRep.loc.x +13, 0 + myRep.loc.y+13);
-
-
-			
+			makeRepTextWithShadow(myRep.loc, Style.textColorBlk, lineheight, myRep.property);
+			makeRepTextWithShadow(new PVector(myRep.loc.x -1,myRep.loc.y-1), Style.textColorWhite, lineheight, myRep.property);
 			p.noFill();
 			
 			
 		}
 
+		private static void makeRepTextWithShadow(PVector loc,int color,int lineheight,Property property){
+			p.fill(color);
+//			p.text("Data of this Repeller",   loc.x +12, 0 + loc.y+12 +(lineheight*0));
+			p.text("index: " +property.index,  loc.x +12, 0 + loc.y+12+(lineheight*0) );
+			p.text("Name: " + property.name,   loc.x +12, 0 + loc.y+12+(lineheight*1));
+			p.text("Propertys : " +"Day "
+					+" prvt:( "+property.valueByIndex(0,0)+") "
+					+" pblc:( "+property.valueByIndex(0,1)+") "
+					+" work:( "+property.valueByIndex(0,2)+") "
+					, loc.x +12, 0 + loc.y+11+(lineheight*2));
+			p.text("Propertys : " +"Nite "
+					+" prvt:( "+property.valueByIndex(1,0)+") "
+					+" pblc:( "+property.valueByIndex(1,1)+") "
+					+" work:( "+property.valueByIndex(1,2)+") "
+					, loc.x +12, 0 + loc.y+12+(lineheight*3));
+			
+			
+		}
 
+		/**
+		 * @param pathsList An {@code ArrayList} of {@link Path}
+		 */
+		public static void displayAllPaths(ArrayList<Path>pathsList){
+			
+			for(int i =0; i<pathsList.size();i++){
+				
+				pathsList.get(i).ptclPathDisplay();
+				
+			}
+			
+		}
+		
 
-		//a grid just for adjustment
 		/**
 		 * Draw a Grid for adjustment
 		 */
@@ -184,7 +235,6 @@ public class Debug {
 				p.noStroke();
 			}
 		}
-		//grid end
 		
 		/**
 		 * draw the tuio Cursors

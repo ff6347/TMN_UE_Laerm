@@ -140,7 +140,7 @@ public class XMLImporter {
 //		 the xml File
 //		 if the id is bigger than the objects in the xml File all values are 0.0f
 		 PApplet.println("this is the command:\nfloat [][] testing = ObjectPropertys(0); \nPApplet.println(testing[0][0]);");
-		 float [][] testing = ObjectPropertys(0,XMLImporter.getRoot()); 
+		 int [][] testing = ObjectPropertys(0,XMLImporter.getRoot()); 
 		 PApplet.println(testing[0][0]);
 		
 	}
@@ -209,11 +209,11 @@ public class XMLImporter {
 					
 						  if(space.equals("private")==true){
 
-						return obstcls[id].getChild("day/private").getFloatAttribute("value"); 
+						return obstcls[id].getChild("day/private").getIntAttribute("value"); 
 					}else if(space.equals("public")==true){
-						return obstcls[id].getChild("day/public").getFloatAttribute("value");
+						return obstcls[id].getChild("day/public").getIntAttribute("value");
 					}else if(space.equals("work")==true){
-						return obstcls[id].getChild("day/work").getFloatAttribute("value");
+						return obstcls[id].getChild("day/work").getIntAttribute("value");
 					}else{
 						return 0.0f;
 					}
@@ -222,11 +222,11 @@ public class XMLImporter {
 				}else if(time.equals("nite")==true){
 					
 					if(space.equals("private")==true){
-						return obstcls[id].getChild("nite/private").getFloatAttribute("value"); 
+						return obstcls[id].getChild("nite/private").getIntAttribute("value"); 
 					}else if(space.equals("public")==true){
-						return obstcls[id].getChild("nite/public").getFloatAttribute("value");
+						return obstcls[id].getChild("nite/public").getIntAttribute("value");
 					}else if(space.equals("work")==true){
-						return obstcls[id].getChild("nite/work").getFloatAttribute("value");
+						return obstcls[id].getChild("nite/work").getIntAttribute("value");
 					}else{
 						
 //						if the element isn't there or the string doesent match
@@ -247,30 +247,30 @@ public class XMLImporter {
 	/**
 	 * this makes an 2 dimensinal array of {@code float} values out of an Obstobject
 	 * @param id the index of the elements within the root of the .xml file
-	 * @return float [] []
+	 * @return int [] []
 	 */
-	public static float [][] ObjectPropertys(int id, XMLElement root){
+	public static int [][] ObjectPropertys(int id, XMLElement root){
 		
 //		root = new XMLElement(p,"./data/affectionPropertys.xml");
 		XMLElement obstcls [] = root.getChildren("obstclObject");
 		if(id < obstcls.length){
-		float [][] propertys = new float[2][3];
-		propertys [0][0] = obstcls[id].getChild("day/private").getFloatAttribute("value");
-		propertys [0][1] = obstcls[id].getChild("day/public").getFloatAttribute("value");
-		propertys [0][2] = obstcls[id].getChild("day/work").getFloatAttribute("value");
-		propertys [1][0] = obstcls[id].getChild("nite/private").getFloatAttribute("value");
-		propertys [1][1] = obstcls[id].getChild("nite/public").getFloatAttribute("value");
-		propertys [1][2] = obstcls[id].getChild("nite/work").getFloatAttribute("value");
+		int [][] propertys = new int[2][3];
+		propertys [0][0] = obstcls[id].getChild("day/private").getIntAttribute("value");
+		propertys [0][1] = obstcls[id].getChild("day/public").getIntAttribute("value");
+		propertys [0][2] = obstcls[id].getChild("day/work").getIntAttribute("value");
+		propertys [1][0] = obstcls[id].getChild("nite/private").getIntAttribute("value");
+		propertys [1][1] = obstcls[id].getChild("nite/public").getIntAttribute("value");
+		propertys [1][2] = obstcls[id].getChild("nite/work").getIntAttribute("value");
 		return propertys;
 		}else{
 			
-			float [][] propertys = new float[2][3];
-			propertys [0][0] = 0.0f;
-			propertys [0][1] = 0.0f;
-			propertys [0][2] = 0.0f;
-			propertys [1][0] = 0.0f;
-			propertys [1][1] = 0.0f;
-			propertys [1][2] = 0.0f;
+			int [][] propertys = new int[2][3];
+			propertys [0][0] = 0;
+			propertys [0][1] = 0;
+			propertys [0][2] = 0;
+			propertys [1][0] = 0;
+			propertys [1][1] = 0;
+			propertys [1][2] = 0;
 		return propertys;
 		}
 		

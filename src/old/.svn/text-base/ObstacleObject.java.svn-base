@@ -1,4 +1,4 @@
-package tmnuelaerm;
+package old;
 
 import java.util.ArrayList;
 import particleSystem.Repeller;
@@ -7,6 +7,7 @@ import processing.core.*;
 
 /**
  * @author PDXIII
+ * @deprecated we use now the package interaction
  *
  */
 public class ObstacleObject {
@@ -165,7 +166,7 @@ public class ObstacleObject {
 			
 			float repXpos = obstclPos.x - obstclSize.x/2 + i*howMuchSpace;
 			float repYpos = obstclPos.y; 
-			ObstclsRepellerList.add(new Repeller(pa, repXpos , repYpos, grav, radius, id));
+			ObstclsRepellerList.add(new Repeller(pa, repXpos , repYpos));
 			
 		}
 		

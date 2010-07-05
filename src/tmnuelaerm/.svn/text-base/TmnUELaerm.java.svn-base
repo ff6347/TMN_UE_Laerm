@@ -1,7 +1,13 @@
 package tmnuelaerm;
 
 import TUIO.TuioListener;
+import interaction.TNObstacleObject;
+import interaction.TNTransformableObject;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import old.ObstacleObject;
 
 import TUIO.TuioClient;
 import TUIO.TuioCursor;
@@ -9,11 +15,9 @@ import TUIO.TuioObject;
 import TUIO.TuioTime;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import tmnuelaerm.ObstacleObject;
 
 import util.Debug;
 import util.PSUtil;
@@ -39,7 +43,7 @@ import particleSystem.Repeller;
  * or here: <a href="http://github.com/fabiantheblind/TMN_UE_Laerm.git" target="blanc"> GitHub</a>
  * @author PDXIII 
  * @author fabianthelbind
- * @version 0.74
+ * @version 0.79
  *
  *
  */
@@ -53,13 +57,20 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	/**
 	 * the Font Object
 	 */
-	public PFont font;
 
 	/**
-	 * An ArrayList of ObstacleObject
-	 * @see Class ObstacleObject Class
+	 * An List of TNObstacleObject
+	 * @see Class TNObstacleObject Class
 	 */
-	public ArrayList<ObstacleObject> obstclObjList;
+	List<TNObstacleObject> transObjects = new ArrayList<TNObstacleObject>();
+	
+	/**
+	 * controls the amount of TNObstleOjects
+	 */
+	public int howManyObstacles = 4;
+
+//	public ArrayList<ObstacleObject> obstclObjList;
+	
 	/**
 	 * the number of Obstacles
 	 * @see Class ObstacleObject Class
@@ -138,6 +149,8 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 * a boolean for switching the path
 	 */
 	private boolean switchPath = false;
+	
+	public boolean DAY = true;
 
 	/**
 	 * to count the time
@@ -154,6 +167,8 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 * display the debug Stuff
 	 */
 	private boolean showDebug = false;
+	private boolean showDebugPath = false;
+
 
 	
 //	start PDXIII background stuff
@@ -209,6 +224,7 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //		println(propertysList.get(1).name +" "+propertysList.get(1).getDayValues()[1]);
 //		exit();
 		
+		
 		background(0);
 		size(1024, 768,OPENGL);
 		frameRate(25);
@@ -220,25 +236,41 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		//PDXIII TUIO Stuff
 		// enable on system installed fonts
 		hint(ENABLE_NATIVE_FONTS);
-		font = createFont("Gentium", 18);
-		textFont(font,18);
+
 
 		//init TUIO
 		tuioClient.addTuioListener(this);
 		tuioClient.connect();
 		
-
-		obstclObjList = new ArrayList<ObstacleObject>();
+//		obstclObjList = new ArrayList<ObstacleObject>();
 		
 		// making ObstacleObjects
-		for (obstclCounter = 0; obstclCounter < 4; obstclCounter++){
-			int obstclNo = obstclCounter + 1;
-			float firstX = obstclNo*150;
-			float firstY = height/2;
-			PVector obstclPos = new PVector (firstX, firstY);
-			obstclObjList.add(new ObstacleObject(this, obstclNo, obstclPos));
+		
+//		transObjects.add(new TNObstacleObject(this, 0, 0, 200, 200));
+//		transObjects.add(new TNObstacleObject(this, 400, 400, 200, 200));
+		for(int i = 0; i < howManyObstacles; i++){
+			Property property = propertysList.get(i);
+			transObjects.add(new TNObstacleObject(this, 50*i, 50*i,0, 0, property));
 			
 		}
+		
+//		for(int i = 0; i < propertysList.size(); i++){
+//			Property property = propertysList.get(i);
+//			transObjects.add(new TNObstacleObject(this, 50*i, 50*i, 100, 100, property));
+//			
+//		}
+//		transObjects.add(new TNObstacleObject(this, 0, 0, 200, 200));
+//		transObjects.add(new TNObstacleObject(this, 400, 400, 200, 200));
+
+//		
+//		for (obstclCounter = 0; obstclCounter < 4; obstclCounter++){
+//			int obstclNo = obstclCounter + 1;
+//			float firstX = obstclNo*150;
+//			float firstY = height/2;
+//			PVector obstclPos = new PVector (firstX, firstY);
+//			obstclObjList.add(new ObstacleObject(this, obstclNo, obstclPos));
+//			
+//		}
 		//end PDXIII TUIO Stuff
 		
 //		particle stuff
@@ -300,13 +332,15 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //		to get them back into ther original position we have to reset them
 //		in the function Path.resetPointPtcls() you can set
 //		how fast and strong the want to get back 
+
+		if(runtimeCounter%42==1){
 		for(int pl2 = 0; pl2<pathsList.size();pl2++ ){
 //		pathsList.get(pl2).ptclPathDisplay();
 		pathsList.get(pl2).resetPointPtcls(); 
 		}
-		
+		}
 //		this is for switching every 300 frames the path to follow
-		if(runtimeCounter%300 == 0){
+		if(runtimeCounter%432 == 0){
 //			println("Range: "+myRange +"   Pathnum: "+myPathNum +"   Dir: "+myDirection);
 			switchPath = true;
 //			myPathNum += 1*myDirection;
@@ -314,8 +348,15 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //				myDirection = -myDirection;
 //			}
 			
+			if(DAY){
+				DAY=false;
+			}else{
+				DAY=true;
+			}
 			
 			}
+		
+		
 		for (int i = 0; i < ptclsList.size(); i++) {
 				Particle ptcl =  ptclsList.get(i);
 //				if the particle is not part of a path
@@ -356,9 +397,10 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		
 //		get all repellers in all objects into one list
 //		to use them in the ParticleSystem Class
-		for(int j = 0; j < obstclObjList.size(); j++){
+		
+		for(int j = 0; j < transObjects.size(); j++){
 			
-			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
+			TNObstacleObject obstclObject = (TNObstacleObject) transObjects.get(j);
 			if(obstclObject.ObstclsRepellerList != null){
 				for(int k = 0; k< obstclObject.ObstclsRepellerList.size();k++){
 					
@@ -366,16 +408,25 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 				}
 			}
 		}
+		
+		for(int i = 0; i< repellers.size(); i++){
+			
+			Repeller rep = (Repeller) repellers.get(i);
+			rep.display();
+			
+		}
 //		display all objects
-		drawObstacleObjects();
-
+//		drawObstacleObjects();
+		for (TNTransformableObject transformableObject : transObjects) {
+			transformableObject.draw();
+		}
 //		DEBUGGING START
 		// Apply repeller objects to all Particles
-		ps.myApplyRepellers(someRepellers);
+		ps.myApplyRepellers(someRepellers,DAY);
 //		DEBUGGING END
 		
 //		pass all Objects over to the ParticleSystem
-		ps.myApplyObstcles(obstclObjList);
+		ps.myApplyObstcles(transObjects, DAY);
 		// Run the Particle System
 		ps.run();
 		
@@ -396,6 +447,8 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 		Debug.watchAParticle(ptclsList, ps);
 		Debug.watchARepellers(someRepellers);
 		PSUtil.displaySomeRepellers(someRepellers);
+		
+		if (showDebugPath){Debug.displayAllPaths(pathsList);}
 		Debug.drawFrameRate();
 		Debug.drawFrameCount();
 		}
@@ -463,14 +516,14 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	/**
 	 * PDXIII TUIO Stuff
 	 */
-	public void drawObstacleObjects(){
-		
-		for(int i = 0; i < obstclObjList.size(); i++){
-			
-			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(i);
-			obstclObject.draw();
-		}
-	}
+//	public void drawObstacleObjects(){
+//		
+//		for(int i = 0; i < obstclObjList.size(); i++){
+//			
+//			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(i);
+//			obstclObject.draw();
+//		}
+//	}
 	
 
 	
@@ -482,36 +535,47 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 * @see TUIO.TuioListener#addTuioCursor(TUIO.TuioCursor)
 	 */
 	@Override
-	public void addTuioCursor(TuioCursor arg0) {
-		
-		float nowX = arg0.getScreenX(width);
-		float nowY = arg0.getScreenY(height);
-		int nowID = arg0.getCursorID();
-		PVector nowPos = new PVector(nowX, nowY);
-		
-		for(int j = 0; j < obstclObjList.size(); j++){
-			
-			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
-				
-			if(obstclObject.boundingBox.contains(nowX, nowY)){
-				
-				if(obstclObject.coursor01ID < 99){
-					
-					obstclObject.coursor02ID = nowID;
-					obstclObject.coursor02Pos = nowPos;
-					obstclObject.newCoursor02Pos = nowPos;
-
-					
-				}else{
-				
-					obstclObject.coursor01ID = nowID;
-					obstclObject.coursor01Pos = nowPos;
-					obstclObject.newCoursor01Pos = nowPos;
-
-					obstclObject.setOffset(nowPos);
-					
-					obstclObject.setTime_01();
-				}
+//	public void addTuioCursor(TuioCursor arg0) {
+//		
+//		float nowX = arg0.getScreenX(width);
+//		float nowY = arg0.getScreenY(height);
+//		int nowID = arg0.getCursorID();
+//		PVector nowPos = new PVector(nowX, nowY);
+//		
+//		for(int j = 0; j < obstclObjList.size(); j++){
+//			
+//			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
+//				
+//			if(obstclObject.boundingBox.contains(nowX, nowY)){
+//				
+//				if(obstclObject.coursor01ID < 99){
+//					
+//					obstclObject.coursor02ID = nowID;
+//					obstclObject.coursor02Pos = nowPos;
+//					obstclObject.newCoursor02Pos = nowPos;
+//
+//					
+//				}else{
+//				
+//					obstclObject.coursor01ID = nowID;
+//					obstclObject.coursor01Pos = nowPos;
+//					obstclObject.newCoursor01Pos = nowPos;
+//
+//					obstclObject.setOffset(nowPos);
+//					
+//					obstclObject.setTime_01();
+//				}
+//			}
+//		}
+//	}
+	
+	public void addTuioCursor(TuioCursor tcur) {
+		// Hit test for all objects: first gets the hit, ordered by creation.
+		// TODO Order by z-index, updated by last activation/usage
+		for (TNObstacleObject ttObj : transObjects) {
+			if (ttObj.isHit(tcur.getScreenX(width), tcur.getScreenY(height))) {
+				ttObj.addTuioCursor(tcur);
+				break;
 			}
 		}
 	}
@@ -520,48 +584,57 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 	 * @see TUIO.TuioListener#updateTuioCursor(TUIO.TuioCursor)
 	 */
 	@Override
-	public void updateTuioCursor(TuioCursor arg0) {
-		
-		float nowX = arg0.getScreenX(width);
-		float nowY = arg0.getScreenY(height);
-		int nowID = arg0.getCursorID();
-
-		
-		PVector nowPos = new PVector(nowX, nowY);
-
-		
-		for(int j = 0; j < obstclObjList.size(); j++){
-			
-			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
-				
-			
-			if(obstclObject.coursor01ID == nowID && obstclObject.coursor02ID == 99){
-				
-				obstclObject.move(nowPos);
-				obstclObject.setTime_01();
-
-				obstclObject.newCoursor01Pos = nowPos;
-				
-			
-			}else if(obstclObject.boundingBox.contains(nowX, nowY)){
-				
-				
-				if(obstclObject.coursor01ID < 99 && obstclObject.coursor01ID != nowID){
-					
-					obstclObject.coursor02ID = nowID;
-					obstclObject.coursor02Pos = nowPos;
-					
-				}else{
-					
-					obstclObject.coursor01ID = nowID;
-					obstclObject.coursor01Pos = nowPos;
-					obstclObject.setTime_01();
-
-					obstclObject.setOffset(nowPos);
-					
-				}
+//	public void updateTuioCursor(TuioCursor arg0) {
+//		
+//		float nowX = arg0.getScreenX(width);
+//		float nowY = arg0.getScreenY(height);
+//		int nowID = arg0.getCursorID();
+//
+//		
+//		PVector nowPos = new PVector(nowX, nowY);
+//
+//		
+//		for(int j = 0; j < obstclObjList.size(); j++){
+//			
+//			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
+//				
+//			
+//			if(obstclObject.coursor01ID == nowID && obstclObject.coursor02ID == 99){
+//				
+//				obstclObject.move(nowPos);
+//				obstclObject.setTime_01();
+//
+//				obstclObject.newCoursor01Pos = nowPos;
+//				
+//			
+//			}else if(obstclObject.boundingBox.contains(nowX, nowY)){
+//				
+//				
+//				if(obstclObject.coursor01ID < 99 && obstclObject.coursor01ID != nowID){
+//					
+//					obstclObject.coursor02ID = nowID;
+//					obstclObject.coursor02Pos = nowPos;
+//					
+//				}else{
+//					
+//					obstclObject.coursor01ID = nowID;
+//					obstclObject.coursor01Pos = nowPos;
+//					obstclObject.setTime_01();
+//
+//					obstclObject.setOffset(nowPos);
+//					
+//				}
+//			}
+//		}
+	
+	public void updateTuioCursor(TuioCursor tcur) {
+		for (TNObstacleObject ttObj : transObjects) {
+			if (ttObj.isHit(tcur.getScreenX(width), tcur.getScreenY(height))) {
+				ttObj.updateTuioCursor(tcur);
+				break;
 			}
 		}
+	}
 		
 //		PARTICLE STUFF
 //		this method sets the Force and Speed if the Particles depending on the Radius
@@ -573,33 +646,42 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 //		of the Repellers in the Obstacle Object
 //		bigger repellers means wider path
 
-	}
+	
 	
 	/* (non-Javadoc)
 	 * @see TUIO.TuioListener#removeTuioCursor(TUIO.TuioCursor)
 	 */
 	@Override
-	public void removeTuioCursor(TuioCursor arg0) {
-		
-		int nowID = arg0.getCursorID();
+//	public void removeTuioCursor(TuioCursor arg0) {
+//		
+//		int nowID = arg0.getCursorID();
+//
+//		for(int j = 0; j < obstclObjList.size(); j++){
+//			
+//			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
+//			
+//			if(obstclObject.coursor01ID == nowID){
+//				
+//				obstclObject.coursor01ID = 99;
+//				obstclObject.coursor01Pos = null;
+//				obstclObject.setTime_02();
+//			}
+//			
+//			if(obstclObject.coursor02ID == nowID){
+//				
+//				obstclObject.coursor02ID = 99;
+//				obstclObject.coursor02Pos = null;
+//
+//			}
+//		}
+//	}
+	
+	public void removeTuioCursor(TuioCursor tcur) {
+		for (TNObstacleObject ttObj : transObjects) {
+			// Pass trough remove-event to all objects, to allow fingerUp also out of boundaries,
+			// as objects decide themselves (via cursor-id) whether cursor belongs to it.
 
-		for(int j = 0; j < obstclObjList.size(); j++){
-			
-			ObstacleObject obstclObject = (ObstacleObject) obstclObjList.get(j);
-			
-			if(obstclObject.coursor01ID == nowID){
-				
-				obstclObject.coursor01ID = 99;
-				obstclObject.coursor01Pos = null;
-				obstclObject.setTime_02();
-			}
-			
-			if(obstclObject.coursor02ID == nowID){
-				
-				obstclObject.coursor02ID = 99;
-				obstclObject.coursor02Pos = null;
-
-			}
+			ttObj.removeTuioCursor(tcur);
 		}
 	}
 	
@@ -656,6 +738,16 @@ public class TmnUELaerm extends PApplet implements TuioListener{
 					  
 				  }
 			  }
+			  if (key == 'p') {
+//					do something fancy
+					  if(showDebugPath == true){
+						  showDebugPath = false;
+						  
+					  }else{
+						  showDebugPath = true;
+						  
+					  }
+				  }
 			  
 //			    if( key==CODED ){
 //			        if( keyCode == UP ){ 

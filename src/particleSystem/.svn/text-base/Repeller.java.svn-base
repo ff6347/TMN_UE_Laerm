@@ -60,30 +60,16 @@ import util.Style;
 	private int color2 = Style.col3;
 	
 	/**
-	 * the String that identifies the ObstacleObject
-	 * @see Class ObstacleObject Class
+	 * The {@link Property} Object of {@code this} {@code Repeller}
+	 * 
 	 */
-	public String obstclID;
+	public Property property;
 	
-	/**
-	 * the index to load the {@link ../util/XMLImporter.html#ObjectPropertys(id)} from the .xml
-	 * 
-	 * @see
-	 * 
-	 */
-	public int obstclIndex;	
-
 	/**
 	 * @param p the PApplet
 	 * @param x the x-Coordinate
 	 * @param y the y-Coordinate
 	 */
-	
-//	private float [][] affectionProps;// = new float [2][3];
-
-	public Property property;
-	
-	
 	public Repeller(PApplet p,float x, float y)  {
 		this.p = p;
 		this.loc = new PVector(x,y);
@@ -116,37 +102,14 @@ import util.Style;
 		this.radius = radius;
 
 		}
-	
+		
 	/**
-	 * Repellers get the ID of the ObstacleObjaect as a String, sowe have IDs looking like 01, 02, etc.
-	 * this is used in the Obstacl Objects
-	 * @param p PApplet
-	 * @param x float x the x-Coordinate
-	 * @param y float y the y-Coordinate
-	 * @param G float G the Gravitational Constante :(
-	 * @param radius float radius the size
-	 * @param id  string id like 01, 02
+	 * @param p <code>PApplet</code>
+	 * @param loc the {@code PVector} location
+	 * @param G the gravitational Constante of the <code>Repeller</code>
+	 * @param radius the size of the Repeller 
+	 * @param property the {@link Property} of the <code>Repeller</code>
 	 */
-	public Repeller(PApplet p,float x, float y, float G,float radius, String id)  {
-		this.p = p;
-		this.loc = new PVector(x,y);
-		this.drag = new PVector(0,0);
-		this.G = G;
-		this.radius = radius;
-		this.obstclID = id;
-
-	}
-	
-//	public Repeller(PApplet p,float x, float y, float G,float radius, float [][] affectionProps)  {
-//		this.p = p;
-//		this.loc = new PVector(x,y);
-//		this.drag = new PVector(0,0);
-//		this.G = G;
-//		this.radius = radius;
-//		this.affectionProps = affectionProps;
-//	}
-	
-	
 	public Repeller(PApplet p,PVector loc, float G,float radius, Property property)  {
 	this.p = p;
 	this.loc = loc;
@@ -252,7 +215,7 @@ import util.Style;
 	 * @param b brightness 0 -100 
 	 * @param a alpha 0-100
 	 */
-	public void setColor1(float h, float s, float b, float a){
+	public void setColor1(int h, int s, int b, int a){
 		
 		this.color1 = p.color(h,s,b,a);
 	}
@@ -264,7 +227,7 @@ import util.Style;
 	 * @param b brightness 0 -100 
 	 * @param a alpha 0-100
 	 */
-	public void setColor2(float h, float s, float b, float a){
+	public void setColor2(int h, int s, int b, int a){
 		
 		this.color2 = p.color(h,s,b,a);
 	}

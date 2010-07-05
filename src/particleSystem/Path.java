@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import processing.core.PApplet;
 import processing.core.PVector;
+import util.Style;
 
 
 //Path Following
@@ -77,11 +78,12 @@ public class Path {
 		  PVector pos = new PVector(x,y);
 //		  PVector vel = new PVector(0,0);
 		  Particle ptcl = new Particle(p, pos,false,true);
-		  ptcl.setMass(100);
+		  ptcl.setMass(0.001f);
 		  ptcl.setGravity(0f);
-		  ptcl.setMaxforce(100f);
-		  ptcl.setMaxspeed(0.0001f);
+		  ptcl.setMaxforce(5f);
+		  ptcl.setMaxspeed(0.1f);
 		  ptcl.setRadius(0.01f);
+//		  ptcl.setPathNum(10);
 		  ptclPoints.add(ptcl);
 		 
 //		    PVector point = new PVector(x,y);
@@ -99,10 +101,10 @@ public class Path {
 	  		for(int i = 0; i < ptclPoints.size();i++){
 	  			if(ptclPoints.get(i).affection==false){
 		  			ptclPoints.get(i).seek(ptclPoints.get(i).origin);
-		  			ptclPoints.get(i).setMass(0.5f);
+		  			ptclPoints.get(i).setMass(0.02f);
 		  			ptclPoints.get(i).setGravity(0f);
-		  			ptclPoints.get(i).setMaxforce(100f);
-		  			ptclPoints.get(i).setMaxspeed(0.11f);
+		  			ptclPoints.get(i).setMaxforce(5f);
+		  			ptclPoints.get(i).setMaxspeed(0.1f);
 		  			ptclPoints.get(i).setRadius(0.01f);
 		  			ptclPoints.get(i).hidden = true;
 	  				
@@ -225,7 +227,7 @@ public class Path {
 		    // Draw end points
 		    for (int i = 0; i < ptclPoints.size(); i++) {
 		      PVector point =  ptclPoints.get(i).loc;
-		      p.fill(0,0,100,20);
+		      p.fill(Style.superSoftWhite);
 		      p.noStroke();
 		      p.ellipse(point.x,point.y,this.radius*2,this.radius*2);
 		    }
@@ -246,7 +248,7 @@ public class Path {
 		      PVector c = PVector.sub(end, normal);
 		      PVector d = PVector.sub(start, normal);
 
-		      p.fill(0,0,100,20);
+		      p.fill(Style.superSoftWhite);
 		      p.noStroke();
 		      p.beginShape();
 		      p.vertex(a.x,a.y);
@@ -257,7 +259,7 @@ public class Path {
 		    }
 
 		    // Draw Regular Line
-		    p.stroke(150,100,100,50);
+		    p.stroke(Style.superSoftWhite);
 		    p.strokeWeight(2);
 		    p.noFill();
 		    p.beginShape();

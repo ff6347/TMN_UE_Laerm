@@ -1,11 +1,11 @@
-package tmnuelaerm;
+package old;
 
 import processing.core.PApplet;
 import processing.core.PVector;
 
 /**
  * @author PDXIII
- *
+ * @deprecated we use now the package interaction
  */
 public class Point extends PVector {
 	

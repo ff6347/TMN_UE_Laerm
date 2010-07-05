@@ -8,12 +8,13 @@ public class Property {
 	
 	public final int index;
 	public final String name;
-	public float [][] affectionProps;
+	public int [][] affectionProps;
 	
-	public Property(int index, String name,float [][] affectionProps){
+	public Property(int index, String name,int [][] affectionProps){
 		this.index = index;
-		this.name = name;
+		this.name = name.toUpperCase();
 		this.affectionProps = affectionProps;
+	
 		
 	}
 
@@ -37,15 +38,15 @@ public class Property {
 	/**
 	 * @return the affectionProps
 	 */
-	public synchronized float[][] getAffectionProps() {
+	public synchronized int[][] getAffectionProps() {
 		return affectionProps;
 	}
 
 	/**
 	 * @return all daytime values from the Class Property as a {@code float[]}
 	 */
-	public float[] getDayValues(){
-		float [] dayValues = new float[]{
+	public int[] getDayValues(){
+		int [] dayValues = new int[]{
 				affectionProps[0][0],
 				affectionProps[0][1],
 				affectionProps[0][2]};
@@ -55,8 +56,8 @@ public class Property {
 	/**
 	 * @return all nitetime values from the Class Property as a {@code float[]}
 	 */
-	public float[] getNiteValues(){
-		float [] dayValues = new float[]{
+	public int[] getNiteValues(){
+		int [] dayValues = new int[]{
 				affectionProps[1][0],
 				affectionProps[1][1],
 				affectionProps[1][2]};
@@ -71,14 +72,14 @@ public class Property {
 	 * @return a {@code float} value
 	 * @see {@link ../util/XMLImporter.html#ObjectPropertys(int id, XMLElement root)}
 	 */
-	public float valueByIndex(int time, int space){
+	public int valueByIndex(int time, int space){
 		return affectionProps[time][space];
 	}
 	
 	/**
 	 * @param affectionProps the affectionProps to set
 	 */
-	public synchronized void setAffectionProps(float[][] affectionProps) {
+	public synchronized void setAffectionProps(int[][] affectionProps) {
 		this.affectionProps = affectionProps;
 	}
 

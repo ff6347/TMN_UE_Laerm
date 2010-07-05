@@ -1,15 +1,15 @@
 10
 
 dir
-70
+79
 https://tmn-ue-learm.googlecode.com/svn/trunk/tmn_UE_Laerm/src/data
 https://tmn-ue-learm.googlecode.com/svn
 
 
 
-2010-06-21T21:22:53.074894Z
-42
-sekan.pete
+2010-07-05T13:38:55.292923Z
+79
+fabiantheblind
 
 
 svn:special svn:externals svn:needs-lock
@@ -300,14 +300,14 @@ sekan.pete
 
 affectionPropertys.xml
 file
-73
 
 
 
-2010-07-03T07:18:30.000000Z
-9420a0dedb5b717c156ad79b83f11dcd
-2010-07-03T10:19:49.407373Z
-73
+
+2010-07-05T13:35:51.000000Z
+fcf1ea1c1c1d60d7a253c3e1e4270ffb
+2010-07-05T13:38:55.292923Z
+79
 fabiantheblind
 has-props
 
@@ -330,7 +330,7 @@ has-props
 
 
 
-3370
+3404
 
 fadingBG.png
 file

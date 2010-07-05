@@ -1,4 +1,4 @@
-package tmnuelaerm;
+package old;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ import processing.core.PVector;
 
 /**
  * @author PDXIII
+ * @deprecated we use now the package interaction
  *
  */
 public class BoundingBox {

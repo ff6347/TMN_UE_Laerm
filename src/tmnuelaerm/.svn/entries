@@ -1,14 +1,14 @@
 10
 
 dir
-70
+82
 https://tmn-ue-learm.googlecode.com/svn/trunk/tmn_UE_Laerm/src/tmnuelaerm
 https://tmn-ue-learm.googlecode.com/svn
 
 
 
-2010-06-30T10:45:59.596580Z
-70
+2010-07-05T16:52:42.591753Z
+82
 sekan.pete
 
 
@@ -28,16 +28,7 @@ c7aafc91-a54f-9bc5-4ece-305c0ad91397
 
 BoundingBox.java
 file
-76
-
-
-
-2010-07-04T10:33:11.000000Z
-1c154afcdc2263566ba70a045e4f705e
-2010-07-04T18:19:32.314547Z
-76
-fabiantheblind
-has-props
+87
 
 
 
@@ -57,21 +48,11 @@ has-props
 
 
 
-
-1766
+deleted
 
 ObstacleObject.java
 file
-74
-
-
-
-2010-07-03T10:40:14.000000Z
-58862a35b9932f07623c3f5217bb4421
-2010-07-04T10:27:42.021267Z
-74
-fabiantheblind
-has-props
+87
 
 
 
@@ -91,21 +72,11 @@ has-props
 
 
 
-
-3973
+deleted
 
 Point.java
 file
-74
-
-
-
-2010-07-03T10:40:31.000000Z
-1ebcfb3d8956d86bd80aec38937669f4
-2010-07-04T10:27:42.021267Z
-74
-fabiantheblind
-has-props
+87
 
 
 
@@ -125,19 +96,18 @@ has-props
 
 
 
-
-611
+deleted
 
 TmnUELaerm.java
 file
-77
+87
 
 
 
-2010-07-05T12:52:00.000000Z
-1273b5c9d2f4a4f2a919f442b827dd9e
-2010-07-05T13:07:27.547004Z
-77
+2010-07-05T20:59:52.000000Z
+b0a019f70fa3a9e96d8fadff70b05250
+2010-07-05T21:03:59.723711Z
+87
 fabiantheblind
 has-props
 
@@ -160,5 +130,5 @@ has-props
 
 
 
-17061
+19646
 
