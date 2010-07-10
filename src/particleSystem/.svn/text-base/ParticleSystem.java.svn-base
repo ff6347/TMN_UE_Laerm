@@ -171,6 +171,8 @@ public class ParticleSystem {
 			// ptcl.setMaxspeed(ptcl.maxspeed + r.property.valueByIndex(0, 0));
 			break;
 		case 0:
+			ptcl.resetColorCol1();
+			ptcl.resetColorCol2();
 			break;
 		case 1:
 			// repel = r.pushParticle(ptcl);

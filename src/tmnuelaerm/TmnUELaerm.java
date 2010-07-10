@@ -36,7 +36,7 @@ import particleSystem.Property;
  * 
  * @author PDXIII
  * @author fabianthelbind
- * @version 0.108
+ * @version 0.112
  * 
  * 
  */
@@ -139,7 +139,7 @@ public class TmnUELaerm extends PApplet implements TuioListener {
 		XMLImporter.setPAppelt(this);
 		propertysList = PSUtil.initPropertysList();
 
-		background(0);
+//		background(0);
 		size(1024, 768, OPENGL);
 		// init TUIO
 		tuioClient.addTuioListener(this);

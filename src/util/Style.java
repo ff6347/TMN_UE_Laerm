@@ -77,6 +77,11 @@ public class Style {
 	 * PDXIII background Stuff
 	 */
 	public static float tintSize = tintMax - tintMin;
+
+	/**
+	 * PDXIII background Stuff
+	 */
+	public static float tintingStep = 0.2f;
 	/**
 	 * PDXIII background Stuff
 	 */
@@ -119,10 +124,11 @@ public class Style {
 	 * Create all colors and stuff
 	 */
 	public static void create() {
+		p.colorMode(PApplet.HSB, 360, 100, 100);
 
 		// colors
 		ptclCol1 = p.color(0, 0, 100, 100);
-		ptclCol2 = p.color(0, 0, 100, 100);
+		ptclCol2 = p.color(0, 100, 0, 100);
 		ptclCol3 = p.color(360, 0, 0, 100);
 
 		tmn_green = p.color(107, 100, 100);
@@ -145,7 +151,7 @@ public class Style {
 		superSoftWhite = p.color(0, 0, 100, 5);
 
 		activeColor = p.color(0);
-		inactiveCol = p.color(0, 23);
+		inactiveCol = p.color(0, 0,0,23);
 
 		tintingH = 220;
 
@@ -178,11 +184,10 @@ public class Style {
 
 	public static boolean switchPath(boolean day, boolean switchPath) {
 
-		
-			if (p.frameCount % (Style.tintSize) == 0){
-				switchPath = true;
+		if (p.frameCount % (Style.tintSize) == 0) {
+			switchPath = true;
 			return switchPath;
-		}else{
+		} else {
 			switchPath = false;
 			return switchPath;
 		}
@@ -190,16 +195,18 @@ public class Style {
 
 	public static void theBackground() {
 
-//		if (Style.tinter > Style.tintSize / 2 + Style.tintMin) {
-//			DAY = true;
-//			switchPath = true;
-//		} else {
-//			DAY = false;
-//			switchPath = true;
-//		}
+		// if (Style.tinter > Style.tintSize / 2 + Style.tintMin) {
+		// DAY = true;
+		// switchPath = true;
+		// } else {
+		// DAY = false;
+		// switchPath = true;
+		// }
 
-		p.colorMode(PApplet.HSB, 360, 100, 100);
-		p.tint(220, 40 + tinter, 40 + tinter, 100);
+		int a = PApplet.ceil(tinter);
+		p.tint(Style.tintingH, 0, 40 + tinter,70);
+
+		inactiveCol = p.color(Style.tintingH, 0,  a + 20);
 		p.image(fadingBG, 0, 0);
 		if (tinter >= tintMax) {
 			tintBack = true;
@@ -210,10 +217,11 @@ public class Style {
 		}
 
 		if (!tintBack) {
-			tinter += 0.2f;
+			tinter += tintingStep;
 		} else {
-			tinter -= 0.2f;
+			tinter -= tintingStep;
 		}
+
 	}
 
 	/**

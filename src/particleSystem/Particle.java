@@ -324,7 +324,13 @@ public class Particle {
 	public synchronized void setColorCol1(int h, int s, int b, int a) {
 		this.col1 = p.color(h, s, b, a);
 	}
-
+	/**
+	 * reset the Particle's Color 1
+	 * 
+	 */
+	public synchronized void resetColorCol1() {
+		this.col1 = Style.ptclCol1;
+	}
 
 	/**
 	 * set the field ptclCol2
@@ -343,7 +349,14 @@ public class Particle {
 	public synchronized void setColorCol2(int h, int s, int b, int a) {
 		this.col2 = p.color(h, s, b, a);
 	}
-
+	
+	/**
+	 * reset the Particle's Color 2
+	 * 
+	 */
+	public synchronized void resetColorCol2() {
+		this.col2 = Style.ptclCol2;
+	}
 	/**
 	 * set the gravity of the particle. if the particle follows a path you wont
 	 * see much of the gravity. but with the emitter! wow!!!!!

@@ -100,74 +100,74 @@
 </obstclObject>
 <obstclObject id="8" name="Background Noise">
 	<day>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</day>
 	<nite>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</nite>
 </obstclObject>
 <obstclObject id="9" name="Background Noise">
 	<day>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</day>
 	<nite>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</nite>
 </obstclObject>
 <obstclObject id="10" name="Background Noise">
 	<day>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</day>
 	<nite>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</nite>
 </obstclObject>
 <obstclObject id="11" name="Background Noise">
 	<day>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</day>
 	<nite>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</nite>
 </obstclObject>
 <obstclObject id="12" name="Background Noise">
 	<day>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</day>
 	<nite>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</nite>
 </obstclObject>
 <obstclObject id="13" name="Background Noise">
 	<day>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</day>
 	<nite>
-		<private value="1" />
-		<public value="1" />
-		<work value="1" />
+		<private value="0" />
+		<public value="0" />
+		<work value="0" />
 	</nite>
 </obstclObject>
 </root>
