@@ -1,19 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/82/trunk/tmn_UE_Laerm/src/interaction
+/svn/!svn/ver/99/trunk/tmn_UE_Laerm/src/interaction
 END
 TNTransformableObject.java
 K 25
 svn:wc:ra_dav:version-url
 V 78
-/svn/!svn/ver/82/trunk/tmn_UE_Laerm/src/interaction/TNTransformableObject.java
+/svn/!svn/ver/98/trunk/tmn_UE_Laerm/src/interaction/TNTransformableObject.java
 END
 TNObstacleObject.java
 K 25
 svn:wc:ra_dav:version-url
-V 73
-/svn/!svn/ver/87/trunk/tmn_UE_Laerm/src/interaction/TNObstacleObject.java
+V 74
+/svn/!svn/ver/110/trunk/tmn_UE_Laerm/src/interaction/TNObstacleObject.java
 END
 TNTextThing.java
 K 25

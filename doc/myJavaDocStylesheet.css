@@ -5,106 +5,127 @@
 /* Page background color */
 body { 
 
-	background-color: #E5ECF7;
-	font-family:Arial, sans-serif;
+	background-color: #F4F4F4;
+	font-family:Geneva, sans-serif;
  	color:#000000;
 }
 
 /* Headings */
 h1{ 
    
-/* 	font-size: 145%; 
-	font-family:Arial, sans-serif; */
-
+	font-size: 145%; 
+	font-family:Miso-Bold,Geneva, sans-serif; 
+	text-align: left;
 	display:block;
 	font-size:3em;
 	font-weight:bold;
 	margin:0.67em 0;
-	text-shadow: #203E38 2px 2px 4px; 
+	text-shadow: #333 1px 1px 4px; 
 	line-height:70px;
 }
 	
 h2{
-	font-family:Arial, sans-serif;
+	font-family:Geneva, sans-serif;
+	text-align: left;
 	display:block;
 	font-size:1.5em;
 	font-weight:bold;
 	margin:0.83em 0;
 }
 h3{
-	font-family:Arial, sans-serif;
+	font-family:Geneva, sans-serif;
 	display:block;
 	font-size:1.17em;
 	font-weight:bold;
 	margin:1em 0;
 }
 
+
 a:link {
-	font-family: "Arial";
+	font-family: "Geneva";
 	font-style: normal;
 	line-height: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-decoration: none;
-	color: #5899DB;
+	color: #004C9E;
 	
 	
 }
 a:visited {
-	font-family: "Arial";
+	font-family: "Geneva";
 	font-style: normal;
 	line-height: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-decoration: none;
-	color: #0E6C73;
+	color: #004FB9;
 	
 }
 a:hover {
-	font-family: "Arial";
+	font-family: "Geneva";
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
-	color: #65A4D3;
+	color: #003DFF;
 	text-decoration: none;
 }
 a:active {
-	font-family: "Arial";
+	font-family: "Geneva";
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
 	text-decoration: none;
-	color: #339BE6;
+	color: #0090ED;
 	
 	
 	
 	
 }
+
 tt, code, kbd, samp {
 	font-family:"Courier New",Courier,monospace;
 	font: 1.0em;
 }
+
+table  {
+border-collapse:separate;
+border-spacing:2px;
+text-indent:0;
+border:0;
+
+
+}
+td{
+
+border: 1px ridge #FEFFFE;
+
+}
 th{
+border: 1px ridge #FEFFFE;
+}
+tbody{
+border: 1px ridge #FEFFFE;
 
 }
 /* Table colors */
 .TableHeadingColor{
-background: #1E3D7E;
+background: #6A6A6A;
 color:#FFFFFF; } /* Dark Blue white font */
-.TableSubHeadingColor  { background: #1E3D7E; color:#FFFFFF }
-.TableRowColor         { background: #D2EDFF; color:#000000 } /* White */
+.TableSubHeadingColor  { background: #6A6A6A; color:#FFFFFF }
+.TableRowColor         { background: #C2C2C2; color:#000000 } /* White */
 
 /* Font used in left-hand frame lists */
-.FrameTitleFont   { font-size: 100%; font-family: Arial, sans-serif; color:#000000 }
-.FrameHeadingFont { font-size:  90%; font-family: Arial, sans-serif; color:#000000 }
-.FrameItemFont    { font-size:  90%; font-family: Arial, sans-serif; color:#000000 }
+.FrameTitleFont   { font-size: 100%; font-family: Geneva, sans-serif; color:#000000 }
+.FrameHeadingFont { font-size:  90%; font-family: Geneva, sans-serif; color:#000000 }
+.FrameItemFont    { font-size:  90%; font-family: Geneva, sans-serif; color:#000000 }
 
 /* Navigation bar fonts and colors */
-.NavBarCell1    { background-color:#B4CCF9; color:#000000} /* Light mint */
+.NavBarCell1    { background-color:#FEFFFE; color:#000000} /* Light mint */
 .NavBarCell1Rev { background-color:#0084C0; color:#FFFFFF} /* Dark mint */
-.NavBarFont1    { font-family: Arial, sans-serif; color:#000000;color:#000000;}
-.NavBarFont1Rev { font-family: Arial, sans-serif; color:#FFFFFF;color:#FFFFFF;}
+.NavBarFont1    { font-family: Geneva, sans-serif; color:#000000;color:#000000;}
+.NavBarFont1Rev { font-family: Geneva, sans-serif; color:#FFFFFF;color:#FFFFFF;}
 
-.NavBarCell2    { font-family: Arial, sans-serif; background-color:#FFFFFF; color:#000000}
-.NavBarCell3    { font-family: Arial, sans-serif; background-color:#FFFFFF; color:#000000}
+.NavBarCell2    { font-family: Geneva, sans-serif; background-color:#FFFFFF; color:#000000}
+.NavBarCell3    { font-family: Geneva, sans-serif; background-color:#FFFFFF; color:#000000}
 

@@ -1,13 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/87/trunk/tmn_UE_Laerm/src/old
+/svn/!svn/ver/92/trunk/tmn_UE_Laerm/src/old
 END
 Point.java
 K 25
 svn:wc:ra_dav:version-url
 V 54
 /svn/!svn/ver/87/trunk/tmn_UE_Laerm/src/old/Point.java
+END
+ObsObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/92/trunk/tmn_UE_Laerm/src/old/ObsObject.java
 END
 ObstacleObject.java
 K 25

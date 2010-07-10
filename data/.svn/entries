@@ -1,14 +1,14 @@
 10
 
 dir
-79
+108
 https://tmn-ue-learm.googlecode.com/svn/trunk/tmn_UE_Laerm/data
 https://tmn-ue-learm.googlecode.com/svn
 
 
 
-2010-07-04T10:31:06.442559Z
-75
+2010-07-09T06:11:38.005083Z
+104
 fabiantheblind
 
 
@@ -32,33 +32,9 @@ dir
 FontMiso
 dir
 
-affectionPropertys.xml
-file
-85
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-deleted
-
 affectionPropertysBasicLayout01.xml
 file
-80
+
 
 
 
