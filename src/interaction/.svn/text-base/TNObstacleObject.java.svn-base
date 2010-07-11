@@ -11,7 +11,8 @@ import TUIO.TuioCursor;
 
 /**
  * Object can be transformed by fingers / TuioCursors.
- * 
+ * @author Till Nagel
+ * @author PDXIII
  */
 
 public class TNObstacleObject extends TNTransformableObject{

@@ -5,6 +5,7 @@ import TUIO.TuioCursor;
 
 /**
  * Object can be transformed by fingers / TuioCursors.
+ * @author Till Nagel
  * 
  */
 public class TNTuioTransformableObject extends TNTransformableObject {

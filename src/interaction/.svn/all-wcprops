@@ -6,24 +6,24 @@ END
 TNTransformableObject.java
 K 25
 svn:wc:ra_dav:version-url
-V 78
-/svn/!svn/ver/98/trunk/tmn_UE_Laerm/src/interaction/TNTransformableObject.java
+V 79
+/svn/!svn/ver/114/trunk/tmn_UE_Laerm/src/interaction/TNTransformableObject.java
 END
 TNObstacleObject.java
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/!svn/ver/110/trunk/tmn_UE_Laerm/src/interaction/TNObstacleObject.java
+/svn/!svn/ver/114/trunk/tmn_UE_Laerm/src/interaction/TNObstacleObject.java
 END
 TNTextThing.java
 K 25
 svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/82/trunk/tmn_UE_Laerm/src/interaction/TNTextThing.java
+V 69
+/svn/!svn/ver/114/trunk/tmn_UE_Laerm/src/interaction/TNTextThing.java
 END
 TNTuioTransformableObject.java
 K 25
 svn:wc:ra_dav:version-url
-V 82
-/svn/!svn/ver/82/trunk/tmn_UE_Laerm/src/interaction/TNTuioTransformableObject.java
+V 83
+/svn/!svn/ver/114/trunk/tmn_UE_Laerm/src/interaction/TNTuioTransformableObject.java
 END

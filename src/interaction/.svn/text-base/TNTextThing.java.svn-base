@@ -2,6 +2,10 @@ package interaction;
 
 import processing.core.PApplet;
 
+/**
+ * @author Till Nagel
+ *
+ */
 public class TNTextThing extends TNTuioTransformableObject {
 
 	public TNTextThing(PApplet p, float offsetX, float offsetY, float width, float height) {

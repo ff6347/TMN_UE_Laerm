@@ -51,6 +51,9 @@ public class Style {
 	public static int tmn_darkLilac;
 
 	public static int superSoftWhite;
+	
+	public static int superSoftGrey;
+
 
 	public static int activeColor;
 	public static int inactiveCol;
@@ -104,6 +107,31 @@ public class Style {
 	 */
 	public static int clsColor;
 
+	static int size = 40;
+	/**the Size of the path when 9 paths
+	 * 
+	 */
+	public static int[] pathsSize9 = { size, size*2, size*3, size*4, size*5, size*6, size*7, size*8, size*9 };
+
+	static int a = 30;
+	static int b = 40;
+	/**
+	 * the radius around the path when 9 paths
+	 */
+	public static int[] pathsRadius9 = { a, b, a, a, b, a,a, b, a};
+	
+	/**
+	 * the Size of the path when 3 paths
+	 * 
+	 */
+	public int[] pathsSize3 = { 100, 250, 360};
+	 
+	 /**
+	 * the radius around the path when 3 paths
+	 */
+	public int[] pathsRadius3 = { 60, 70, 60};
+	
+	
 	/**
 	 * to set the PApplet for the whole Class
 	 * 
@@ -149,6 +177,7 @@ public class Style {
 		textColorBlk = p.color(255, 0, 0, 100);
 
 		superSoftWhite = p.color(0, 0, 100, 5);
+		superSoftGrey = p.color(0, 0, 20, 5);
 
 		activeColor = p.color(0);
 		inactiveCol = p.color(0, 0,0,23);
@@ -169,6 +198,12 @@ public class Style {
 
 		// PDXIII background Stuff
 		fadingBG = p.loadImage("fadingBG.png");
+		
+
+
+		// int[] pathsSize = { 100, 250, 360};//, 230, 250, 270, 340, 360, 380
+		// };
+		// int[] pathsRadius = { 60, 70, 60};//, 20, 60, 30, 20, 60, 30 };
 	}
 
 	public static boolean switchTime(boolean day) {
@@ -206,7 +241,7 @@ public class Style {
 		int a = PApplet.ceil(tinter);
 		p.tint(Style.tintingH, 0, 40 + tinter,70);
 
-		inactiveCol = p.color(Style.tintingH, 0,  a + 20);
+//		inactiveCol = p.color(Style.tintingH, 0,  a + 20);
 		p.image(fadingBG, 0, 0);
 		if (tinter >= tintMax) {
 			tintBack = true;

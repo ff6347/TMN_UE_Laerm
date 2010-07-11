@@ -2,7 +2,6 @@ package particleSystem;
 
 import interaction.TNObstacleObject;
 
-import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,14 +65,12 @@ public class ParticleSystem {
 																	// arraylist
 		}
 	}
-	public ParticleSystem(PApplet p, PVector v,
-			ArrayList<Particle> particles) {
+
+	public ParticleSystem(PApplet p, PVector v, ArrayList<Particle> particles) {
 		this.particles = particles; // Initialize the arraylist
 		this.p = p;
 		this.origin = v.get(); // Store the origin point
 	}
-	
-	
 
 	/**
 	 * @return the origin
@@ -83,7 +80,8 @@ public class ParticleSystem {
 	}
 
 	/**
-	 * @param origin the origin to set
+	 * @param origin
+	 *            the origin to set
 	 */
 	public synchronized void setOrigin(PVector origin) {
 		this.origin = origin;
@@ -103,6 +101,7 @@ public class ParticleSystem {
 			ptcl.applyRepellForce(f);
 		}
 	}
+
 	/**
 	 * A function for particles to interact with all Repellers that are near to
 	 * the repeller
@@ -126,40 +125,50 @@ public class ParticleSystem {
 			x = PApplet.floor(ptcl.getLoc().x);
 			y = PApplet.floor(ptcl.getLoc().y);
 
-			
 			for (int j = 0; j < ObstclsList.size(); j++) {
 				if (ObstclsList.get(j).isActive) {
 					obsObj = ObstclsList.get(j);
 
 					if ((obsObj.isHit(x, y) == true)) {
 
-						force = new Force(p, obsObj.property.getIndex(),
-								obsObj.getProperty().getName(),
-								obsObj.getProperty().getAffectionProps(), new PVector(x,
-										y), 10);
+						force = new Force(p, obsObj.property.getIndex(), obsObj
+								.getProperty().getName(), obsObj.getProperty()
+								.getAffectionProps(), new PVector(x, y), 10);
 						calcPtclReactionOnForce(force, ptcl, day);
 					}
 				}
 			}
 		}
 	}
+
 	/**
-	 * @param f the <code>force</code>
-	 * @param time the <code>Property</code> value time
-	 * @param space the <code>Property</code> value space
+	 * @param f
+	 *            the <code>force</code>
+	 * @param time
+	 *            the <code>Property</code> value time
+	 * @param space
+	 *            the <code>Property</code> value space
 	 * @param ptcl
+	 * @param DAY
 	 */
-	private void reactOnForceValues(Force f, int time, int space , Particle ptcl) {
+	private void reactOnForceValues(Force f, int time, int space,
+			Particle ptcl, boolean DAY) {
 
 		switch (f.valueByIndex(time, space)) {
 		case -2:
 			f.setRepel(f.pushParticle(ptcl));
 			ptcl.applyRepellForce(f.getRepel());
-			 ptcl.setColorCol1(20, 100, 100, 100);
-			//
-			 ptcl.setColorCol2(40, 50, 100, 50);
-			// ptcl.setMaxforce(ptcl.maxforce + r.property.valueByIndex(0, 0));
-			// ptcl.setMaxspeed(ptcl.maxspeed + r.property.valueByIndex(0, 0));
+			ptcl.setColorCol1(20, 100, 100, 100);
+			ptcl.setColorCol2(40, 50, 100, 50);
+			ptcl.setMaxforce(ptcl.getMaxforce() + 0.1f);
+			ptcl.setMaxspeed(ptcl.getMaxspeed() + 0.2f);
+			if (ptcl.getMaxspeed() > 3f) {
+				ptcl.setMaxspeed(3f);
+			}
+			if (ptcl.getMaxforce() > 3f) {
+				ptcl.setMaxforce(3f);
+			}
+
 			break;
 		case -1:
 			f.setRepel(f.pushParticle(ptcl));
@@ -167,8 +176,12 @@ public class ParticleSystem {
 			ptcl.setColorCol1(60, 100, 100, 100);
 
 			ptcl.setColorCol2(60, 50, 100, 50);
-			// ptcl.setMaxforce(ptcl.maxforce + r.property.valueByIndex(0, 0));
-			// ptcl.setMaxspeed(ptcl.maxspeed + r.property.valueByIndex(0, 0));
+			ptcl.setMaxspeed(ptcl.getMaxspeed() + 0.1f);
+
+			if (ptcl.getMaxspeed() > 3f) {
+				ptcl.setMaxspeed(3f);
+			}
+
 			break;
 		case 0:
 			ptcl.resetColorCol1();
@@ -178,19 +191,33 @@ public class ParticleSystem {
 			// repel = r.pushParticle(ptcl);
 			// ptcl.applyRepellForce(repel);
 			ptcl.setColorCol1(80, 100, 100, 100);
-
 			ptcl.setColorCol2(80, 50, 100, 50);
-			// ptcl.setMaxforce(ptcl.maxforce + r.property.valueByIndex(0, 0));
-			// ptcl.setMaxspeed(ptcl.maxspeed + r.property.valueByIndex(0, 0));
+			ptcl.setMaxspeed(ptcl.getMaxspeed() - 0.1f);
+
+			if (ptcl.getMaxspeed() < 1.5 && DAY) {
+				ptcl.setMaxspeed(1.5f);
+			} 
+			if (ptcl.getMaxspeed() < 1.5 && (DAY!=true)) {
+				ptcl.setMaxspeed(1.0f);
+			}
+
 			break;
 		case 2:
 			// repel = r.pushParticle(ptcl);
 			// ptcl.applyRepellForce(repel);
 			ptcl.setColorCol1(123, 100, 100, 100);
-
 			ptcl.setColorCol2(123, 100, 100, 50);
-			// ptcl.setMaxforce(ptcl.maxforce + r.property.valueByIndex(0, 0));
-			// ptcl.setMaxspeed(ptcl.maxspeed + r.property.valueByIndex(0, 0));
+			ptcl.setMaxforce(ptcl.getMaxforce() - 0.1f);
+			ptcl.setMaxspeed(ptcl.getMaxspeed() - 0.2f);
+
+			if (ptcl.getMaxforce() < 0.5) {
+				ptcl.setMaxforce(0.4f);
+			}
+			if (ptcl.getMaxspeed() < 1.5 && DAY) {
+				ptcl.setMaxspeed(1.5f);
+			} else if (ptcl.getMaxspeed() < 1.5 && (DAY !=true)) {
+				ptcl.setMaxspeed(1.0f);
+			}
 			break;
 		}
 
@@ -206,10 +233,10 @@ public class ParticleSystem {
 
 				if (day) {
 					// at daytime
-					reactOnForceValues(f, 0, 0, ptcl);
+					reactOnForceValues(f, 0, 0, ptcl, day);
 				} else {
 					// at nite
-					reactOnForceValues(f, 1, 0, ptcl);
+					reactOnForceValues(f, 1, 0, ptcl, day);
 
 				}
 				// this is in public space
@@ -219,11 +246,11 @@ public class ParticleSystem {
 				// at Daytime
 
 				if (day) {
-					reactOnForceValues(f, 0, 1, ptcl);
+					reactOnForceValues(f, 0, 1, ptcl, day);
 
 				} else {
 					// at nite
-					reactOnForceValues(f, 1, 1, ptcl);
+					reactOnForceValues(f, 1, 1, ptcl, day);
 
 				}
 				// this is in work space
@@ -231,21 +258,21 @@ public class ParticleSystem {
 					|| (ptcl.getPathNum() == 8)) {
 				// at Daytime
 				if (day) {
-					reactOnForceValues(f, 0, 2, ptcl);
+					reactOnForceValues(f, 0, 2, ptcl, day);
 				} else {
 					// at nite
-					reactOnForceValues(f, 1, 2, ptcl);
+					reactOnForceValues(f, 1, 2, ptcl, day);
 				}
 			} else {
 				// if the Particle has no path to follow just a basic action
 				// takes place
 				// this is for pushing the particles that build the path around
 
-				f.setRepel(f.pushParticle(ptcl));
-				ptcl.applyRepellForce(f.getRepel());
-				ptcl.setMaxspeed(ptcl.getMaxspeed() + 0.05f);
-				ptcl.setMass(ptcl.getMass() - 0.01f);
-				ptcl.setMaxforce(ptcl.getMaxforce() + 0.01f);
+				// f.setRepel(f.pushParticle(ptcl));
+				// ptcl.applyRepellForce(f.getRepel());
+				// ptcl.setMaxspeed(ptcl.getMaxspeed() + 0.05f);
+				// ptcl.setMass(ptcl.getMass() - 0.01f);
+				// ptcl.setMaxforce(ptcl.getMaxforce() + 0.01f);
 			}
 		}
 	}
@@ -322,13 +349,13 @@ public class ParticleSystem {
 		for (int i = 0; i < particles.size(); i++) {
 			Particle ptcl = (Particle) particles.get(i);
 
-
 			for (int j = 0; j < ObstclsList.size(); j++) {
 				if (ObstclsList.get(j).isActive) {
 					TNObstacleObject obsObj = ObstclsList.get(j);
 					// For every Repeller
 					for (int k = 0; k < obsObj.ObstclsRepellerList.size(); k++) {
-						Repeller r = (Repeller) ObstclsList.get(j).ObstclsRepellerList.get(k);
+						Repeller r = (Repeller) ObstclsList.get(j).ObstclsRepellerList
+								.get(k);
 						// // Calculate and apply a force from Repeller to
 						// Particle
 						float d = ptcl.getLoc().dist(r.getLoc());
@@ -489,7 +516,6 @@ public class ParticleSystem {
 
 	}
 
-	
 	/**
 	 * this runs the ParticleSystem
 	 * 

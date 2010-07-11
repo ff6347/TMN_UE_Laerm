@@ -80,16 +80,12 @@ public class Path {
 	 * @param y
 	 * @see Class Particle Class
 	 */
-	public void addPointPtcl(float x, float y) {
+	public void addPointPtcl(float x, float y,int pathNum) {
 		PVector pos = new PVector(x, y);
 		// PVector vel = new PVector(0,0);
 		Particle ptcl = new Particle(p, pos, false, true);
-		ptcl.setMass(0.5f);
-		ptcl.setGravity(0f);
-		ptcl.setMaxforce(0.1f);
-		ptcl.setMaxspeed(1.5f);
-		ptcl.setRadius(0.1f);
-		// ptcl.setPathNum(10);
+		ptcl.setPathNum(pathNum);
+
 		ptclPoints.add(ptcl);
 
 		// PVector point = new PVector(x,y);
@@ -114,26 +110,35 @@ public class Path {
 		float d;
 		for (int i = 0; i < this.ptclPoints.size(); i++) {
 			ptcl = this.ptclPoints.get(i);
-
 			d = ptcl.getLoc().dist(ptcl.getOrigin());
+	
+			ptcl.seek(ptcl.getOrigin());
 
-			if (ptcl.isHidden() == true) {
-				ptcl.seek(ptcl.getOrigin());
+				if(d < 3f){
+					ptcl.setMaxspeed(0.5f);
+					ptcl.setMass(0.5f);
+				}
+				if(d > 3f){
+					ptcl.setMaxspeed(0.7f);
+					ptcl.setMass(0.5f);
+				}
+				
 
-				if (ptcl.getMass() < 0.8) {
-					ptcl.setMass(ptcl.getMass() + (d / 500));
-				}
-				ptcl.setGravity(0f);
-				if (ptcl.getMaxspeed() < 0.1f) {
-					ptcl.setMaxforce(ptcl.getMaxforce() + (d / 1000));
-				}
-				if (ptcl.getMaxspeed() < 0.5f) {
-					ptcl.setMaxspeed(ptcl.getMaxspeed() + (d / 100000));
-				}
-				ptcl.setRadius(0.01f);
-				ptcl.setHidden(true);
+				if(d > 40){
 
-			}
+				ptcl.setMaxforce(1f);
+				ptcl.setMaxspeed(2f);
+				
+				}
+				if (d > 200){
+
+					ptcl.setMass(10f);
+					ptcl.setMaxforce(ptcl.getMaxspeed()+0.2f);
+					ptcl.setMaxspeed(13f);
+					
+				}
+
+			
 		}
 
 	}
@@ -189,67 +194,6 @@ public class Path {
 		return this.radius;
 	}
 
-	// public void updatePath(float radius_){
-	//
-	// radius = radius_;
-	// }
-
-	// Draw the path
-
-	// /**
-	// * this is the old way to build a path
-	// *
-	// */
-	// public void display() {
-	//
-	// // Draw the radius as thick lines and circles
-	//
-	// // Draw end points
-	// for (int i = 0; i < points.size(); i++) {
-	// PVector point = (PVector) points.get(i);
-	// p.fill(175);
-	// p.noStroke();
-	// p.ellipse(point.x,point.y,radius*2,radius*2);
-	// }
-	//
-	// // Draw Polygon around path
-	// for (int i = 0; i < points.size(); i++) {
-	// PVector start = (PVector) points.get(i);
-	// // We're assuming path is a circle in this example
-	// PVector end = (PVector) points.get((i+1)%points.size());
-	// PVector line = PVector.sub(end,start);
-	// PVector normal = new PVector(line.y,-line.x);
-	// normal.normalize();
-	// normal.mult(radius);
-	//
-	// // Polygon has four vertices
-	// PVector a = PVector.add(start, normal);
-	// PVector b = PVector.add(end, normal);
-	// PVector c = PVector.sub(end, normal);
-	// PVector d = PVector.sub(start, normal);
-	//
-	// p.fill(175);
-	// p.noStroke();
-	// p.beginShape();
-	// p.vertex(a.x,a.y);
-	// p.vertex(b.x,b.y);
-	// p.vertex(c.x,c.y);
-	// p.vertex(d.x,d.y);
-	// p.endShape();
-	// }
-	//
-	// // Draw Regular Line
-	// p.stroke(255);
-	// p.strokeWeight(3);
-	// p.noFill();
-	// p.beginShape();
-	// for (int i = 0; i < points.size(); i++) {
-	// PVector loc = (PVector) points.get(i);
-	// p.vertex(loc.x,loc.y);
-	// }
-	// p.endShape(p.CLOSE);
-	//
-	// }
 	/**
 	 * This is for showing the Path DEBUGGING
 	 * 
@@ -299,6 +243,71 @@ public class Path {
 		p.beginShape();
 		for (int i = 0; i < ptclPoints.size(); i++) {
 			PVector loc = ptclPoints.get(i).getLoc();
+			p.vertex(loc.x, loc.y);
+		}
+		p.endShape(PApplet.CLOSE);
+
+	}
+	
+	/**
+	 * This is for showing the Path DEBUGGING
+	 * 
+	 */
+	public void simplePathDisplay() {
+
+		// Draw the radius as thick lines and circles
+
+		// Draw end points
+		for (int i = 0; i < ptclPoints.size(); i++) {
+			PVector point = ptclPoints.get(i).getLoc();
+			p.fill(Style.tmn_lightBlue);
+			p.noStroke();
+			p.ellipse(point.x, point.y, 10, 10);
+		}
+
+		// Draw Polygon around path
+		
+//		PVector start = null;
+//		PVector end = null;
+//		PVector line = null;
+//		PVector normal = null;
+//		PVector a = null;
+//		PVector b = null;
+//		PVector c = null;
+//		PVector d = null;
+//		for (int i = 0; i < ptclPoints.size(); i++) {
+//			start = ptclPoints.get(i).getLoc();
+//			// We're assuming path is a circle in this example
+//			end = ptclPoints.get((i + 1) % ptclPoints.size()).getLoc();
+//			line = PVector.sub(end, start);
+//			normal = new PVector(line.y, -line.x);
+//			normal.normalize();
+//			normal.mult(this.radius);
+//
+//			// Polygon has four vertices
+//			a = PVector.add(start, normal);
+//			b = PVector.add(end, normal);
+//			c = PVector.sub(end, normal);
+//			d = PVector.sub(start, normal);
+//
+//			p.fill(Style.superSoftWhite);
+//			p.noStroke();
+//			p.beginShape();
+//			p.vertex(a.x, a.y);
+//			p.vertex(b.x, b.y);
+//			p.vertex(c.x, c.y);
+//			p.vertex(d.x, d.y);
+//			p.endShape();
+//		}
+
+		// Draw Regular Line
+		p.stroke(Style.superSoftWhite);
+//		p.strokeWeight(this.getRadius()*2);
+		p.noFill();
+		p.beginShape();
+		PVector loc = null;
+		for (int i = 0; i < ptclPoints.size(); i++) {
+			loc = ptclPoints.get(i).getLoc();
 			p.vertex(loc.x, loc.y);
 		}
 		p.endShape(PApplet.CLOSE);

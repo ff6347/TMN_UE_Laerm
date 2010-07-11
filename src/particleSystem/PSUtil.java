@@ -1,6 +1,5 @@
 package particleSystem;
 
-import java.awt.Component;
 import java.util.ArrayList;
 
 import old.ObstacleObject;
@@ -8,6 +7,7 @@ import old.ObstacleObject;
 import processing.core.PApplet;
 import processing.core.PVector;
 import processing.xml.XMLElement;
+import util.Style;
 import util.XMLImporter;
 
 /**
@@ -59,14 +59,14 @@ public class PSUtil {
 	 * @see Path Class Path
 	 * @see Path#addPointPtcl(float, float)
 	 */
-	public static Path initCirclePath(int segments, int radius, int size) {
+	public static Path initCirclePath(int segments, int radius, int size,int pathNum) {
 
 		Path path = new Path(p, radius);
 		for (int i = 0; i <= 360; i += 360 / segments) {
 
 			path.addPointPtcl((p.width / 2) + (PApplet.sin(PApplet.radians(i)))
 					* size, (p.height / 2) + (PApplet.cos(PApplet.radians(i)))
-					* size);
+					* size, pathNum);
 		}
 		return path;
 	}
@@ -236,15 +236,8 @@ public class PSUtil {
 	public static void makeSpaces(ArrayList<Path> pathsList) {
 
 		setNumOfPaths(9);
-		int[] pathsSize = { 80, 100, 120, 230, 250, 270, 340, 360, 380 };
-		int[] pathsRadius = { 20, 60, 30, 20, 60, 30, 20, 60, 30 };
-
-		// int[] pathsSize = { 100, 250, 360};//, 230, 250, 270, 340, 360, 380
-		// };
-		// int[] pathsRadius = { 60, 70, 60};//, 20, 60, 30, 20, 60, 30 };
-
 		for (int p = 0; p < numOfPaths; p++) {
-			pathsList.add(initCirclePath(13, pathsRadius[p], pathsSize[p]));
+			pathsList.add(initCirclePath(13, Style.pathsRadius9[p], Style.pathsSize9[p], p));
 		}
 
 	}

@@ -5,7 +5,7 @@ import processing.core.PMatrix3D;
 
 /**
  * Simple drawing object. Used instead of a map to solely check transformations.
- * 
+ * @author Till Nagel
  */
 public class TNTransformableObject {
 

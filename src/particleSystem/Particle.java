@@ -56,7 +56,7 @@ public class Particle {
 	/**
 	 * the maximum speed of the particle
 	 */
-	private float maxspeed = 2.0f;
+	private float maxspeed = 1.0f;
 
 	/**
 	 * the radius of the particle.<br>
@@ -91,10 +91,10 @@ public class Particle {
 	 */
 	private float mass = 0.5f; //
 
-	/**
-	 * to check if an particle should get affected by the repellers or not
-	 */
-	private boolean affection;
+//	/**
+//	 * to check if an particle should get affected by the repellers or not
+//	 */
+//	private boolean affection;
 
 	/**
 	 * if this is true the particle will not be drawn to the screen<br>
@@ -125,7 +125,6 @@ public class Particle {
 	 * 
 	 * @see Style#ptclCol1
 	 */
-	@SuppressWarnings("unused")
 	private int col1 = Style.ptclCol1;
 	/**
 	 * the second color of the Particle
@@ -134,12 +133,12 @@ public class Particle {
 	 */
 	private int col2 = Style.ptclCol2;
 
-	/**
-	 * the third color of the Particle
-	 * 
-	 * @see Style#ptclCol3
-	 */
-	private int col3 = Style.ptclCol3;
+//	/**
+//	 * the third color of the Particle
+//	 * 
+//	 * @see Style#ptclCol3
+//	 */
+//	private int col3 = Style.ptclCol3;
 
 	/**
 	 * This is the Master Constructor. you can also set all these parameters at
@@ -174,7 +173,6 @@ public class Particle {
 		this.maxforce = mf;
 		this.acc = new PVector(0, 0);
 		this.vel = new PVector(0, 0);
-		this.affection = affection;
 		this.hidden = hidden;
 		this.origin = new PVector(loc.x, loc.y);
 		this.pathNum = pathNum;
@@ -204,7 +202,6 @@ public class Particle {
 		this.maxforce = mf;
 		this.acc = new PVector(0, 0);
 		this.vel = new PVector(0, 0);
-		this.affection = affection;
 		this.hidden = hidden;
 		this.origin = new PVector(loc.x, loc.y);
 	}
@@ -228,7 +225,6 @@ public class Particle {
 		this.acc = new PVector(0, 0);
 		this.vel = new PVector(0, 0);
 		this.lifeTime = 100000.0f;
-		this.affection = affection;
 		this.origin = new PVector(loc.x, loc.y);
 		this.hidden = hidden;
 		this.pathNum = pathNum;
@@ -247,7 +243,6 @@ public class Particle {
 		this.acc = new PVector(0, 0);
 		this.vel = new PVector(0, 0);
 		this.loc = loc.get();
-		this.affection = affection;
 		this.origin = new PVector(loc.x, loc.y);
 		this.hidden = hidden;
 

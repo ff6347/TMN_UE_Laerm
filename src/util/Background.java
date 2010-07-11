@@ -6,15 +6,21 @@ package util;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+/**
+ * This Class is justz a tryout. esting to draw the background in a parallel thread<br>
+ * doesn't work quite well
+ * @author fabiantheblind
+ *
+ */
 public class Background implements Runnable {
 	
 	Thread thread;
 
-	private boolean running; // Is the thread running? Yes or no?
-	private int wait; // How many milliseconds should we wait in between
-						// executions?
-	private String id; // Thread name
-	private int count; // counter
+//	private boolean running; // Is the thread running? Yes or no?
+//	private int wait; // How many milliseconds should we wait in between
+//						// executions?
+//	private String id; // Thread name
+//	private int count; // counter
 
 	/**
 	 * PDXIII background Stuff
@@ -51,7 +57,7 @@ public class Background implements Runnable {
 		parent.registerDispose(this);
 		// wait = w;
 //		running = false;
-		this.id = s;
+//		this.id = s;
 //		this.count = 0;
 //		this.p = p;
 		this.fadingBG = fadingBG;

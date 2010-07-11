@@ -15,6 +15,7 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 import util.Debug;
+import util.Overlay;
 import util.Style;
 import util.XMLImporter;
 
@@ -36,7 +37,7 @@ import particleSystem.Property;
  * 
  * @author PDXIII
  * @author fabianthelbind
- * @version 0.112
+ * @version 0.113
  * 
  * 
  */
@@ -119,6 +120,7 @@ public class TmnUELaerm extends PApplet implements TuioListener {
 	 * display the paths if {@code true}
 	 */
 	boolean showDebugPath = false;
+	private Overlay overlay;
 
 	/*
 	 * (non-Javadoc)
@@ -141,6 +143,7 @@ public class TmnUELaerm extends PApplet implements TuioListener {
 
 //		background(0);
 		size(1024, 768, OPENGL);
+		
 		// init TUIO
 		tuioClient.addTuioListener(this);
 		tuioClient.connect();
@@ -175,7 +178,7 @@ public class TmnUELaerm extends PApplet implements TuioListener {
 		ps = new ParticleSystem(this, new PVector(width / 2, height / 2),ptclsList);
 
 
-
+		overlay = new Overlay(this);
 	}
 
 	/*
@@ -189,6 +192,7 @@ public class TmnUELaerm extends PApplet implements TuioListener {
 		DAY = Style.switchTime(DAY);
 		switchPath = Style.switchPath(DAY,switchPath);
 		Style.theBackground();
+//		overlay.display();
 		// this is for the particles that make the paths
 		// to get them back into their original position we have to reset them
 		// in the function Path.resetPointPtcls() you can set
