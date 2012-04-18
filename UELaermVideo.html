@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<!-- Build by fabiantheblind http://the-moron.net
+		how to Center a video in the browserwindow using CSS and Javascript
+		build on this example: http://www.alistapart.com/d/footers/footer_variation1.html
+		-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>UELaerm Showreel</title>
+<link href="./styleCenterdVid.css" rel="stylesheet" media="all" type="text/css" />
+</style>
+	<script type="text/javascript">
+	<!--
+	function getWindowHeight() {
+		var windowHeight = 0;
+		if (typeof(window.innerHeight) == 'number') {
+			windowHeight = window.innerHeight;
+		}
+		else {
+			if (document.documentElement && document.documentElement.clientHeight) {
+				windowHeight = document.documentElement.clientHeight;
+			}
+			else {
+				if (document.body && document.body.clientHeight) {
+					windowHeight = document.body.clientHeight;
+				}
+			}
+		}
+		return windowHeight;
+	}
+	function setContent() {
+		if (document.getElementById) {
+			var windowHeight = getWindowHeight();
+			if (windowHeight > 0) {
+				var contentElement = document.getElementById('myObject');
+				var contentHeight = contentElement.offsetHeight;
+				if (windowHeight - contentHeight > 0) {
+					contentElement.style.position = 'relative';
+					contentElement.style.top = ((windowHeight / 2) - (contentHeight / 2)) + 'px';
+				}
+				else {
+					contentElement.style.position = 'static';
+				}
+			}
+		}
+	}
+	window.onload = function() {
+		setContent();
+	}
+	window.onresize = function() {
+		setContent();
+	}
+	//-->
+	</script>
+
+</head>
+<body>
+	<body >
+		<div id="myObject">
+<object width="640" height="480"><param name="allowfullscreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=13450825&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=ffffff&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=13450825&amp;server=vimeo.com&amp;show_title=0&amp;show_byline=0&amp;show_portrait=0&amp;color=ffffff&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="500" height="281"></embed></object>
+	</div>
+	</body>
+</body>
+</html>

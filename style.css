@@ -1,0 +1,143 @@
+@charset "UTF-8";
+/* CSS Document*/
+/* 
+written by fabiantheblind //4th inc. KSC http://www.the-moron.net
+*/
+
+body {
+	font-family: "Arial";
+	font-size: 12px;
+	cursor: default;
+	color: #222;
+	width: 1024px;
+	background-image:url(./circles.png);	
+}
+
+h1 {
+font-family: "Arial Black";
+font-size: 144px;
+letter-spacing:-0.1em;
+font-weight: normal;
+line-height:90px;
+text-decoration: none;
+text-indent: 50px;
+cursor: default;
+color: #E5E5E5;
+text-shadow: #203E38 2px 2px 4px; 
+   /*     margin-bottom:-0.051em; 
+border-style:none/hidden/dotted/dashed/solid/double/groove/ridge/inset/outset;*/
+margin-right:300px;
+
+	}
+
+
+
+h2{
+font-family: "Arial Black";
+font-size: 18px;
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+color: #E5E5E5;
+cursor: default;
+/*background-color: #4A4A4A;*/
+cursor: default;
+text-shadow: #203E38 2px 2px 4px;
+
+}
+
+#frame{
+font-family: "Arial";
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+text-transform: lowercase;
+color: #E5E5E5;
+cursor: default;
+margin-top:-14em;
+
+
+}
+#container{
+font-family: "Arial";
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+/*text-transform: lowercase;*/
+text-decoration: none;
+color: #E5E5E5;
+
+width:800px;
+margin-left:112px;
+
+
+}
+.description{
+color:#161616;
+font-family: "Arial";
+font-size: 14px;
+font-style: normal;
+line-height: 1.5em;
+font-weight: normal;
+font-variant: normal;
+text-decoration: none;
+cursor: default;
+margin-left:100px;
+background-color:#ffffff;
+
+width:500px;
+   /* text-indent:5px;   */
+ /* einruecken */
+padding:7px;
+/*
+padding-right:42px;
+/*
+margin-left:23px;
+margin-right:23px;
+*/
+}
+
+a:link {
+	font-family: "Arial";
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #737373;
+	
+	
+}
+a:visited {
+	font-family: "Arial";
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #737373;
+	
+}
+a:hover {
+	font-family: "Arial";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #2B2B2B;
+	text-decoration: none;
+}
+a:active {
+	font-family: "Arial";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #737373;
+	
+	
+	
+	
+}

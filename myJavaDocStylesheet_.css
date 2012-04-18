@@ -1,0 +1,177 @@
+/* Javadoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults */
+
+/* Page background color */
+body { 
+
+	background-color: #F5F5F5;
+	font-family:Arial, sans-serif;
+ 	color:#000000;
+}
+
+h1 {
+font-family: "Arial Black";
+font-size: 144px;
+letter-spacing:-0.1em;
+font-weight: normal;
+line-height:90px;
+text-decoration: none;
+text-indent: 50px;
+cursor: default;
+color: #E5E5E5;
+text-shadow: #203E38 2px 2px 4px; 
+   /*     margin-bottom:-0.051em; 
+border-style:none/hidden/dotted/dashed/solid/double/groove/ridge/inset/outset;*/
+margin-right:300px;
+margin-top:150px;
+
+
+	}
+
+  /*	
+h1 { 
+  	font-size: 145%; 
+	font-family:Arial, sans-serif;
+
+	display:block;
+	font-weight:bold;
+	margin:0.67em 0;
+	text-shadow: #203E38 2px 2px 4px; 
+	line-height:70px;
+	
+	}
+ */
+
+	
+h2{
+	font-family:Arial, sans-serif;
+	display:block;
+	font-size:1.5em;
+	font-weight:bold;
+	margin:0.83em 0;
+}
+h3{
+	font-family:Arial, sans-serif;
+	display:block;
+	font-size:1.17em;
+	font-weight:bold;
+	margin:1em 0;
+}
+#frame{
+font-family: "Arial";
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+text-transform: lowercase;
+color: #E5E5E5;
+cursor: default;
+margin-top:-14em;
+
+
+}
+#container{
+font-family: "Arial";
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+/*text-transform: lowercase;*/
+text-decoration: none;
+color: #E5E5E5;
+
+width:800px;
+margin-left:112px;
+
+
+}
+.description{
+color:#161616;
+font-family: "Arial";
+font-size: 14px;
+font-style: normal;
+line-height: 1.5em;
+font-weight: normal;
+font-variant: normal;
+text-decoration: none;
+cursor: default;
+margin-left:100px;
+background-color:#ffffff;
+
+width:500px;
+   /* text-indent:5px;   */
+ /* einruecken */
+padding:7px;
+/*
+padding-right:42px;
+/*
+margin-left:23px;
+margin-right:23px;
+*/
+}
+a:link {
+	font-family: "Arial";
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #008752;
+	
+	
+}
+a:visited {
+	font-family: "Arial";
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #0E6C73;
+	
+}
+a:hover {
+	font-family: "Arial";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #06FFD8;
+	text-decoration: none;
+}
+a:active {
+	font-family: "Arial";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #008048;
+	
+	
+	
+	
+}
+tt, code, kbd, samp {
+	font-family:"Courier New",Courier,monospace;
+	font: 1.0em;
+}
+
+/* Table colors */
+.TableHeadingColor     { background: #C7FFEB; color:#000000 } /* Dark mint */
+.TableSubHeadingColor  { background: #E8FFF5; color:#000000 } /* Light mint */
+.TableRowColor         { background: #ECFFF6; color:#000000 } /* White */
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { font-size: 100%; font-family: Arial, sans-serif; color:#000000 }
+.FrameHeadingFont { font-size:  90%; font-family: Arial, sans-serif; color:#000000 }
+.FrameItemFont    { font-size:  90%; font-family: Arial, sans-serif; color:#000000 }
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { background-color:#C7FFEB; color:#000000} /* Light mint */
+.NavBarCell1Rev { background-color:#00CA6F; color:#FFFFFF} /* Dark mint */
+.NavBarFont1    { font-family: Arial, sans-serif; color:#000000;color:#000000;}
+.NavBarFont1Rev { font-family: Arial, sans-serif; color:#FFFFFF;color:#FFFFFF;}
+
+.NavBarCell2    { font-family: Arial, sans-serif; background-color:#FFFFFF; color:#000000}
+.NavBarCell3    { font-family: Arial, sans-serif; background-color:#FFFFFF; color:#000000}
+

@@ -1,0 +1,152 @@
+@charset "UTF-8";
+/* CSS Document
+* <!-- Build by fabiantheblind http://the-moron.net
+* how to Center a video in the browserwindow using CSS and Javascript
+* build on this example: http://www.alistapart.com/d/footers/footer_variation1.html
+* -->
+*/
+
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Arial";/*  this  is just styling*/
+	font-size: 13px;/*  this  is just styling*/
+	cursor: default;/*  this  is just styling*/
+	color: ##969696;/*  this  is just styling*/
+	background-color:#FFFFFF;/*  this  is just styling*/
+	text-align: center; /* Takes care of horizontal alignment in Internet Explorer */
+
+}
+
+object{
+	position: relative; /* Needed for Safari */
+	margin: auto; /* Takes care of horizontal alignment in standards compliant browsers */
+	width: 640;
+	height: 480;
+
+
+}
+
+/*  this  is just styling*/
+h1 {
+   /* margin-top:192px; */
+
+font-family:  "Arial Black";
+font-size: 100px;
+letter-spacing:-0.1em;
+font-weight: normal;
+line-height: 20px; 
+text-decoration: none;
+text-indent: 50px;
+cursor: default;
+color: #E5E5E5;
+text-shadow: #203E38 2px 2px 4px; 
+   /*     margin-bottom:-0.051em; 
+border-style:none/hidden/dotted/dashed/solid/double/groove/ridge/inset/outset;*/
+
+}
+
+h2{
+font-family: "Arial Black";
+font-size: 18px;
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+color: #E5E5E5;
+cursor: default;
+/*background-color: #4A4A4A;*/
+cursor: default;
+text-shadow: #203E38 2px 2px 4px;
+}
+
+   /* #frame{
+font-family: "Arial";
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+text-transform: lowercase;
+color: #E5E5E5;
+cursor: default;
+margin-top:-14em;
+} */
+
+   /* #container{
+font-family: "Arial";
+font-style: normal;
+line-height: 1.7em;
+font-weight: normal;
+font-variant: normal;
+text-transform: lowercase;
+text-decoration: none;
+color: #E5E5E5;
+width:800px;
+margin-left:112px;
+} */
+
+/* .description{
+color:#161616;
+font-family: "Arial";
+font-size: 14px;
+font-style: normal;
+line-height: 1.5em;
+font-weight: normal;
+font-variant: normal;
+text-decoration: none;
+cursor: default;
+margin-left:100px;
+width:500px;
+    text-indent:5px;   
+padding:7px;
+
+padding-right:42px;
+
+margin-left:23px;
+margin-right:23px;
+
+} */
+
+
+a:link {
+	font-family: "Arial";
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #737373;
+	
+	
+}
+a:visited {
+	font-family: "Arial";
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #737373;
+	
+}
+a:hover {
+	font-family: "Arial";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #2B2B2B;
+	text-decoration: none;
+}
+a:active {
+	font-family: "Arial";
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	color: #737373;
+	
+	
+	
+	
+}
